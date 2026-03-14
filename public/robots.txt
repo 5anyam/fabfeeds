@@ -1,0 +1,23 @@
+# Robots.txt for CSPKIndia
+User-agent: *
+Allow: /
+
+# Block admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow access to important pages
+Allow: /
+Allow: /about
+Allow: /services/
+Allow: /blogs/
+Allow: /contact
+Allow: /career
+
+# Sitemap location
+Sitemap: https://cspkindia.in/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
