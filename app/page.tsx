@@ -173,7 +173,7 @@ function Ticker({ posts }: { posts: WPPost[] }) {
               <Link
                 key={`${p.id}-${i}`}
                 href={`/${p.slug}`}
-                className="inline-flex items-center gap-2 text-[11px] font-medium text-zinc-500 hover:text-teal-400 transition-colors"
+                className="inline-flex items-center gap-2 text-[11px] font-medium text-zinc-400 hover:text-teal-400 transition-colors"
               >
                 <span className="text-teal-700 text-[8px]">◆</span>
                 {p.title.rendered}
@@ -226,19 +226,19 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
                   {cat}
                 </span>
               )}
-              <span className="text-[10px] text-zinc-600 flex items-center gap-1">
+              <span className="text-[10px] text-white flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 {fmtDate(post.date)}
               </span>
               <span className="text-[10px] text-zinc-700">·</span>
-              <span className="text-[10px] text-zinc-600">5 min read</span>
+              <span className="text-[10px] text-white">5 min read</span>
             </div>
 
-            <h1 className="text-[2rem] sm:text-4xl lg:text-[3.2rem] xl:text-[3.6rem] font-black text-white leading-[1.04] tracking-tight">
+            <h1 className="text-[1.2rem] sm:text-2xl lg:text-[1.6rem] xl:text-[2rem] font-black text-white leading-[3.2] tracking-tight">
               {post.title.rendered}
             </h1>
 
-            <p className="text-zinc-400 text-sm md:text-[15px] leading-[1.75] line-clamp-3 max-w-xl">
+            <p className="text-zinc-200 text-base md:text-[17px] leading-[1.85] line-clamp-3 max-w-xl">
               {stripHtml(post.excerpt.rendered)}
             </p>
 
@@ -250,7 +250,7 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
                 Read Full Article
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
-              <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-600 border border-white/8 px-3 py-2 rounded-full">
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white border border-white/8 px-3 py-2 rounded-full">
                 <Sparkles className="w-3 h-3 text-teal-600" />
                 Powered by AI
               </span>
@@ -308,10 +308,10 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] font-semibold text-zinc-500 line-clamp-2 leading-snug group-hover:text-zinc-200 transition-colors">
+                  <p className="text-[11px] font-semibold text-zinc-300 line-clamp-2 leading-snug group-hover:text-white transition-colors">
                     {p.title.rendered}
                   </p>
-                  <span className="text-[9px] text-zinc-700 mt-2 block">{fmtDate(p.date)}</span>
+                  <span className="text-[9px] text-white mt-2 block">{fmtDate(p.date)}</span>
                 </Link>
               );
             })}
@@ -399,11 +399,11 @@ function CardLg({ post }: { post: WPPost }) {
         <h2 className="text-xl md:text-2xl font-black text-white leading-tight line-clamp-3 group-hover:text-teal-100 transition-colors mb-2.5">
           {post.title.rendered}
         </h2>
-        <p className="text-zinc-400 text-[11px] line-clamp-2 leading-relaxed mb-3.5">
+        <p className="text-zinc-200 text-[13px] line-clamp-2 leading-relaxed mb-3.5">
           {stripHtml(post.excerpt.rendered)}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-zinc-600 flex items-center gap-1.5">
+          <span className="text-[10px] text-whilte flex items-center gap-1.5">
             <Clock className="w-2.5 h-2.5" />
             {fmtDate(post.date)} · 5 min read
           </span>
@@ -446,11 +446,11 @@ function CardMd({ post }: { post: WPPost }) {
         <h3 className="text-[13px] font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors mb-2.5">
           {post.title.rendered}
         </h3>
-        <p className="text-gray-400 text-[11px] line-clamp-2 leading-relaxed mb-3">
+        <p className="text-gray-600 text-[13px] line-clamp-2 leading-relaxed mb-3">
           {stripHtml(post.excerpt.rendered)}
         </p>
         <div className="flex items-center justify-between border-t border-gray-50 pt-2.5">
-          <span className="text-[10px] text-gray-400 flex items-center gap-1">
+          <span className="text-[10px] text-black flex items-center gap-1">
             <Clock className="w-2.5 h-2.5" />
             {fmtDate(post.date)}
           </span>
@@ -496,10 +496,10 @@ function CardRow({ post, rank }: { post: WPPost; rank: number }) {
             {cat}
           </span>
         )}
-        <h3 className="text-[12px] font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
+        <h3 className="text-[12px] font-bold text-gray-800 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
           {post.title.rendered}
         </h3>
-        <span className="text-[9px] text-gray-400 mt-1 flex items-center gap-1">
+        <span className="text-[9px] text-black mt-1 flex items-center gap-1">
           <Clock className="w-2.5 h-2.5" />
           {fmtDate(post.date)}
         </span>
@@ -620,7 +620,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                               {cat}
                             </span>
                           )}
-                          <p className="text-[11px] font-semibold text-zinc-500 line-clamp-2 leading-snug group-hover:text-zinc-200 transition-colors">
+                          <p className="text-[11px] font-semibold text-zinc-300 line-clamp-2 leading-snug group-hover:text-white transition-colors">
                             {post.title.rendered}
                           </p>
                         </div>
@@ -632,14 +632,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
 
               {/* Ad unit */}
               <div className="rounded-2xl overflow-hidden border border-gray-100 bg-white">
-                <div className="flex items-center justify-between px-3 pt-2.5 pb-1.5">
-                  <span className="text-[8px] font-semibold uppercase tracking-widest text-gray-400">
-                    Sponsored
-                  </span>
-                  <span className="text-[7px] font-black uppercase tracking-wider bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">
-                    Ad
-                  </span>
-                </div>
+
                 <a
                   href="https://converti.se/click/4bdd0a13-ff3c999cd6-ccbc7b35/?sid=sidebar1"
                   target="_blank"
@@ -672,7 +665,7 @@ function AIBanner() {
   return (
     <div
       ref={ref}
-      className={`bg-zinc-950 py-12 md:py-16 relative overflow-hidden transition-all duration-700 ${
+      className={`bg-zinc-950 py-8 md:py-10 relative overflow-hidden transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -698,7 +691,7 @@ function AIBanner() {
               so you don&apos;t have to.
             </span>
           </h2>
-          <p className="text-zinc-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-7">
+          <p className="text-zinc-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-7">
             Our AI continuously scans top blogs, reviews &amp; e-commerce stores — surfacing the
             most trending content across every category, updated daily.
           </p>
@@ -754,7 +747,7 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
   return (
     <div
       ref={ref}
-      className={`py-10 bg-white border-b border-gray-100 transition-all duration-700 ${
+      className={`py-7 bg-white border-b border-gray-100 transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -886,7 +879,7 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Numbered trending posts */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-12 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-6 rounded-full bg-gradient-to-b from-orange-400 to-red-500" />
@@ -905,38 +898,6 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
             <div className="space-y-2.5">
               {posts.slice(0, 5).map((p, i) => (
                 <CardRow key={p.id} post={p} rank={i + 1} />
-              ))}
-            </div>
-          </div>
-
-          {/* Partners column */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-400">
-                Featured Partners
-              </span>
-              <span className="text-[7px] font-black uppercase tracking-wider bg-gray-100 text-gray-400 px-2 py-1 rounded">
-                Sponsored
-              </span>
-            </div>
-            <div className="space-y-3">
-              {partners.map((p) => (
-                <a
-                  key={p.href}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block group"
-                >
-                  <div className="relative w-full h-[90px] rounded-xl overflow-hidden border border-gray-100 bg-white shadow-sm group-hover:shadow-lg group-hover:-translate-y-0.5 transition-all duration-300">
-                    <img
-                      src={p.img}
-                      alt={p.alt}
-                      loading="lazy"
-                      className="w-full h-full py-2 px-6 object-contain group-hover:scale-[1.02] transition-transform duration-500"
-                    />
-                  </div>
-                </a>
               ))}
             </div>
           </div>
