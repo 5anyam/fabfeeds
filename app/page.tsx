@@ -889,8 +889,7 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
               </div>
               <Link
                 href="/trending"
-                className="text-[11px] font-bold text-orange-500 hover:text-orange-600 flex items-center gap-1 transition-colors"
-              >
+                className="text-[11px] font-bold text-orange-500 hover:text-orange-600 flex items-center gap-1 transition-colors">
                 <Flame className="w-3 h-3" />
                 Trending Page
               </Link>
