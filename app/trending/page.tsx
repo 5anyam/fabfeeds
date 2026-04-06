@@ -9,8 +9,10 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
+
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
 const WP_API_URL = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
+
 
 /* ══ Types ════════════════════════════════════════════════════════════════ */
 interface WPPost {
@@ -36,6 +38,7 @@ interface CategoryWithPosts {
   posts: WPPost[];
 }
 
+
 /* ══ Helpers ══════════════════════════════════════════════════════════════ */
 const stripHtml = (h: string) =>
   h.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
@@ -58,13 +61,14 @@ const getEmoji = (slug: string) => {
   return CAT_EMOJI.default;
 };
 
-/* rank colors */
+/* rank colors — all must be visible on white bg */
 const rankColor = (i: number) => {
   if (i === 0) return "text-orange-500";
   if (i === 1) return "text-zinc-400";
   if (i === 2) return "text-amber-600";
-  return "text-gray-200";
+  return "text-gray-400";
 };
+
 
 /* ══ Scroll Reveal Hook ═══════════════════════════════════════════════════ */
 function useReveal(threshold = 0.08) {
@@ -81,6 +85,7 @@ function useReveal(threshold = 0.08) {
   return { ref, visible };
 }
 
+
 /* ══════════════════════════════════════════════════════════════════════════
    SKELETON
 ══════════════════════════════════════════════════════════════════════════ */
@@ -91,17 +96,15 @@ const Sk = ({ className = "" }: { className?: string }) => (
 function TrendingSkeleton() {
   return (
     <div className="bg-white min-h-screen">
-      {/* hero skeleton */}
       <div className="bg-zinc-950 py-16">
         <Container>
           <div className="text-center space-y-4">
-            <Sk className="h-5 w-36 bg-white/5 mx-auto rounded-full" />
-            <Sk className="h-14 w-72 bg-white/5 mx-auto" />
-            <Sk className="h-4 w-96 bg-white/5 mx-auto" />
+            <Sk className="h-6 w-36 bg-white/5 mx-auto rounded-full" />
+            <Sk className="h-16 w-72 bg-white/5 mx-auto" />
+            <Sk className="h-5 w-96 bg-white/5 mx-auto" />
           </div>
         </Container>
       </div>
-      {/* stats skeleton */}
       <div className="bg-white border-b border-gray-100 py-6">
         <Container>
           <div className="grid grid-cols-4 gap-4">
@@ -109,13 +112,12 @@ function TrendingSkeleton() {
           </div>
         </Container>
       </div>
-      {/* content skeleton */}
       <div className="bg-gray-50 py-8">
         <Container>
           <div className="space-y-10">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="space-y-4">
-                <Sk className="h-7 w-56 bg-gray-200" />
+                <Sk className="h-8 w-56 bg-gray-200" />
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                   <Sk className="md:col-span-5 h-64 bg-gray-200" />
                   <div className="md:col-span-7 space-y-3">
@@ -132,6 +134,7 @@ function TrendingSkeleton() {
     </div>
   );
 }
+
 
 /* ══════════════════════════════════════════════════════════════════════════
    1. HERO
@@ -165,13 +168,13 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
           {/* AI pill */}
           <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-1.5 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-            <span className="text-[9px] font-black uppercase tracking-[0.25em] text-teal-300">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-teal-300">
               Powered by AI
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.0] tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-5">
             <span className="text-white">What&apos;s </span>
             <span className="bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
               Trending
@@ -182,23 +185,23 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
             </span>
           </h1>
 
-          <p className="text-zinc-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8">
+          <p className="text-zinc-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-8">
             Our AI scans thousands of sources daily — surfacing the most-read articles &amp;
             hottest products across every category, so you never miss a trend.
           </p>
 
           {/* Live stats pills */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-teal-400 border border-teal-500/20 bg-teal-500/8 rounded-full px-3.5 py-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-300 border border-teal-500/25 bg-teal-500/10 rounded-full px-3.5 py-1.5">
+              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
               Live updates
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-orange-400 border border-orange-500/20 bg-orange-500/8 rounded-full px-3.5 py-1.5">
-              <Flame className="w-3 h-3" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-300 border border-orange-500/25 bg-orange-500/10 rounded-full px-3.5 py-1.5">
+              <Flame className="w-3.5 h-3.5" />
               Refreshed daily
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-cyan-400 border border-cyan-500/20 bg-cyan-500/8 rounded-full px-3.5 py-1.5">
-              <BarChart2 className="w-3 h-3" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-300 border border-cyan-500/25 bg-cyan-500/10 rounded-full px-3.5 py-1.5">
+              <BarChart2 className="w-3.5 h-3.5" />
               {totalCategories} Categories
             </span>
           </div>
@@ -211,15 +214,16 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
   );
 }
 
+
 /* ══════════════════════════════════════════════════════════════════════════
    2. STATS BAR
 ══════════════════════════════════════════════════════════════════════════ */
 function StatsBar({ totalPosts }: { totalPosts: number }) {
   const stats = [
     { icon: Flame, label: "Trending Articles", value: `${totalPosts}+`, color: "text-orange-500", bg: "bg-orange-50" },
-    { icon: Zap, label: "AI Curated", value: "Daily", color: "text-teal-600", bg: "bg-teal-50" },
-    { icon: Eye, label: "Topics Covered", value: "6+", color: "text-blue-600", bg: "bg-blue-50" },
-    { icon: Star, label: "Quality Score", value: "Top 1%", color: "text-amber-600", bg: "bg-amber-50" },
+    { icon: Zap, label: "AI Curated", value: "Daily", color: "text-teal-700", bg: "bg-teal-50" },
+    { icon: Eye, label: "Topics Covered", value: "6+", color: "text-blue-700", bg: "bg-blue-50" },
+    { icon: Star, label: "Quality Score", value: "Top 1%", color: "text-amber-700", bg: "bg-amber-50" },
   ];
 
   return (
@@ -230,12 +234,12 @@ function StatsBar({ totalPosts }: { totalPosts: number }) {
             const Icon = s.icon;
             return (
               <div key={s.label} className="px-5 py-5 flex items-center gap-3">
-                <span className={`w-9 h-9 rounded-xl ${s.bg} flex items-center justify-center shrink-0`}>
-                  <Icon className={`w-4 h-4 ${s.color}`} />
+                <span className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center shrink-0`}>
+                  <Icon className={`w-5 h-5 ${s.color}`} />
                 </span>
                 <div>
-                  <div className={`text-lg font-black ${s.color}`}>{s.value}</div>
-                  <div className="text-[10px] text-gray-400 font-medium">{s.label}</div>
+                  <div className={`text-xl font-black ${s.color}`}>{s.value}</div>
+                  <div className="text-xs text-gray-600 font-medium">{s.label}</div>
                 </div>
               </div>
             );
@@ -245,6 +249,7 @@ function StatsBar({ totalPosts }: { totalPosts: number }) {
     </div>
   );
 }
+
 
 /* ══════════════════════════════════════════════════════════════════════════
    3. AI PRODUCTS BANNER
@@ -274,20 +279,20 @@ function AIProductsBanner() {
             {/* Left text */}
             <div className="flex-1 space-y-3">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/25">
+                <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/25">
                   <Package className="w-5 h-5 text-white" />
                 </span>
                 <div>
-                  <h2 className="text-white font-black text-base leading-tight">
+                  <h2 className="text-white font-black text-lg leading-tight">
                     Trending Products
                   </h2>
-                  <div className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-teal-400">
-                    <Sparkles className="w-2.5 h-2.5" />
+                  <div className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-[0.18em] text-teal-400">
+                    <Sparkles className="w-3 h-3" />
                     Powered by AI
                   </div>
                 </div>
               </div>
-              <p className="text-zinc-500 text-[12px] leading-relaxed max-w-md">
+              <p className="text-zinc-300 text-sm leading-relaxed max-w-md">
                 Our AI continuously scans top e-commerce platforms — Amazon, Flipkart, Myntra &amp;
                 more — surfacing the best trending products updated in real time.
               </p>
@@ -295,7 +300,7 @@ function AIProductsBanner() {
                 {["Fashion", "Electronics", "Beauty", "Home", "Sports"].map((tag) => (
                   <span
                     key={tag}
-                    className="text-[9px] font-bold text-zinc-600 border border-white/8 bg-white/[0.03] px-2.5 py-1 rounded-full"
+                    className="text-xs font-bold text-zinc-400 border border-white/10 bg-white/[0.05] px-3 py-1 rounded-full"
                   >
                     {tag}
                   </span>
@@ -314,7 +319,7 @@ function AIProductsBanner() {
                     className="w-full aspect-square rounded-lg bg-gradient-to-br from-white/8 to-white/4 flex items-center justify-center"
                     style={{ animation: `pulse 2s ease-in-out ${i * 0.3}s infinite` }}
                   >
-                    <Package className="w-5 h-5 text-zinc-700 group-hover:text-zinc-500 transition-colors" />
+                    <Package className="w-5 h-5 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
                   </div>
                   <div className="w-full space-y-1">
                     <div className="h-1.5 bg-white/8 rounded animate-pulse" />
@@ -328,12 +333,12 @@ function AIProductsBanner() {
           {/* Coming soon strip */}
           <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-              <span className="text-[10px] text-zinc-600 font-medium">
+              <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+              <span className="text-xs text-zinc-400 font-medium">
                 Live product feed integration — coming soon
               </span>
             </div>
-            <span className="text-[9px] font-black uppercase tracking-widest text-teal-700 border border-teal-700/30 bg-teal-500/5 px-2.5 py-1 rounded-full">
+            <span className="text-xs font-black uppercase tracking-widest text-teal-400 border border-teal-500/30 bg-teal-500/8 px-3 py-1 rounded-full">
               Beta
             </span>
           </div>
@@ -342,6 +347,7 @@ function AIProductsBanner() {
     </div>
   );
 }
+
 
 /* ══════════════════════════════════════════════════════════════════════════
    4. CATEGORY TRENDING SECTION
@@ -366,26 +372,26 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
       {/* Section header */}
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 shadow-md shadow-orange-500/20 shrink-0">
-            <Flame className="w-4 h-4 text-white" />
+          <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 shadow-md shadow-orange-500/20 shrink-0">
+            <Flame className="w-5 h-5 text-white" />
           </span>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-xs font-black uppercase tracking-widest text-gray-500">
                 Trending in
               </span>
               <span
-                className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${
+                className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${
                   rank <= 3
                     ? "bg-orange-50 text-orange-600 border border-orange-100"
-                    : "bg-gray-100 text-gray-500"
+                    : "bg-gray-100 text-gray-600"
                 }`}
               >
                 #{rank}
               </span>
             </div>
-            <h2 className="text-lg md:text-xl font-black text-gray-900 leading-tight flex items-center gap-2">
-              <span className="text-xl">{getEmoji(category.slug)}</span>
+            <h2 className="text-xl md:text-2xl font-black text-gray-900 leading-tight flex items-center gap-2">
+              <span className="text-2xl">{getEmoji(category.slug)}</span>
               {category.name}
             </h2>
           </div>
@@ -393,7 +399,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
 
         <Link
           href={`/blogs?category=${category.slug}`}
-          className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-teal-600 hover:text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-100 px-3.5 py-2 rounded-xl transition-all duration-200 group"
+          className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-100 px-4 py-2 rounded-xl transition-all duration-200 group"
         >
           See All
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -422,8 +428,8 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
 
             {/* #1 badge */}
             <div className="absolute top-3 left-3 flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-widest bg-gradient-to-r from-orange-500 to-red-500 text-white px-2.5 py-1 rounded-full shadow-lg shadow-orange-500/25">
-                <Flame className="w-2.5 h-2.5" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wide bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full shadow-lg shadow-orange-500/25">
+                <Flame className="w-3 h-3" />
                 #1 Trending
               </span>
             </div>
@@ -431,7 +437,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
             {/* Category */}
             {mainCat && (
               <div className="absolute top-3 right-3">
-                <span className="text-[8px] font-black uppercase tracking-widest bg-white/15 backdrop-blur-sm border border-white/20 text-white px-2 py-0.5 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-wide bg-white/15 backdrop-blur-sm border border-white/20 text-white px-2.5 py-1 rounded-full">
                   {mainCat}
                 </span>
               </div>
@@ -441,19 +447,19 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
               <h3 className="text-sm md:text-base font-extrabold line-clamp-2 leading-snug group-hover:text-teal-200 transition-colors">
                 {main.title.rendered}
               </h3>
-              <p className="text-[11px] text-gray-300 line-clamp-1 mt-0.5 hidden sm:block">
+              <p className="text-sm text-gray-200 line-clamp-1 mt-1 hidden sm:block">
                 {stripHtml(main.excerpt.rendered)}
               </p>
             </div>
           </div>
 
           <div className="px-4 py-3 bg-white border-t border-gray-50 flex items-center justify-between">
-            <span className="text-[10px] text-gray-400 flex items-center gap-1.5">
-              <Clock className="w-3 h-3" />
+            <span className="text-xs text-gray-500 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
               {fmtDate(main.date)} · 5 min read
             </span>
-            <span className="text-[10px] font-bold text-teal-600 flex items-center gap-0.5 group-hover:gap-1.5 transition-all">
-              Read <ArrowUpRight className="w-3 h-3" />
+            <span className="text-xs font-bold text-teal-700 flex items-center gap-1 group-hover:gap-1.5 transition-all">
+              Read <ArrowUpRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </Link>
@@ -467,11 +473,11 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
               <Link
                 key={post.id}
                 href={`/${post.slug}`}
-                className="group flex gap-3 items-center bg-white rounded-2xl border border-gray-100 p-3 hover:shadow-lg hover:border-teal-100 hover:-translate-y-0.5 transition-all duration-200"
+                className="group flex gap-3 items-center bg-white rounded-2xl border border-gray-100 p-3.5 hover:shadow-lg hover:border-teal-100 hover:-translate-y-0.5 transition-all duration-200"
               >
                 {/* Rank number */}
                 <span
-                  className={`shrink-0 text-3xl font-black leading-none w-8 text-center tabular-nums select-none ${rankColor(
+                  className={`shrink-0 text-3xl font-black leading-none w-9 text-center tabular-nums select-none ${rankColor(
                     idx + 1
                   )}`}
                 >
@@ -479,7 +485,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
                 </span>
 
                 {/* Thumbnail */}
-                <div className="relative shrink-0 w-[72px] h-[72px] rounded-xl overflow-hidden bg-gray-100">
+                <div className="relative shrink-0 w-[80px] h-[80px] rounded-xl overflow-hidden bg-gray-100">
                   {img ? (
                     <img
                       src={img}
@@ -495,20 +501,20 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   {cat && (
-                    <span className="text-[8px] font-black uppercase tracking-widest text-teal-600 block mb-1">
+                    <span className="text-xs font-black uppercase tracking-widest text-teal-700 block mb-1">
                       {cat}
                     </span>
                   )}
-                  <h3 className="text-[12px] md:text-[13px] font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
+                  <h3 className="text-sm font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
                     {post.title.rendered}
                   </h3>
-                  <span className="text-[10px] text-gray-400 mt-1.5 flex items-center gap-1">
-                    <Clock className="w-2.5 h-2.5" />
+                  <span className="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
                     {fmtDate(post.date)}
                   </span>
                 </div>
 
-                <ArrowUpRight className="w-4 h-4 text-gray-200 group-hover:text-teal-500 shrink-0 transition-colors" />
+                <ArrowUpRight className="w-4 h-4 text-gray-300 group-hover:text-teal-500 shrink-0 transition-colors" />
               </Link>
             );
           })}
@@ -516,7 +522,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
           {/* See all link — mobile */}
           <Link
             href={`/blogs?category=${category.slug}`}
-            className="sm:hidden flex items-center justify-center gap-2 text-[12px] font-bold text-teal-600 border border-teal-100 bg-teal-50 rounded-xl py-2.5 hover:bg-teal-100 transition-colors"
+            className="sm:hidden flex items-center justify-center gap-2 text-sm font-bold text-teal-700 border border-teal-100 bg-teal-50 rounded-xl py-3 hover:bg-teal-100 transition-colors"
           >
             See all {category.name} articles
             <ChevronRight className="w-4 h-4" />
@@ -527,6 +533,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
   );
 }
 
+
 /* ══════════════════════════════════════════════════════════════════════════
    5. BOTTOM CTA BANNER
 ══════════════════════════════════════════════════════════════════════════ */
@@ -535,7 +542,7 @@ function BottomCTA() {
   return (
     <div
       ref={ref}
-      className={`bg-zinc-950 relative overflow-hidden py-14 md:py-18 transition-all duration-700 ${
+      className={`bg-zinc-950 relative overflow-hidden py-16 md:py-20 transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -550,18 +557,18 @@ function BottomCTA() {
       />
       <Container>
         <div className="relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.22em] mb-5">
-            <Sparkles className="w-3 h-3" />
+          <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-300 rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] mb-5">
+            <Sparkles className="w-3.5 h-3.5" />
             Powered by AI
           </div>
-          <h2 className="text-2xl md:text-4xl font-black text-white leading-tight tracking-tight mb-4">
+          <h2 className="text-3xl md:text-5xl font-black text-white leading-tight tracking-tight mb-4">
             Never miss a trend again.
             <br />
             <span className="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
               Stay ahead, always.
             </span>
           </h2>
-          <p className="text-zinc-500 text-sm max-w-md mx-auto leading-relaxed mb-8">
+          <p className="text-zinc-300 text-base max-w-md mx-auto leading-relaxed mb-8">
             Trendships AI scans thousands of sources daily — delivering the most relevant
             content straight to you.
           </p>
@@ -575,7 +582,7 @@ function BottomCTA() {
             </Link>
             <Link
               href="/categories"
-              className="inline-flex items-center gap-2 text-zinc-400 hover:text-white border border-white/10 hover:border-white/20 font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-300 hover:bg-white/[0.03]"
+              className="inline-flex items-center gap-2 text-zinc-300 hover:text-white border border-white/15 hover:border-white/25 font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-300 hover:bg-white/[0.04]"
             >
               Explore Categories
             </Link>
@@ -585,6 +592,7 @@ function BottomCTA() {
     </div>
   );
 }
+
 
 /* ══════════════════════════════════════════════════════════════════════════
    MAIN PAGE
@@ -670,8 +678,8 @@ export default function TrendingPage() {
             {/* Divider with label */}
             <div className="flex items-center gap-4">
               <div className="flex-1 h-px bg-gray-200" />
-              <span className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-gray-400 bg-gray-50 px-3">
-                <TrendingUp className="w-3 h-3 text-orange-400" />
+              <span className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-gray-500 bg-gray-50 px-3">
+                <TrendingUp className="w-3.5 h-3.5 text-orange-500" />
                 Trending by Category
               </span>
               <div className="flex-1 h-px bg-gray-200" />
@@ -686,17 +694,17 @@ export default function TrendingPage() {
             {data.length === 0 && (
               <div className="text-center py-16">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center mx-auto mb-4">
-                  <Flame className="w-7 h-7 text-teal-500" />
+                  <Flame className="w-7 h-7 text-teal-600" />
                 </div>
-                <h3 className="text-lg font-black text-gray-900 mb-2">
+                <h3 className="text-xl font-black text-gray-900 mb-2">
                   No trending content yet
                 </h3>
-                <p className="text-sm text-gray-500 mb-5">
+                <p className="text-base text-gray-600 mb-6">
                   Check back soon — our AI is warming up.
                 </p>
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-teal-500/20 hover:-translate-y-0.5 transition-all"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md shadow-teal-500/20 hover:-translate-y-0.5 transition-all"
                 >
                   Browse All Articles
                   <ArrowUpRight className="w-4 h-4" />
