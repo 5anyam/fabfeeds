@@ -10,9 +10,10 @@ import { LatestPostsGrid } from "@/components/LatestPostsGrid";
 import { useEffect, useMemo, useState, useRef } from "react";
 
 /* ══════════════════════════════════════════════════════════════
-   CONFIG
+   CONFIG — 2 WordPress sites
 ══════════════════════════════════════════════════════════════ */
-const WP_API_URL = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL_1 = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL_2 = "https://commuteworld.com/wp-json/wp/v2"; // ← yahan apni 2nd site ka URL dalo
 
 const CAT_IMGS = [
   "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
@@ -57,9 +58,10 @@ interface WPPost {
   date: string;
   title: { rendered: string };
   excerpt: { rendered: string };
-  content: { rendered: string };  // ← ye line add karo
+  content: { rendered: string };
   slug: string;
   categories: number[];
+  _source?: "site1" | "site2"; // ← kahan se aayi post
   _embedded?: {
     "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
     "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
@@ -70,6 +72,37 @@ interface Cat {
   name: string;
   slug: string;
   count: number;
+  _source?: "site1" | "site2";
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════════════ */
+// Safe JSON parse — agar site down ho toh empty array return karo
+async function safeJson<T>(res: Response): Promise<T[]> {
+  if (!res.ok) return [];
+  try { return await res.json(); } catch { return []; }
+}
+
+// Posts ko date ke hisaab se sort karo (newest first)
+function sortByDate(posts: WPPost[]): WPPost[] {
+  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+// Categories merge karo — duplicate names hata ke
+function mergeCats(cats1: Cat[], cats2: Cat[]): Cat[] {
+  const map = new Map<string, Cat>();
+  cats1.forEach((c) => map.set(c.slug, { ...c, _source: "site1" }));
+  cats2.forEach((c) => {
+    if (map.has(c.slug)) {
+      // Same category dono sites mein hai — count add karo
+      const existing = map.get(c.slug)!;
+      map.set(c.slug, { ...existing, count: existing.count + c.count });
+    } else {
+      map.set(c.slug, { ...c, _source: "site2" });
+    }
+  });
+  return Array.from(map.values()).sort((a, b) => b.count - a.count);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -171,7 +204,7 @@ function Ticker({ posts }: { posts: WPPost[] }) {
           >
             {items.map((p, i) => (
               <Link
-                key={`${p.id}-${i}`}
+                key={`${p._source}-${p.id}-${i}`}
                 href={`/${p.slug}`}
                 className="inline-flex items-center gap-2 text-[11px] font-medium text-zinc-400 hover:text-teal-400 transition-colors"
               >
@@ -296,7 +329,7 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
               const pCat = p._embedded?.["wp:term"]?.[0]?.[0]?.name;
               return (
                 <Link
-                  key={p.id}
+                  key={`${p._source}-${p.id}`}
                   href={`/${p.slug}`}
                   className="p-4 md:p-5 hover:bg-white/[0.025] transition-colors group cursor-pointer"
                 >
@@ -341,7 +374,7 @@ function CategoryChips({ cats }: { cats: Cat[] }) {
           </span>
           {list.map((c) => (
             <Link
-              key={c.id}
+              key={`${c._source}-${c.id}`}
               href={`/blogs?category=${c.slug}`}
               className="shrink-0 flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400 hover:text-white border border-white/8 hover:border-teal-500/40 bg-white/[0.03] hover:bg-teal-500/8 rounded-full px-3.5 py-1.5 transition-all duration-200 whitespace-nowrap group"
             >
@@ -403,7 +436,7 @@ function CardLg({ post }: { post: WPPost }) {
           {stripHtml(post.excerpt.rendered)}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-whilte flex items-center gap-1.5">
+          <span className="text-[10px] text-white flex items-center gap-1.5">
             <Clock className="w-2.5 h-2.5" />
             {fmtDate(post.date)} · 5 min read
           </span>
@@ -549,7 +582,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                   <CardLg post={posts[0]} />
                 </div>
                 {posts.slice(1, 3).map((p) => (
-                  <CardMd key={p.id} post={p} />
+                  <CardMd key={`${p._source}-${p.id}`} post={p} />
                 ))}
               </div>
             )}
@@ -558,7 +591,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
             {posts.length > 3 && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {posts.slice(3, 6).map((p) => (
-                  <CardMd key={p.id} post={p} />
+                  <CardMd key={`${p._source}-${p.id}`} post={p} />
                 ))}
               </div>
             )}
@@ -589,7 +622,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                     const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
                     return (
                       <Link
-                        key={post.id}
+                        key={`${post._source}-${post.id}`}
                         href={`/${post.slug}`}
                         className="group flex gap-3 items-center px-4 py-3 hover:bg-white/[0.03] transition-colors"
                       >
@@ -632,7 +665,6 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
 
               {/* Ad unit */}
               <div className="rounded-2xl overflow-hidden border border-gray-100 bg-white">
-
                 <a
                   href="https://converti.se/click/4bdd0a13-ff3c999cd6-ccbc7b35/?sid=sidebar1"
                   target="_blank"
@@ -734,7 +766,7 @@ function AIBanner() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 6 — CATEGORY SHOWCASE (new bento)
+   SECTION 6 — CATEGORY SHOWCASE (bento)
 ══════════════════════════════════════════════════════════════ */
 function CategoryShowcase({ cats }: { cats: Cat[] }) {
   const { ref, visible } = useReveal();
@@ -797,7 +829,7 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
           {/* 4 smaller tiles */}
           {list.slice(1, 5).map((cat, idx) => (
             <Link
-              key={cat.id}
+              key={`${cat._source}-${cat.id}`}
               href={`/blogs?category=${cat.slug}`}
               className={`relative group rounded-2xl overflow-hidden h-32 md:h-auto ${
                 idx < 2 ? "col-span-1 md:col-span-3" : "col-span-1 md:col-span-4"
@@ -896,7 +928,7 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
             </div>
             <div className="space-y-2.5">
               {posts.slice(0, 5).map((p, i) => (
-                <CardRow key={p.id} post={p} rank={i + 1} />
+                <CardRow key={`${p._source}-${p.id}`} post={p} rank={i + 1} />
               ))}
             </div>
           </div>
@@ -907,7 +939,7 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   MAIN PAGE
+   MAIN PAGE — Dual Site Fetch
 ══════════════════════════════════════════════════════════════ */
 export default function HomePage() {
   const [featuredPosts, setFeaturedPosts] = useState<WPPost[]>([]);
@@ -918,14 +950,33 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [featRes, postsRes, catsRes] = await Promise.all([
-          fetch(`${WP_API_URL}/posts?_embed&per_page=12&orderby=date`),
-          fetch(`${WP_API_URL}/posts?_embed&per_page=20&orderby=date`),
-          fetch(`${WP_API_URL}/categories?per_page=12&orderby=count&order=desc`),
+        // Dono sites ko ek saath parallel fetch karo
+        const [
+          feat1Res, posts1Res, cats1Res,
+          feat2Res, posts2Res, cats2Res,
+        ] = await Promise.all([
+          fetch(`${WP_API_URL_1}/posts?_embed&per_page=12&orderby=date`),
+          fetch(`${WP_API_URL_1}/posts?_embed&per_page=20&orderby=date`),
+          fetch(`${WP_API_URL_1}/categories?per_page=12&orderby=count&order=desc`),
+          fetch(`${WP_API_URL_2}/posts?_embed&per_page=12&orderby=date`),
+          fetch(`${WP_API_URL_2}/posts?_embed&per_page=20&orderby=date`),
+          fetch(`${WP_API_URL_2}/categories?per_page=12&orderby=count&order=desc`),
         ]);
-        if (featRes.ok) setFeaturedPosts(await featRes.json());
-        if (postsRes.ok) setAllPosts(await postsRes.json());
-        if (catsRes.ok) setCategories(await catsRes.json());
+
+        // Safe JSON parse + _source tag lagao
+        const feat1: WPPost[] = (await safeJson<WPPost>(feat1Res)).map((p) => ({ ...p, _source: "site1" as const }));
+        const posts1: WPPost[] = (await safeJson<WPPost>(posts1Res)).map((p) => ({ ...p, _source: "site1" as const }));
+        const cats1: Cat[] = (await safeJson<Cat>(cats1Res)).map((c) => ({ ...c, _source: "site1" as const }));
+
+        const feat2: WPPost[] = (await safeJson<WPPost>(feat2Res)).map((p) => ({ ...p, _source: "site2" as const }));
+        const posts2: WPPost[] = (await safeJson<WPPost>(posts2Res)).map((p) => ({ ...p, _source: "site2" as const }));
+        const cats2: Cat[] = (await safeJson<Cat>(cats2Res)).map((c) => ({ ...c, _source: "site2" as const }));
+
+        // Merge + sort by date (newest first)
+        setFeaturedPosts(sortByDate([...feat1, ...feat2]));
+        setAllPosts(sortByDate([...posts1, ...posts2]));
+        setCategories(mergeCats(cats1, cats2));
+
       } catch (err) {
         console.error("Fetch error:", err);
       } finally {
