@@ -12,7 +12,7 @@ import { useEffect, useMemo, useState, useRef } from "react";
 /* ══════════════════════════════════════════════════════════════
    CONFIG
 ══════════════════════════════════════════════════════════════ */
-const WP_API_URL = "https://cms.clubmytrip.com/wp-json/wp/v2";
+const WP_API_URL = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
 
 const CAT_IMGS = [
   "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
