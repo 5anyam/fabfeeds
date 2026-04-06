@@ -8,7 +8,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const WP_API_URL = 'https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2';
-const WP_API_URL_2 = "https://commuteworld.com/wp-json/wp/v2";
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;

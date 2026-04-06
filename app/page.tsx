@@ -10,10 +10,9 @@ import { LatestPostsGrid } from "@/components/LatestPostsGrid";
 import { useEffect, useMemo, useState, useRef } from "react";
 
 /* ══════════════════════════════════════════════════════════════
-   CONFIG — 2 WordPress sites
+   CONFIG
 ══════════════════════════════════════════════════════════════ */
-const WP_API_URL_1 = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
-const WP_API_URL_2 = "https://commuteworld.com/wp-json/wp/v2"; // ← yahan apni 2nd site ka URL dalo
+const WP_API_URL = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
 
 const CAT_IMGS = [
   "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
@@ -58,10 +57,9 @@ interface WPPost {
   date: string;
   title: { rendered: string };
   excerpt: { rendered: string };
-  content: { rendered: string };
+  content: { rendered: string };  // ← ye line add karo
   slug: string;
   categories: number[];
-  _source?: "site1" | "site2"; // ← kahan se aayi post
   _embedded?: {
     "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
     "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
@@ -72,37 +70,6 @@ interface Cat {
   name: string;
   slug: string;
   count: number;
-  _source?: "site1" | "site2";
-}
-
-/* ══════════════════════════════════════════════════════════════
-   HELPERS
-══════════════════════════════════════════════════════════════ */
-// Safe JSON parse — agar site down ho toh empty array return karo
-async function safeJson<T>(res: Response): Promise<T[]> {
-  if (!res.ok) return [];
-  try { return await res.json(); } catch { return []; }
-}
-
-// Posts ko date ke hisaab se sort karo (newest first)
-function sortByDate(posts: WPPost[]): WPPost[] {
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
-
-// Categories merge karo — duplicate names hata ke
-function mergeCats(cats1: Cat[], cats2: Cat[]): Cat[] {
-  const map = new Map<string, Cat>();
-  cats1.forEach((c) => map.set(c.slug, { ...c, _source: "site1" }));
-  cats2.forEach((c) => {
-    if (map.has(c.slug)) {
-      // Same category dono sites mein hai — count add karo
-      const existing = map.get(c.slug)!;
-      map.set(c.slug, { ...existing, count: existing.count + c.count });
-    } else {
-      map.set(c.slug, { ...c, _source: "site2" });
-    }
-  });
-  return Array.from(map.values()).sort((a, b) => b.count - a.count);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -204,9 +171,9 @@ function Ticker({ posts }: { posts: WPPost[] }) {
           >
             {items.map((p, i) => (
               <Link
-                key={`${p._source}-${p.id}-${i}`}
+                key={`${p.id}-${i}`}
                 href={`/${p.slug}`}
-                className="inline-flex items-center gap-2 text-[11px] font-medium text-zinc-400 hover:text-teal-400 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-medium text-zinc-200 hover:text-teal-300 transition-colors"
               >
                 <span className="text-teal-700 text-[8px]">◆</span>
                 {p.title.rendered}
@@ -255,23 +222,23 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
           <div className="order-2 lg:order-1 space-y-6">
             <div className="flex flex-wrap items-center gap-2.5">
               {cat && (
-                <span className="text-[8px] font-black uppercase tracking-[0.25em] text-teal-400 border border-teal-500/25 bg-teal-500/8 px-3 py-1 rounded-full">
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-teal-300 border border-teal-500/25 bg-teal-500/8 px-3 py-1 rounded-full">
                   {cat}
                 </span>
               )}
-              <span className="text-[10px] text-white flex items-center gap-1">
+              <span className="text-xs text-zinc-200 flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 {fmtDate(post.date)}
               </span>
-              <span className="text-[10px] text-zinc-700">·</span>
-              <span className="text-[10px] text-white">5 min read</span>
+              <span className="text-xs text-zinc-400">·</span>
+              <span className="text-xs text-zinc-200">5 min read</span>
             </div>
 
-            <h1 className="text-[1.2rem] sm:text-2xl lg:text-[1.6rem] xl:text-[2rem] font-black text-white leading-[3.2] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.15] tracking-tight">
               {post.title.rendered}
             </h1>
 
-            <p className="text-zinc-200 text-base md:text-[17px] leading-[1.85] line-clamp-3 max-w-xl">
+            <p className="text-zinc-100 text-base md:text-[18px] leading-[1.8] line-clamp-3 max-w-xl">
               {stripHtml(post.excerpt.rendered)}
             </p>
 
@@ -283,7 +250,7 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
                 Read Full Article
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
-              <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white border border-white/8 px-3 py-2 rounded-full">
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.15em] text-zinc-300 border border-white/8 px-3 py-2 rounded-full">
                 <Sparkles className="w-3 h-3 text-teal-600" />
                 Powered by AI
               </span>
@@ -316,7 +283,7 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
             <div className="absolute -top-3 -right-3 bg-zinc-900 border border-white/10 text-white rounded-2xl px-3.5 py-2 shadow-xl">
               <div className="text-center">
                 <div className="text-lg font-black text-teal-400 leading-none">{secondary.length + 1}</div>
-                <div className="text-[8px] text-zinc-600 uppercase tracking-widest mt-0.5">Stories</div>
+                <div className="text-xs text-zinc-300 uppercase tracking-widest mt-0.5">Stories</div>
               </div>
             </div>
           </div>
@@ -329,22 +296,22 @@ function MegaHero({ post, secondary }: { post: WPPost; secondary: WPPost[] }) {
               const pCat = p._embedded?.["wp:term"]?.[0]?.[0]?.name;
               return (
                 <Link
-                  key={`${p._source}-${p.id}`}
+                  key={p.id}
                   href={`/${p.slug}`}
                   className="p-4 md:p-5 hover:bg-white/[0.025] transition-colors group cursor-pointer"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[8px] font-black text-zinc-700 tabular-nums">0{i + 2}</span>
+                    <span className="text-xs font-black text-zinc-400 tabular-nums">0{i + 2}</span>
                     {pCat && (
-                      <span className="text-[8px] font-bold text-teal-600 uppercase tracking-widest">
+                      <span className="text-xs font-bold text-teal-400 uppercase tracking-widest">
                         {pCat}
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] font-semibold text-zinc-300 line-clamp-2 leading-snug group-hover:text-white transition-colors">
+                  <p className="text-[13px] font-semibold text-zinc-200 line-clamp-2 leading-snug group-hover:text-white transition-colors">
                     {p.title.rendered}
                   </p>
-                  <span className="text-[9px] text-white mt-2 block">{fmtDate(p.date)}</span>
+                  <span className="text-xs text-zinc-400 mt-2 block">{fmtDate(p.date)}</span>
                 </Link>
               );
             })}
@@ -369,25 +336,25 @@ function CategoryChips({ cats }: { cats: Cat[] }) {
     <div className="bg-zinc-950 border-b border-white/[0.06] py-3.5 sticky top-0 z-20 backdrop-blur-sm">
       <Container>
         <div className="flex items-center gap-3 overflow-x-auto no-scrollbar">
-          <span className="shrink-0 text-[8px] font-black uppercase tracking-[0.22em] text-zinc-700 pr-3 border-r border-white/8">
+          <span className="shrink-0 text-xs font-black uppercase tracking-[0.2em] text-zinc-300 pr-3 border-r border-white/8">
             Topics
           </span>
           {list.map((c) => (
             <Link
-              key={`${c._source}-${c.id}`}
+              key={c.id}
               href={`/blogs?category=${c.slug}`}
-              className="shrink-0 flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400 hover:text-white border border-white/8 hover:border-teal-500/40 bg-white/[0.03] hover:bg-teal-500/8 rounded-full px-3.5 py-1.5 transition-all duration-200 whitespace-nowrap group"
+              className="shrink-0 flex items-center gap-1.5 text-sm font-semibold text-zinc-200 hover:text-white border border-white/8 hover:border-teal-500/40 bg-white/[0.03] hover:bg-teal-500/8 rounded-full px-3.5 py-1.5 transition-all duration-200 whitespace-nowrap group"
             >
               <span className="text-sm leading-none">{getEmoji(c.slug)}</span>
               {c.name}
-              <span className="text-[9px] text-zinc-700 group-hover:text-teal-600 transition-colors">
+              <span className="text-xs text-zinc-400 group-hover:text-teal-400 transition-colors">
                 {c.count}
               </span>
             </Link>
           ))}
           <Link
             href="/categories"
-            className="shrink-0 flex items-center gap-1 text-[11px] font-bold text-teal-500 hover:text-teal-400 pl-3 border-l border-white/8 transition-colors whitespace-nowrap"
+            className="shrink-0 flex items-center gap-1 text-sm font-bold text-teal-400 hover:text-teal-300 pl-3 border-l border-white/8 transition-colors whitespace-nowrap"
           >
             All <ArrowRight className="w-3 h-3" />
           </Link>
@@ -424,19 +391,19 @@ function CardLg({ post }: { post: WPPost }) {
         {cat && (
           <div className="flex items-center gap-2 mb-2.5">
             <span className="w-5 h-[2px] bg-orange-400" />
-            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-orange-400">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-300">
               {cat}
             </span>
           </div>
         )}
-        <h2 className="text-xl md:text-2xl font-black text-white leading-tight line-clamp-3 group-hover:text-teal-100 transition-colors mb-2.5">
+        <h2 className="text-2xl md:text-3xl font-black text-white leading-tight line-clamp-3 group-hover:text-teal-100 transition-colors mb-2.5">
           {post.title.rendered}
         </h2>
-        <p className="text-zinc-200 text-[13px] line-clamp-2 leading-relaxed mb-3.5">
+        <p className="text-zinc-100 text-[15px] line-clamp-2 leading-relaxed mb-3.5">
           {stripHtml(post.excerpt.rendered)}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-white flex items-center gap-1.5">
+          <span className="text-xs text-zinc-300 flex items-center gap-1.5">
             <Clock className="w-2.5 h-2.5" />
             {fmtDate(post.date)} · 5 min read
           </span>
@@ -470,24 +437,24 @@ function CardMd({ post }: { post: WPPost }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         {cat && (
-          <span className="absolute top-2.5 left-2.5 text-[8px] font-black uppercase tracking-widest bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-2 py-0.5 rounded-full shadow-md">
+          <span className="absolute top-2.5 left-2.5 text-xs font-black uppercase tracking-widest bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-2 py-0.5 rounded-full shadow-md">
             {cat}
           </span>
         )}
       </div>
       <div className="p-3.5">
-        <h3 className="text-[13px] font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors mb-2.5">
+        <h3 className="text-base font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors mb-2.5">
           {post.title.rendered}
         </h3>
-        <p className="text-gray-600 text-[13px] line-clamp-2 leading-relaxed mb-3">
+        <p className="text-gray-700 text-sm line-clamp-2 leading-relaxed mb-3">
           {stripHtml(post.excerpt.rendered)}
         </p>
         <div className="flex items-center justify-between border-t border-gray-50 pt-2.5">
-          <span className="text-[10px] text-black flex items-center gap-1">
+          <span className="text-xs text-gray-600 flex items-center gap-1">
             <Clock className="w-2.5 h-2.5" />
             {fmtDate(post.date)}
           </span>
-          <span className="text-[10px] font-bold text-teal-600 flex items-center gap-0.5 group-hover:gap-1.5 transition-all">
+          <span className="text-xs font-bold text-teal-700 flex items-center gap-0.5 group-hover:gap-1.5 transition-all">
             Read <ArrowRight className="w-3 h-3" />
           </span>
         </div>
@@ -506,7 +473,7 @@ function CardRow({ post, rank }: { post: WPPost; rank: number }) {
     >
       <span
         className={`shrink-0 text-2xl font-black leading-none w-6 text-center tabular-nums select-none ${
-          rank === 1 ? "text-orange-400" : rank === 2 ? "text-zinc-300" : "text-gray-100"
+          rank === 1 ? "text-orange-500" : rank === 2 ? "text-gray-400" : "text-gray-400"
         }`}
       >
         {rank}
@@ -525,19 +492,19 @@ function CardRow({ post, rank }: { post: WPPost; rank: number }) {
       </div>
       <div className="flex-1 min-w-0">
         {cat && (
-          <span className="text-[8px] font-black uppercase tracking-widest text-teal-600 mb-0.5 block">
+          <span className="text-xs font-black uppercase tracking-widest text-teal-700 mb-0.5 block">
             {cat}
           </span>
         )}
-        <h3 className="text-[12px] font-bold text-gray-800 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
+        <h3 className="text-sm font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-teal-700 transition-colors">
           {post.title.rendered}
         </h3>
-        <span className="text-[9px] text-black mt-1 flex items-center gap-1">
+        <span className="text-xs text-gray-600 mt-1 flex items-center gap-1">
           <Clock className="w-2.5 h-2.5" />
           {fmtDate(post.date)}
         </span>
       </div>
-      <ArrowUpRight className="w-4 h-4 text-gray-200 group-hover:text-teal-500 shrink-0 -translate-x-1 group-hover:translate-x-0 transition-all" />
+      <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-teal-600 shrink-0 -translate-x-1 group-hover:translate-x-0 transition-all" />
     </Link>
   );
 }
@@ -563,7 +530,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-6 rounded-full bg-gradient-to-b from-teal-500 to-cyan-400" />
-                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-500">
+                <span className="text-xs font-black uppercase tracking-[0.22em] text-gray-700">
                   Editor&apos;s Selection
                 </span>
               </div>
@@ -582,7 +549,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                   <CardLg post={posts[0]} />
                 </div>
                 {posts.slice(1, 3).map((p) => (
-                  <CardMd key={`${p._source}-${p.id}`} post={p} />
+                  <CardMd key={p.id} post={p} />
                 ))}
               </div>
             )}
@@ -591,7 +558,7 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
             {posts.length > 3 && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {posts.slice(3, 6).map((p) => (
-                  <CardMd key={`${p._source}-${p.id}`} post={p} />
+                  <CardMd key={p.id} post={p} />
                 ))}
               </div>
             )}
@@ -622,17 +589,17 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                     const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
                     return (
                       <Link
-                        key={`${post._source}-${post.id}`}
+                        key={post.id}
                         href={`/${post.slug}`}
                         className="group flex gap-3 items-center px-4 py-3 hover:bg-white/[0.03] transition-colors"
                       >
                         <span
                           className={`shrink-0 text-xl font-black leading-none w-5 text-right tabular-nums select-none ${
                             i === 0
-                              ? "text-orange-500"
+                              ? "text-orange-400"
                               : i === 1
-                              ? "text-zinc-600"
-                              : "text-zinc-800"
+                              ? "text-zinc-300"
+                              : "text-zinc-500"
                           }`}
                         >
                           {i + 1}
@@ -649,11 +616,11 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
                         </div>
                         <div className="flex-1 min-w-0">
                           {cat && (
-                            <span className="text-[8px] font-black uppercase tracking-widest text-teal-600 block mb-0.5">
+                            <span className="text-xs font-black uppercase tracking-widest text-teal-400 block mb-0.5">
                               {cat}
                             </span>
                           )}
-                          <p className="text-[11px] font-semibold text-zinc-300 line-clamp-2 leading-snug group-hover:text-white transition-colors">
+                          <p className="text-[13px] font-semibold text-zinc-200 line-clamp-2 leading-snug group-hover:text-white transition-colors">
                             {post.title.rendered}
                           </p>
                         </div>
@@ -665,6 +632,14 @@ function EditorialGrid({ posts, trendingPosts }: { posts: WPPost[]; trendingPost
 
               {/* Ad unit */}
               <div className="rounded-2xl overflow-hidden border border-gray-100 bg-white">
+                <div className="flex items-center justify-between px-3 pt-2.5 pb-1.5">
+                  <span className="text-[8px] font-semibold uppercase tracking-widest text-gray-400">
+                    Sponsored
+                  </span>
+                  <span className="text-[7px] font-black uppercase tracking-wider bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">
+                    Ad
+                  </span>
+                </div>
                 <a
                   href="https://converti.se/click/4bdd0a13-ff3c999cd6-ccbc7b35/?sid=sidebar1"
                   target="_blank"
@@ -697,7 +672,7 @@ function AIBanner() {
   return (
     <div
       ref={ref}
-      className={`bg-zinc-950 py-8 md:py-10 relative overflow-hidden transition-all duration-700 ${
+      className={`bg-zinc-950 py-12 md:py-16 relative overflow-hidden transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -712,7 +687,7 @@ function AIBanner() {
       />
       <Container>
         <div className="relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-[0.22em] mb-5">
+          <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-300 rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] mb-5">
             <Sparkles className="w-3 h-3" />
             Powered by AI
           </div>
@@ -723,7 +698,7 @@ function AIBanner() {
               so you don&apos;t have to.
             </span>
           </h2>
-          <p className="text-zinc-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-7">
+          <p className="text-zinc-200 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-7">
             Our AI continuously scans top blogs, reviews &amp; e-commerce stores — surfacing the
             most trending content across every category, updated daily.
           </p>
@@ -738,7 +713,7 @@ function AIBanner() {
             </Link>
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 text-zinc-400 hover:text-white border border-white/10 hover:border-white/20 font-semibold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:bg-white/[0.03]"
+              className="inline-flex items-center gap-2 text-zinc-100 hover:text-white border border-white/20 hover:border-white/40 font-semibold px-6 py-3 rounded-full text-sm transition-all duration-300 hover:bg-white/[0.05]"
             >
               Browse All Articles
             </Link>
@@ -753,7 +728,7 @@ function AIBanner() {
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-2xl font-black text-white">{s.val}</div>
-                <div className="text-[9px] text-zinc-600 uppercase tracking-widest mt-0.5">
+                <div className="text-xs text-zinc-300 uppercase tracking-widest mt-0.5">
                   {s.label}
                 </div>
               </div>
@@ -766,7 +741,7 @@ function AIBanner() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 6 — CATEGORY SHOWCASE (bento)
+   SECTION 6 — CATEGORY SHOWCASE (new bento)
 ══════════════════════════════════════════════════════════════ */
 function CategoryShowcase({ cats }: { cats: Cat[] }) {
   const { ref, visible } = useReveal();
@@ -779,14 +754,14 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
   return (
     <div
       ref={ref}
-      className={`py-7 bg-white border-b border-gray-100 transition-all duration-700 ${
+      className={`py-10 bg-white border-b border-gray-100 transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
       <Container>
         <div className="flex items-end justify-between mb-6">
           <div>
-            <span className="text-[8px] font-black uppercase tracking-[0.25em] text-teal-600 block mb-1.5">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-teal-700 block mb-1.5">
               Explore
             </span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight tracking-tight">
@@ -795,7 +770,7 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
           </div>
           <Link
             href="/categories"
-            className="text-[11px] font-bold text-gray-400 hover:text-teal-600 flex items-center gap-1 transition-colors"
+            className="text-sm font-bold text-gray-600 hover:text-teal-700 flex items-center gap-1 transition-colors"
           >
             All categories <ChevronRight className="w-3.5 h-3.5" />
           </Link>
@@ -816,20 +791,20 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             <div className="absolute inset-0 p-5 flex flex-col justify-end">
-              <span className="text-[8px] font-black uppercase tracking-[0.22em] text-orange-400 mb-2 flex items-center gap-1.5">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-300 mb-2 flex items-center gap-1.5">
                 <TrendingUp className="w-3 h-3" /> Most Popular
               </span>
               <h3 className="text-2xl md:text-3xl font-black text-white leading-tight mb-1">
                 {list[0].name}
               </h3>
-              <p className="text-[11px] text-white/60 font-medium">{list[0].count} Articles</p>
+              <p className="text-sm text-white/80 font-medium">{list[0].count} Articles</p>
             </div>
           </Link>
 
           {/* 4 smaller tiles */}
           {list.slice(1, 5).map((cat, idx) => (
             <Link
-              key={`${cat._source}-${cat.id}`}
+              key={cat.id}
               href={`/blogs?category=${cat.slug}`}
               className={`relative group rounded-2xl overflow-hidden h-32 md:h-auto ${
                 idx < 2 ? "col-span-1 md:col-span-3" : "col-span-1 md:col-span-4"
@@ -844,7 +819,7 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
               <div className="absolute inset-0 p-3.5 flex flex-col justify-end">
                 <h3 className="text-sm font-black text-white leading-snug">{cat.name}</h3>
-                <span className="text-[9px] text-white/55 mt-0.5">{cat.count} Articles</span>
+                <span className="text-xs text-white/80 mt-0.5">{cat.count} Articles</span>
               </div>
               <div className="absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
                 <ArrowUpRight className="w-3 h-3 text-white" />
@@ -867,7 +842,7 @@ function CategoryShowcase({ cats }: { cats: Cat[] }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
               <div className="absolute inset-0 p-3.5 flex flex-col justify-end">
                 <h3 className="text-sm font-black text-white">{list[5].name}</h3>
-                <span className="text-[9px] text-white/55 mt-0.5">{list[5].count} Articles</span>
+                <span className="text-xs text-white/80 mt-0.5">{list[5].count} Articles</span>
               </div>
             </Link>
           )}
@@ -911,24 +886,57 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Numbered trending posts */}
-          <div className="lg:col-span-12 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-6 rounded-full bg-gradient-to-b from-orange-400 to-red-500" />
-                <span className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-500">
+                <span className="text-xs font-black uppercase tracking-[0.22em] text-gray-700">
                   Most Read
                 </span>
               </div>
               <Link
                 href="/trending"
-                className="text-[11px] font-bold text-orange-500 hover:text-orange-600 flex items-center gap-1 transition-colors">
+                className="text-[11px] font-bold text-orange-500 hover:text-orange-600 flex items-center gap-1 transition-colors"
+              >
                 <Flame className="w-3 h-3" />
                 Trending Page
               </Link>
             </div>
             <div className="space-y-2.5">
               {posts.slice(0, 5).map((p, i) => (
-                <CardRow key={`${p._source}-${p.id}`} post={p} rank={i + 1} />
+                <CardRow key={p.id} post={p} rank={i + 1} />
+              ))}
+            </div>
+          </div>
+
+          {/* Partners column */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-400">
+                Featured Partners
+              </span>
+              <span className="text-[7px] font-black uppercase tracking-wider bg-gray-100 text-gray-400 px-2 py-1 rounded">
+                Sponsored
+              </span>
+            </div>
+            <div className="space-y-3">
+              {partners.map((p) => (
+                <a
+                  key={p.href}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block group"
+                >
+                  <div className="relative w-full h-[90px] rounded-xl overflow-hidden border border-gray-100 bg-white shadow-sm group-hover:shadow-lg group-hover:-translate-y-0.5 transition-all duration-300">
+                    <img
+                      src={p.img}
+                      alt={p.alt}
+                      loading="lazy"
+                      className="w-full h-full py-2 px-6 object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                  </div>
+                </a>
               ))}
             </div>
           </div>
@@ -939,7 +947,7 @@ function TrendingWithPartners({ posts }: { posts: WPPost[] }) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   MAIN PAGE — Dual Site Fetch
+   MAIN PAGE
 ══════════════════════════════════════════════════════════════ */
 export default function HomePage() {
   const [featuredPosts, setFeaturedPosts] = useState<WPPost[]>([]);
@@ -950,33 +958,14 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Dono sites ko ek saath parallel fetch karo
-        const [
-          feat1Res, posts1Res, cats1Res,
-          feat2Res, posts2Res, cats2Res,
-        ] = await Promise.all([
-          fetch(`${WP_API_URL_1}/posts?_embed&per_page=12&orderby=date`),
-          fetch(`${WP_API_URL_1}/posts?_embed&per_page=20&orderby=date`),
-          fetch(`${WP_API_URL_1}/categories?per_page=12&orderby=count&order=desc`),
-          fetch(`${WP_API_URL_2}/posts?_embed&per_page=12&orderby=date`),
-          fetch(`${WP_API_URL_2}/posts?_embed&per_page=20&orderby=date`),
-          fetch(`${WP_API_URL_2}/categories?per_page=12&orderby=count&order=desc`),
+        const [featRes, postsRes, catsRes] = await Promise.all([
+          fetch(`${WP_API_URL}/posts?_embed&per_page=12&orderby=date`),
+          fetch(`${WP_API_URL}/posts?_embed&per_page=20&orderby=date`),
+          fetch(`${WP_API_URL}/categories?per_page=12&orderby=count&order=desc`),
         ]);
-
-        // Safe JSON parse + _source tag lagao
-        const feat1: WPPost[] = (await safeJson<WPPost>(feat1Res)).map((p) => ({ ...p, _source: "site1" as const }));
-        const posts1: WPPost[] = (await safeJson<WPPost>(posts1Res)).map((p) => ({ ...p, _source: "site1" as const }));
-        const cats1: Cat[] = (await safeJson<Cat>(cats1Res)).map((c) => ({ ...c, _source: "site1" as const }));
-
-        const feat2: WPPost[] = (await safeJson<WPPost>(feat2Res)).map((p) => ({ ...p, _source: "site2" as const }));
-        const posts2: WPPost[] = (await safeJson<WPPost>(posts2Res)).map((p) => ({ ...p, _source: "site2" as const }));
-        const cats2: Cat[] = (await safeJson<Cat>(cats2Res)).map((c) => ({ ...c, _source: "site2" as const }));
-
-        // Merge + sort by date (newest first)
-        setFeaturedPosts(sortByDate([...feat1, ...feat2]));
-        setAllPosts(sortByDate([...posts1, ...posts2]));
-        setCategories(mergeCats(cats1, cats2));
-
+        if (featRes.ok) setFeaturedPosts(await featRes.json());
+        if (postsRes.ok) setAllPosts(await postsRes.json());
+        if (catsRes.ok) setCategories(await catsRes.json());
       } catch (err) {
         console.error("Fetch error:", err);
       } finally {
@@ -1048,7 +1037,7 @@ export default function HomePage() {
         <Container>
           <div className="flex items-center gap-3 mb-6">
             <div className="w-1 h-6 rounded-full bg-gradient-to-b from-teal-500 to-cyan-400" />
-            <span className="text-[10px] font-black uppercase tracking-[0.22em] text-gray-500">
+            <span className="text-xs font-black uppercase tracking-[0.22em] text-gray-700">
               Latest Articles
             </span>
           </div>
