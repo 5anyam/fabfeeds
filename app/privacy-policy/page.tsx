@@ -4,8 +4,8 @@ import { Section } from "@/components/ui/section";
 import { ShieldCheck, Lock, Eye, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Trendships',
-  description: 'Privacy Policy for Trendships. Learn how we collect, use, and protect your personal information.',
+  title: 'Privacy Policy | influencershark',
+  description: 'Privacy Policy for influencershark. Learn how we collect, use, and protect your personal information.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
             <div className="prose prose-lg prose-gray max-w-none">
               
               <p className="lead text-xl text-gray-700 leading-relaxed mb-10">
-                At <strong>Trendships</strong>, accessible from https://trendships.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Trendships and how we use it.
+                At <strong>influencershark</strong>, accessible from https://influencershark.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by influencershark and how we use it.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 my-12 not-prose">
@@ -80,12 +80,12 @@ export default function PrivacyPolicyPage() {
 
               <h2>3. Log Files</h2>
               <p>
-                Trendships follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.
+                influencershark follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.
               </p>
 
               <h2>4. Cookies and Web Beacons</h2>
               <p>
-                Like any other website, Trendships uses cookies. These cookies are used to store information including visitors preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users experience by customizing our web page content based on visitors browser type and/or other information.
+                Like any other website, influencershark uses cookies. These cookies are used to store information including visitors preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users experience by customizing our web page content based on visitors browser type and/or other information.
               </p>
 
               <h2>5. Google DoubleClick DART Cookie</h2>
@@ -105,7 +105,7 @@ export default function PrivacyPolicyPage() {
 
               <h2>7. Children Information</h2>
               <p>
-                Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. Trendships does not knowingly collect any Personal Identifiable Information from children under the age of 13.
+                Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. influencershark does not knowingly collect any Personal Identifiable Information from children under the age of 13.
               </p>
 
               <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-8 mt-12 not-prose text-center">
@@ -115,7 +115,7 @@ export default function PrivacyPolicyPage() {
                   If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
                 </p>
                 <a 
-                  href="mailto:support@trendships.com" 
+                  href="mailto:support@influencershark.com" 
                   className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 transition-colors"
                 >
                   Contact Support

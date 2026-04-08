@@ -1,9 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
 import {
   Instagram, Facebook, Twitter, Youtube,
   ArrowUpRight, Flame, Sparkles, MapPin,
-  BookOpen, Building2, Zap,
+  BookOpen, Building2, Zap, Waves, Target
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
@@ -13,18 +14,18 @@ const footerLinks = [
     heading: "Categories",
     icon: BookOpen,
     links: [
-      { label: "👗 Fashion",      href: "/blogs?category=fashion" },
-      { label: "✈️ Travel",       href: "/blogs?category=travel" },
-      { label: "🏥 Health",       href: "/blogs?category=health" },
-      { label: "📌 Home Decor",   href: "/blogs?category=home-decor" },
-      { label: "✨ Lifestyle",     href: "/blogs?category=lifestyle" },
-      { label: "💄 Beauty",       href: "/blogs?category=beauty" },
-      { label: "📌 Relationship", href: "/blogs?category=relationship" },
-      { label: "📌 Diet",         href: "/blogs?category=diet" },
-      { label: "📌 Ecommerce",    href: "/blogs?category=ecommerce" },
-      { label: "📌 Business",     href: "/blogs?category=business" },
-      { label: "🚗 Automotive",   href: "/blogs?category=automotive" },
-      { label: "🍕 Food",         href: "/blogs?category=food" },
+      { label: "Fashion",       href: "/blogs?category=fashion" },
+      { label: "Travel",        href: "/blogs?category=travel" },
+      { label: "Health",        href: "/blogs?category=health" },
+      { label: "Home Decor",    href: "/blogs?category=home-decor" },
+      { label: "Lifestyle",     href: "/blogs?category=lifestyle" },
+      { label: "Beauty",        href: "/blogs?category=beauty" },
+      { label: "Relationship",  href: "/blogs?category=relationship" },
+      { label: "Diet",          href: "/blogs?category=diet" },
+      { label: "Ecommerce",     href: "/blogs?category=ecommerce" },
+      { label: "Business",      href: "/blogs?category=business" },
+      { label: "Automotive",    href: "/blogs?category=automotive" },
+      { label: "Food",          href: "/blogs?category=food" },
     ],
   },
   {
@@ -45,7 +46,7 @@ const footerLinks = [
     links: [
       { label: "Travel Guides",   href: "/blogs?category=travel-guides" },
       { label: "Packing Lists",   href: "/blogs?category=packing" },
-      { label: "Visa Information", href: "/blogs?category=visa" },
+      { label: "Visa Info",       href: "/blogs?category=visa" },
       { label: "Latest Deals",    href: "/blogs?category=deals" },
       { label: "Itineraries",     href: "/blogs?category=itineraries" },
       { label: "Safety Tips",     href: "/blogs?category=safety" },
@@ -67,28 +68,28 @@ const footerLinks = [
 
 const socialLinks = [
   {
-    href: "https://instagram.com/trendships",
+    href: "https://instagram.com",
     icon: Instagram,
     label: "Instagram",
-    hover: "hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 hover:text-white hover:border-transparent",
+    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
   },
   {
-    href: "https://facebook.com/trendships",
+    href: "https://facebook.com",
     icon: Facebook,
     label: "Facebook",
-    hover: "hover:bg-blue-600 hover:text-white hover:border-transparent",
+    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
   },
   {
-    href: "https://twitter.com/trendships",
+    href: "https://twitter.com",
     icon: Twitter,
     label: "Twitter/X",
-    hover: "hover:bg-gray-900 hover:text-white hover:border-transparent",
+    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
   },
   {
-    href: "https://youtube.com/@trendships",
+    href: "https://youtube.com",
     icon: Youtube,
     label: "YouTube",
-    hover: "hover:bg-red-600 hover:text-white hover:border-transparent",
+    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
   },
 ];
 
@@ -96,21 +97,21 @@ const socialLinks = [
 function NewsletterForm() {
   return (
     <div>
-      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">
-        Stay Updated
+      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3 flex items-center gap-2">
+        <Zap className="w-3 h-3 text-cyan-500" /> Stay Updated
       </h4>
       <div className="flex gap-2">
         <input
           type="email"
           placeholder="Your email address"
-          className="flex-1 min-w-0 px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-500/10 transition-all"
+          className="flex-1 min-w-0 px-3.5 py-2.5 bg-[#0a1220] border border-cyan-900/40 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/50 transition-all"
         />
-        <button className="shrink-0 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold text-[11px] rounded-xl shadow-md shadow-teal-500/20 hover:-translate-y-0.5 transition-all duration-200">
+        <button className="shrink-0 px-4 py-2.5 bg-cyan-400 hover:bg-cyan-300 text-[#020813] font-black uppercase tracking-widest text-[10px] rounded-xl shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
           Subscribe
         </button>
       </div>
-      <p className="text-[10px] text-gray-400 mt-2">
-        Join 500,000+ readers · No spam, ever
+      <p className="text-[10px] text-slate-500 mt-2">
+        Join the radar · No spam, ever
       </p>
     </div>
   );
@@ -121,30 +122,31 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-gray-100" aria-label="Site footer">
+    <footer className="bg-[#020813] border-t border-cyan-900/30 selection:bg-cyan-500/30" aria-label="Site footer">
 
       {/* ── Pre-footer Trending CTA strip ── */}
-      <div className="bg-gradient-to-r from-gray-50 via-white to-teal-50/40 border-b border-gray-100">
+      <div className="bg-[#050b14] border-b border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/10 to-transparent pointer-events-none" />
         <Container>
-          <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
             <div className="flex items-center gap-3">
-              <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 shadow-md shadow-orange-500/20 shrink-0">
-                <Flame className="w-4 h-4 text-white" />
+              <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 shrink-0">
+                <Target className="w-4 h-4 text-cyan-400" />
               </span>
               <div>
-                <p className="text-[12px] font-black text-gray-900 tracking-tight">
+                <p className="text-[12px] font-black text-white tracking-wider uppercase">
                   See what&apos;s trending right now
                 </p>
-                <p className="text-[10px] text-gray-400">
+                <p className="text-[10px] text-cyan-100/60 font-medium">
                   AI-curated picks updated daily
                 </p>
               </div>
             </div>
             <Link
               href="/trending"
-              className="shrink-0 inline-flex items-center gap-2 text-[12px] font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 px-5 py-2.5 rounded-xl shadow-md shadow-orange-500/20 hover:-translate-y-0.5 transition-all duration-200 group"
+              className="shrink-0 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#020813] bg-cyan-400 hover:bg-cyan-300 px-5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 group"
             >
-              <Flame className="w-3.5 h-3.5" />
+              <Flame className="w-3.5 h-3.5 text-[#020813]" />
               Explore Trending
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
@@ -154,29 +156,36 @@ export function Footer() {
 
       {/* ── Main footer body ── */}
       <Container>
-        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 relative">
+          
+          {/* Background Glow */}
+          <div className="absolute top-1/2 left-0 w-64 h-64 bg-cyan-900/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2" />
 
           {/* ── Brand column ── */}
-          <div className="lg:col-span-4 space-y-7">
+          <div className="lg:col-span-4 space-y-7 relative z-10">
             {/* Logo */}
-            <Link href="/" className="inline-block">
-              <Image
-                src="/trendships_logo.png"
-                alt="Trendships"
-                width={150}
-                height={40}
-                className="h-10 w-auto object-contain"
-              />
+            <Link href="/" className="flex items-center gap-2.5 group inline-flex">
+              <div className="w-10 h-10 bg-cyan-500/10 border border-cyan-400/30 rounded flex items-center justify-center group-hover:bg-cyan-500/20 group-hover:border-cyan-400 transition-all shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                <Waves className="w-5 h-5 text-cyan-400" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-black uppercase tracking-widest text-white leading-none">
+                  Influencer
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 leading-none mt-1">
+                  Shark
+                </span>
+              </div>
             </Link>
 
             {/* Tagline */}
-            <p className="text-gray-500 text-[13px] leading-relaxed max-w-xs">
-              Your AI-powered content hub for travel, tech, lifestyle, finance &amp;
-              more — helping you discover what&apos;s trending every day.
+            <p className="text-slate-400 text-[12px] leading-relaxed max-w-xs font-medium">
+              Your AI-powered content hub for lifestyle, tech, health, and more. 
+              Discover the apex of what&apos;s trending every day.
             </p>
 
             {/* AI badge */}
-            <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-100 text-teal-600 rounded-full px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.2em]">
+            <div className="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-900 text-cyan-400 rounded-full px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] shadow-[0_0_10px_rgba(34,211,238,0.1)]">
               <Sparkles className="w-3 h-3" />
               Powered by AI
             </div>
@@ -186,8 +195,8 @@ export function Footer() {
 
             {/* Socials */}
             <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3">
-                Follow Us
+              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
+                Follow The Radar
               </h4>
               <div className="flex gap-2">
                 {socialLinks.map((s) => {
@@ -199,7 +208,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className={`w-9 h-9 rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-400 transition-all duration-200 ${s.hover}`}
+                      className={`w-9 h-9 rounded-xl border border-white/10 bg-[#0a1220] flex items-center justify-center text-slate-400 transition-all duration-300 ${s.hover}`}
                     >
                       <Icon className="w-4 h-4" />
                     </Link>
@@ -213,20 +222,20 @@ export function Footer() {
           {footerLinks.map((col) => {
             const Icon = col.icon;
             return (
-              <div key={col.heading} className="lg:col-span-2 space-y-4">
-                <h3 className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
-                  <Icon className="w-3 h-3 text-teal-500 shrink-0" />
+              <div key={col.heading} className="lg:col-span-2 space-y-5 relative z-10">
+                <h3 className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-300">
+                  <Icon className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
                   {col.heading}
                 </h3>
-                <div className="w-10 h-px bg-gradient-to-r from-teal-400 to-transparent" />
-                <ul className="space-y-2.5">
+                <div className="w-10 h-px bg-cyan-500/50" />
+                <ul className="space-y-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="group flex items-center gap-2 text-[12px] font-medium text-gray-500 hover:text-teal-600 transition-colors duration-150"
+                        className="group flex items-center gap-2.5 text-[12px] font-semibold text-slate-400 hover:text-cyan-300 transition-colors duration-200"
                       >
-                        <span className="w-1 h-1 rounded-full bg-gray-300 group-hover:bg-teal-500 transition-colors shrink-0" />
+                        <span className="w-1 h-1 rounded-full bg-slate-700 group-hover:bg-cyan-400 group-hover:shadow-[0_0_5px_rgba(34,211,238,0.8)] transition-all shrink-0" />
                         {link.label}
                       </Link>
                     </li>
@@ -239,13 +248,13 @@ export function Footer() {
       </Container>
 
       {/* ── Affiliate disclosure ── */}
-      <div className="border-t border-gray-100 bg-gray-50">
+      <div className="border-t border-white/5 bg-[#050b14]">
         <Container>
-          <div className="py-4">
-            <p className="text-[10px] text-gray-400 text-center leading-relaxed max-w-3xl mx-auto">
-              <span className="text-gray-500 font-semibold">Affiliate Disclosure: </span>
-              Trendships earns commissions from qualifying purchases made through affiliate
-              links on this site, at no extra cost to you. We only recommend products and
+          <div className="py-5">
+            <p className="text-[10px] text-slate-500 text-center leading-relaxed max-w-4xl mx-auto font-medium">
+              <span className="text-cyan-400 font-bold uppercase tracking-wider">Affiliate Disclosure: </span>
+              Influencer Shark earns commissions from qualifying purchases made through affiliate
+              links on this site, at no extra cost to you. We only recommend products, tools, and
               services we genuinely believe in.
             </p>
           </div>
@@ -253,11 +262,11 @@ export function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-gray-100 bg-white">
+      <div className="border-t border-white/5 bg-[#020813]">
         <Container>
           <div className="py-5 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-gray-400 font-medium text-center md:text-left">
-              © {year} Trendships. All rights reserved.
+            <p className="text-[11px] text-slate-500 font-bold tracking-wide text-center md:text-left">
+              © {year} INFLUENCER SHARK. ALL RIGHTS RESERVED.
             </p>
             <div className="flex flex-wrap justify-center md:justify-end gap-5">
               {[
@@ -269,37 +278,12 @@ export function Footer() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-[11px] text-gray-400 hover:text-teal-600 font-medium transition-colors"
+                  className="text-[11px] text-slate-500 hover:text-cyan-400 font-semibold uppercase tracking-wider transition-colors"
                 >
                   {l.label}
                 </Link>
               ))}
             </div>
-          </div>
-        </Container>
-      </div>
-
-      {/* ── Powered by strip ── */}
-      <div className="border-t border-gray-100 bg-gray-50">
-        <Container>
-          <div className="py-3 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2">
-            <p className="text-[10px] text-gray-400 flex items-center gap-1.5">
-              Powered by{" "}
-              <Link
-                href="https://www.adshouz.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-teal-600 hover:text-teal-700 font-bold transition-colors inline-flex items-center gap-0.5"
-              >
-                Adshouz Digital LLP
-                <ArrowUpRight className="w-2.5 h-2.5" />
-              </Link>
-            </p>
-            <p className="text-[10px] text-gray-300 flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-teal-300" />
-              Trendships — Discover what&apos;s trending today
-              <span className="w-1 h-1 rounded-full bg-teal-300" />
-            </p>
           </div>
         </Container>
       </div>

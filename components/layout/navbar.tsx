@@ -1,20 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import {
-  Menu, X, ChevronDown, Flame, Sparkles,
-  ArrowUpRight, TrendingUp, Compass, ShoppingBag,
-  Utensils, Heart, Laptop, MapPin,
+  Menu, X, ChevronDown, Waves, Zap, Flame,
+  ArrowUpRight, Sparkles, Heart, Utensils, 
+  Compass, Laptop, TrendingUp, LucideIcon
 } from "lucide-react";
-import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
 
-// ── Navbar ke navigation array mein Categories dropdown update karo ──
+// ── TYPESCRIPT INTERFACES ──
+type SubMenuItem = {
+  name: string;
+  href: string;
+};
 
-const navigation = [
+type DropdownCategory = {
+  category: string;
+  icon: LucideIcon;
+  desc: string;
+  items: SubMenuItem[];
+};
+
+type NavItem = {
+  name: string;
+  href: string;
+  icon?: LucideIcon;
+  hasDropdown?: boolean;
+  dropdownItems?: DropdownCategory[];
+};
+
+// ── BLOG NAVIGATION (INFLUENCER SHARK THEME) ──
+const navigation: NavItem[] = [
   { name: "Home", href: "/" },
   {
     name: "Categories",
@@ -23,62 +41,71 @@ const navigation = [
     dropdownItems: [
       {
         category: "Style & Beauty",
-        icon: Sparkles,         // already imported
-        color: "text-pink-600",
-        bg: "bg-pink-50",
+        icon: Sparkles,
+        desc: "Fashion & lifestyle trends",
         items: [
           { name: "Fashion",   href: "/blogs?category=fashion" },
           { name: "Beauty",    href: "/blogs?category=beauty" },
           { name: "Lifestyle", href: "/blogs?category=lifestyle" },
-          { name: "Diet",      href: "/blogs?category=diet" },
         ],
       },
       {
         category: "Health & Life",
-        icon: Heart,            // already imported
-        color: "text-rose-600",
-        bg: "bg-rose-50",
+        icon: Heart,
+        desc: "Wellness & modern living",
         items: [
           { name: "Health",        href: "/blogs?category=health" },
           { name: "Relationship",  href: "/blogs?category=relationship" },
-          { name: "Food",          href: "/blogs?category=food" },
           { name: "Home Decor",    href: "/blogs?category=home-decor" },
         ],
       },
       {
-        category: "Travel & Auto",
-        icon: MapPin,           // already imported
-        color: "text-teal-600",
-        bg: "bg-teal-50",
+        category: "Food & Dining",
+        icon: Utensils,
+        desc: "Recipes & top restaurants",
         items: [
-          { name: "Travel",        href: "/blogs?category=travel" },
+          { name: "Recipes",      href: "/blogs?category=recipes" },
+          { name: "Restaurants",  href: "/blogs?category=restaurants" },
+          { name: "Diet Plans",   href: "/blogs?category=diet" },
+        ],
+      },
+      {
+        category: "Travel & Auto",
+        icon: Compass,
+        desc: "Destinations & rides",
+        items: [
+          { name: "Destinations",  href: "/blogs?category=destinations" },
           { name: "Automotive",    href: "/blogs?category=automotive" },
-          { name: "Buying Guides", href: "/blogs?filter=buying-guides" },
-          { name: "Best Picks",    href: "/blogs?category=best-picks" },
+          { name: "Travel Guides", href: "/blogs?category=travel-guides" },
+        ],
+      },
+      {
+        category: "Tech & Gear",
+        icon: Laptop,
+        desc: "Gadgets & digital life",
+        items: [
+          { name: "Gadgets",      href: "/blogs?category=gadgets" },
+          { name: "Software",     href: "/blogs?category=software" },
+          { name: "AI Trends",    href: "/blogs?category=ai-trends" },
         ],
       },
       {
         category: "Business & More",
-        icon: ShoppingBag,      // already imported
-        color: "text-orange-600",
-        bg: "bg-orange-50",
+        icon: TrendingUp,
+        desc: "Markets & entrepreneurship",
         items: [
-          { name: "Business",   href: "/blogs?category=business" },
-          { name: "Ecommerce",  href: "/blogs?category=ecommerce" },
-          { name: "Tech",       href: "/blogs?category=tech" },
-          { name: "Finance",    href: "/blogs?category=finance" },
+          { name: "Business",     href: "/blogs?category=business" },
+          { name: "Ecommerce",    href: "/blogs?category=ecommerce" },
+          { name: "Finance",      href: "/blogs?category=finance" },
         ],
       },
     ],
   },
-  { name: "Trending",       href: "/trending" },
+  { name: "Trending",       href: "/trending", icon: Flame },
   { name: "Buying Guides",  href: "/blogs?filter=buying-guides" },
-  { name: "About",          href: "/about" },
-  { name: "Contact",        href: "/contact" },
 ];
 
-/* ══ Navbar ═════════════════════════════════════════════════════════════ */
-export function Navbar() {
+export function InfluencerSharkHeader() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -86,56 +113,55 @@ export function Navbar() {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* close mobile menu on route change */
   useEffect(() => { setIsOpen(false); setActiveDropdown(null); }, [pathname]);
 
   const handleMouseEnter = (name: string) => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setActiveDropdown(name);
   };
+  
   const handleMouseLeave = () => {
-    dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 120);
-  };
-  const handleLinkClick = () => {
-    setActiveDropdown(null);
-    setIsOpen(false);
+    dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => 
+    href === "/" ? pathname === "/" : pathname?.startsWith(href);
 
   return (
     <>
-      <nav
+      <header
         className={cn(
-          "sticky top-0 z-50 bg-white transition-all duration-300",
+          "fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b",
           isScrolled
-            ? "shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-gray-100"
-            : "border-b border-gray-100"
+            ? "bg-[#020813]/95 backdrop-blur-md border-cyan-900/40 shadow-[0_4px_30px_rgba(6,182,212,0.1)] py-3"
+            : "bg-[#020813] border-white/5 py-4"
         )}
       >
-        <Container>
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
 
-            {/* ── Logo ── */}
-            <Link href="/" className="flex items-center shrink-0" onClick={handleLinkClick}>
-              <Image
-                src="/trendships_logo.png"
-                alt="Trendships"
-                width={140}
-                height={36}
-                className="h-9 w-auto object-contain"
-                priority
-              />
+            {/* ── LOGO ── */}
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+              <div className="w-9 h-9 bg-cyan-500/10 border border-cyan-400/30 rounded flex items-center justify-center group-hover:bg-cyan-500/20 group-hover:border-cyan-400 transition-all shadow-[0_0_15px_rgba(34,211,238,0.2)] group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                <Waves className="w-5 h-5 text-cyan-400" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-black uppercase tracking-widest text-white leading-none">
+                  Influencer
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 leading-none mt-1">
+                  Shark
+                </span>
+              </div>
             </Link>
 
-            {/* ── Desktop Nav ── */}
-            <div className="hidden lg:flex items-center gap-0.5">
+            {/* ── DESKTOP NAVIGATION ── */}
+            <nav className="hidden lg:flex items-center gap-1 bg-[#0a1220]/50 border border-white/5 rounded-full px-2 py-1.5 backdrop-blur-sm">
               {navigation.map((item) => (
                 <div
                   key={item.name}
@@ -145,54 +171,57 @@ export function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    onClick={() => !item.hasDropdown && handleLinkClick()}
                     className={cn(
-                      "flex items-center gap-1 px-3.5 py-2 text-[13px] font-semibold rounded-xl transition-all duration-200",
+                      "flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300",
                       isActive(item.href) && !item.hasDropdown
-                        ? "text-teal-600 bg-teal-50"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                      activeDropdown === item.name && "text-gray-900 bg-gray-50"
+                        ? "bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.1)]"
+                        : "text-slate-300 hover:text-cyan-300 hover:bg-[#0a1220]",
+                      activeDropdown === item.name && "text-cyan-300 bg-[#0a1220]"
                     )}
                   >
+                    {item.name === "Trending" && <Flame className="w-3.5 h-3.5 text-cyan-500" />}
                     {item.name}
                     {item.hasDropdown && (
                       <ChevronDown
                         className={cn(
-                          "w-3.5 h-3.5 transition-transform duration-200",
-                          activeDropdown === item.name ? "rotate-180 text-teal-600" : "text-gray-400"
+                          "w-3 h-3 ml-1 transition-transform duration-200",
+                          activeDropdown === item.name ? "rotate-180 text-cyan-400" : "text-slate-500"
                         )}
                       />
                     )}
                   </Link>
 
-                  {/* ── Desktop Mega Dropdown ── */}
+                  {/* ── MEGA DROPDOWN (3 Columns, Dark Theme) ── */}
                   {item.hasDropdown && activeDropdown === item.name && (
                     <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[720px] bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-gray-100 overflow-hidden z-50"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[780px] bg-[#050b14] rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] border border-cyan-900/40 overflow-hidden z-50 before:absolute before:inset-0 before:bg-gradient-to-b before:from-cyan-500/5 before:to-transparent before:pointer-events-none"
                       onMouseEnter={() => handleMouseEnter(item.name)}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <div className="p-5 grid grid-cols-4 gap-5">
+                      <div className="p-6 grid grid-cols-3 gap-x-6 gap-y-8 relative z-10">
                         {item.dropdownItems?.map((cat) => {
                           const Icon = cat.icon;
                           return (
-                            <div key={cat.category} className="space-y-2.5">
-                              <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
-                                <span className={cn("w-6 h-6 rounded-lg flex items-center justify-center shrink-0", cat.bg)}>
-                                  <Icon className={cn("w-3.5 h-3.5", cat.color)} />
-                                </span>
-                                <h3 className="text-[10px] font-black uppercase tracking-[0.15em] text-gray-500">
-                                  {cat.category}
-                                </h3>
+                            <div key={cat.category} className="space-y-4">
+                              <div className="pb-3 border-b border-white/5">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <div className="w-6 h-6 rounded bg-cyan-950/50 flex items-center justify-center border border-cyan-900/50">
+                                    <Icon className="w-3.5 h-3.5 text-cyan-400" />
+                                  </div>
+                                  <h3 className="text-xs font-black uppercase tracking-widest text-white">
+                                    {cat.category}
+                                  </h3>
+                                </div>
+                                <p className="text-[10px] text-slate-400 font-medium ml-8">{cat.desc}</p>
                               </div>
-                              <ul className="space-y-0.5">
+                              <ul className="space-y-1.5 ml-1">
                                 {cat.items.map((sub) => (
                                   <li key={sub.name}>
                                     <Link
                                       href={sub.href}
-                                      onClick={handleLinkClick}
-                                      className="block text-[12px] font-medium text-gray-600 hover:text-teal-700 hover:bg-teal-50 px-2.5 py-1.5 rounded-lg transition-all duration-150"
+                                      className="group flex items-center text-xs font-semibold text-slate-300 hover:text-cyan-300 py-1 transition-colors"
                                     >
+                                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-900 group-hover:bg-cyan-400 mr-2.5 transition-colors shadow-[0_0_5px_rgba(34,211,238,0)] group-hover:shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
                                       {sub.name}
                                     </Link>
                                   </li>
@@ -202,180 +231,125 @@ export function Navbar() {
                           );
                         })}
                       </div>
-
-                      {/* Dropdown footer CTA */}
-                      <div className="bg-gradient-to-r from-gray-50 to-teal-50/40 border-t border-gray-100 px-5 py-3.5 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-3.5 h-3.5 text-teal-500" />
-                          <span className="text-[11px] font-semibold text-gray-500">
-                            AI-curated content across all topics
-                          </span>
-                        </div>
+                      
+                      {/* Dropdown Footer */}
+                      <div className="bg-[#0a1220] border-t border-cyan-900/30 px-6 py-4 flex items-center justify-between relative z-10">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                          <Zap className="w-3.5 h-3.5 text-cyan-500" /> Dive into the latest stories
+                        </span>
                         <Link
                           href="/blogs"
-                          onClick={handleLinkClick}
-                          className="inline-flex items-center gap-1.5 text-[11px] font-bold text-teal-600 hover:text-teal-700 bg-white border border-teal-100 hover:border-teal-300 px-3.5 py-1.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md"
+                          className="text-[10px] font-black uppercase tracking-widest text-[#020813] bg-cyan-400 hover:bg-cyan-300 px-4 py-2 rounded shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all flex items-center gap-1"
                         >
-                          View All Articles
-                          <ArrowUpRight className="w-3 h-3" />
+                          View All Articles <ArrowUpRight className="w-3 h-3" />
                         </Link>
                       </div>
                     </div>
                   )}
                 </div>
               ))}
-            </div>
+            </nav>
 
-            {/* ── Right: Trending CTA + Browse + Mobile toggle ── */}
-            <div className="flex items-center gap-2">
-              {/* 🔥 Trending Tab — Desktop */}
-              <Link
-                href="/trending"
-                className={cn(
-                  "hidden lg:inline-flex items-center gap-1.5 text-[12px] font-bold px-3.5 py-2 rounded-xl transition-all duration-200",
-                  pathname === "/trending"
-                    ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md shadow-orange-500/25"
-                    : "text-orange-600 hover:bg-orange-50 border border-orange-100 hover:border-orange-200"
-                )}
-              >
-                <Flame className={cn("w-3.5 h-3.5", pathname === "/trending" ? "text-white" : "text-orange-500")} />
-                Trending
-                <span className={cn(
-                  "text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full leading-none",
-                  pathname === "/trending"
-                    ? "bg-white/20 text-white"
-                    : "bg-red-500 text-white animate-pulse"
-                )}>
-                  HOT
-                </span>
-              </Link>
-
-              {/* Browse CTA — Desktop */}
+            {/* ── RIGHT CTA & MOBILE TOGGLE ── */}
+            <div className="flex items-center gap-4">
               <Link
                 href="/blogs"
-                className="hidden lg:inline-flex items-center gap-1.5 text-[12px] font-bold text-white bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 px-4 py-2 rounded-xl shadow-md shadow-teal-500/20 hover:shadow-teal-500/35 hover:-translate-y-0.5 transition-all duration-200"
-                onClick={handleLinkClick}
+                className="hidden lg:flex items-center gap-2 text-xs font-black uppercase tracking-widest text-cyan-300 bg-cyan-950/30 border border-cyan-500/30 hover:bg-cyan-400 hover:text-[#020813] hover:border-cyan-400 px-5 py-2.5 rounded hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300"
               >
-                Browse Articles
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                Start Reading
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
 
-              {/* Mobile menu toggle */}
               <button
-                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label={isOpen ? "Close menu" : "Open menu"}
+                className="lg:hidden text-slate-300 hover:text-cyan-400 p-1 transition-colors"
+                onClick={() => setIsOpen(true)}
               >
-                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <Menu className="w-6 h-6" />
               </button>
             </div>
-          </div>
-        </Container>
-      </nav>
 
-      {/* ══ Mobile Menu Drawer ══════════════════════════════════════════════ */}
-      {/* Backdrop */}
+          </div>
+        </div>
+      </header>
+
+      {/* ── MOBILE MENU DRAWER ── */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden transition-opacity duration-300",
+          "fixed inset-0 z-[60] bg-[#020813]/80 backdrop-blur-sm lg:hidden transition-opacity duration-300",
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Drawer */}
       <div
         className={cn(
-          "fixed top-0 right-0 h-full w-[300px] max-w-[85vw] bg-white z-50 shadow-2xl flex flex-col lg:hidden transition-transform duration-300 ease-out",
+          "fixed top-0 right-0 h-full w-[300px] max-w-[85vw] bg-[#050b14] border-l border-cyan-900/40 z-[70] flex flex-col lg:hidden transition-transform duration-300 ease-out shadow-2xl",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        {/* Drawer header */}
-        <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100 shrink-0">
-          <span className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/5 shrink-0">
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">
             Menu
           </span>
           <button
-            className="w-8 h-8 flex items-center justify-center rounded-xl text-gray-400 hover:bg-gray-100 transition-colors"
+            className="text-slate-400 hover:text-cyan-400 transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            <X className="w-4.5 h-4.5" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Drawer body */}
-        <div className="flex-1 overflow-y-auto py-3">
-          {/* 🔥 Trending — mobile highlight */}
-          <div className="px-3 mb-3">
-            <Link
-              href="/trending"
-              onClick={handleLinkClick}
-              className="flex items-center gap-2.5 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-3 rounded-xl font-bold text-sm shadow-md shadow-orange-500/20"
-            >
-              <Flame className="w-4 h-4" />
-              What&apos;s Trending
-              <span className="ml-auto text-[8px] font-black bg-white/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                Hot
-              </span>
-            </Link>
-          </div>
-
-          {/* Divider */}
-          <div className="mx-5 mb-3 border-t border-gray-100" />
-
-          {/* Nav items */}
+        <div className="flex-1 overflow-y-auto py-4 px-4 space-y-2">
           {navigation.map((item) => (
             <div key={item.name}>
               {!item.hasDropdown ? (
                 <Link
                   href={item.href}
-                  onClick={handleLinkClick}
                   className={cn(
-                    "flex items-center px-5 py-3 text-[13px] font-semibold transition-colors",
+                    "flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wider rounded-lg transition-colors",
                     isActive(item.href)
-                      ? "text-teal-600 bg-teal-50"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                      ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                      : "text-slate-300 hover:bg-[#0a1220] hover:text-cyan-300"
                   )}
+                  onClick={() => setIsOpen(false)}
                 >
+                  {item.name === "Trending" && <Flame className="w-4 h-4 text-cyan-500" />}
                   {item.name}
                 </Link>
               ) : (
                 <>
                   <button
-                    className="flex items-center justify-between w-full px-5 py-3 text-[13px] font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    onClick={() =>
-                      setActiveDropdown(activeDropdown === item.name ? null : item.name)
-                    }
+                    className="flex items-center justify-between w-full px-4 py-3 text-sm font-bold uppercase tracking-wider text-slate-300 hover:bg-[#0a1220] hover:text-cyan-300 rounded-lg transition-colors"
+                    onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
                   >
-                    {item.name}
+                    <span>{item.name}</span>
                     <ChevronDown
                       className={cn(
-                        "w-4 h-4 text-gray-400 transition-transform duration-200",
-                        activeDropdown === item.name && "rotate-180 text-teal-500"
+                        "w-4 h-4 transition-transform duration-200",
+                        activeDropdown === item.name ? "rotate-180 text-cyan-400" : "text-slate-500"
                       )}
                     />
                   </button>
 
-                  {/* Mobile dropdown */}
                   {activeDropdown === item.name && (
-                    <div className="bg-gray-50 border-y border-gray-100 py-3 px-3 space-y-4">
+                    <div className="mt-2 mb-4 space-y-5 px-4 py-4 bg-[#020813] rounded-lg border border-white/5">
                       {item.dropdownItems?.map((cat) => {
                         const Icon = cat.icon;
                         return (
                           <div key={cat.category}>
-                            <div className="flex items-center gap-1.5 mb-1.5 px-2">
-                              <Icon className={cn("w-3 h-3", cat.color)} />
-                              <span className="text-[9px] font-black uppercase tracking-[0.18em] text-gray-400">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Icon className="w-3.5 h-3.5 text-cyan-500" />
+                              <h4 className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
                                 {cat.category}
-                              </span>
+                              </h4>
                             </div>
-                            <div className="space-y-0.5">
+                            <div className="space-y-1 pl-5 border-l border-white/10">
                               {cat.items.map((sub) => (
                                 <Link
                                   key={sub.name}
                                   href={sub.href}
-                                  onClick={handleLinkClick}
-                                  className="block px-3 py-2 text-[12px] font-medium text-gray-600 hover:text-teal-700 hover:bg-white rounded-xl transition-colors"
+                                  className="block px-3 py-1.5 text-xs font-semibold text-slate-400 hover:text-cyan-300 transition-colors"
+                                  onClick={() => setIsOpen(false)}
                                 >
                                   {sub.name}
                                 </Link>
@@ -392,20 +366,15 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Drawer footer */}
-        <div className="px-4 py-4 border-t border-gray-100 space-y-2.5 shrink-0">
+        <div className="p-6 border-t border-white/5 bg-[#020813] shrink-0">
           <Link
             href="/blogs"
-            onClick={handleLinkClick}
-            className="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-[13px] py-3 rounded-xl shadow-md shadow-teal-500/20 transition-all hover:-translate-y-0.5"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-center gap-2 w-full text-xs font-black uppercase tracking-widest text-[#020813] bg-cyan-400 hover:bg-cyan-300 py-3.5 rounded shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all"
           >
-            Browse All Articles
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            Browse Articles
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
-          <p className="text-center text-[9px] text-gray-400 flex items-center justify-center gap-1">
-            <Sparkles className="w-2.5 h-2.5 text-teal-400" />
-            AI-powered content by Trendships
-          </p>
         </div>
       </div>
     </>

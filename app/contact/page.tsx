@@ -9,11 +9,11 @@ import Link from "next/link";
 
 /* ══ Metadata ═════════════════════════════════════════════════════════════ */
 export const metadata: Metadata = {
-  title: "Contact Us — Trendships",
+  title: "Contact Us — influencershark",
   description:
-    "Get in touch with the Trendships team for collaborations, content inquiries, or general questions. We reply within 24 hours.",
+    "Get in touch with the influencershark team for collaborations, content inquiries, or general questions. We reply within 24 hours.",
   keywords:
-    "contact trendships, content collaboration, trendships support, ai content platform contact",
+    "contact influencershark, content collaboration, influencershark support, ai content platform contact",
 };
 
 /* ══ Data ═════════════════════════════════════════════════════════════════ */
@@ -21,9 +21,9 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    detail: "hello@trendships.com",
+    detail: "hello@influencershark.com",
     sub: "We reply within 24 hours",
-    href: "mailto:hello@trendships.com",
+    href: "mailto:hello@influencershark.com",
     bg: "bg-teal-50",
     color: "text-teal-600",
   },
@@ -86,11 +86,11 @@ const inquiryTypes = [
 
 const faqs = [
   {
-    q: "How do I get my product featured on Trendships?",
-    a: "Email us at hello@trendships.com with details about your product. We review every collaboration request and respond within 48 hours.",
+    q: "How do I get my product featured on influencershark?",
+    a: "Email us at hello@influencershark.com with details about your product. We review every collaboration request and respond within 48 hours.",
   },
   {
-    q: "Is Trendships a content aggregator or original publisher?",
+    q: "Is influencershark a content aggregator or original publisher?",
     a: "Both! Our AI curates the best trending content from across the web while our editorial team produces original buying guides, reviews, and how-tos.",
   },
   {
@@ -98,16 +98,16 @@ const faqs = [
     a: "We typically reply to all emails within 24 hours on business days. Partnership inquiries may take up to 48 hours.",
   },
   {
-    q: "Can I write a guest post for Trendships?",
+    q: "Can I write a guest post for influencershark?",
     a: "Yes! We welcome high-quality guest contributions. Contact us with your topic idea and we'll let you know if it fits our editorial guidelines.",
   },
   {
     q: "How is content selected to be trending?",
-    a: "Our AI scores content based on freshness, engagement signals, social shares, and relevance — only top 1% content makes it to Trendships.",
+    a: "Our AI scores content based on freshness, engagement signals, social shares, and relevance — only top 1% content makes it to influencershark.",
   },
   {
     q: "Do you offer advertising opportunities?",
-    a: "Yes! We offer sponsored placements, newsletter ads, and category sponsorships. Email hello@trendships.com for our media kit.",
+    a: "Yes! We offer sponsored placements, newsletter ads, and category sponsorships. Email hello@influencershark.com for our media kit.",
   },
 ];
 
@@ -337,7 +337,7 @@ export default function ContactPage() {
               {/* Quick contact cards below form */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <a
-                  href="mailto:hello@trendships.com"
+                  href="mailto:hello@influencershark.com"
                   className="group flex items-center gap-4 bg-white border border-gray-100 rounded-2xl p-5 hover:border-teal-200 hover:shadow-lg transition-all duration-200"
                 >
                   <span className="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -345,7 +345,7 @@ export default function ContactPage() {
                   </span>
                   <div>
                     <p className="text-[11px] font-black text-gray-900">Email Directly</p>
-                    <p className="text-[11px] text-teal-600 font-semibold">hello@trendships.com</p>
+                    <p className="text-[11px] text-teal-600 font-semibold">hello@influencershark.com</p>
                     <p className="text-[10px] text-gray-400 mt-0.5">Fastest way to reach us</p>
                   </div>
                 </a>
@@ -359,7 +359,7 @@ export default function ContactPage() {
                   </span>
                   <div>
                     <p className="text-[11px] font-black text-gray-900">Browse Articles</p>
-                    <p className="text-[11px] text-orange-600 font-semibold">trendships.com/blogs</p>
+                    <p className="text-[11px] text-orange-600 font-semibold">influencershark.com/blogs</p>
                     <p className="text-[10px] text-gray-400 mt-0.5">AI-curated, updated daily</p>
                   </div>
                 </Link>
@@ -381,7 +381,7 @@ export default function ContactPage() {
                     Prefer a direct line? Reach out via email for the fastest response from our team.
                   </p>
                   <a
-                    href="mailto:hello@trendships.com"
+                    href="mailto:hello@influencershark.com"
                     className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-[12px] py-3 rounded-xl shadow-md shadow-teal-500/20 hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -390,10 +390,10 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Why Trendships */}
+              {/* Why influencershark */}
               <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                 <h3 className="text-[11px] font-black uppercase tracking-[0.18em] text-gray-400 mb-4">
-                  Why Trendships?
+                  Why influencershark?
                 </h3>
                 <div className="space-y-3">
                   {reasons.map((r) => {
@@ -488,7 +488,7 @@ export default function ContactPage() {
                 Our team is ready to answer via email — we reply within 24 hours.
               </p>
               <a
-                href="mailto:hello@trendships.com"
+                href="mailto:hello@influencershark.com"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold text-[12px] px-6 py-3 rounded-xl shadow-md shadow-teal-500/20 hover:-translate-y-0.5 transition-all duration-200 group"
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -517,7 +517,7 @@ export default function ContactPage() {
             </p>
             <div className="flex items-center gap-1.5 text-[10px] text-zinc-700">
               <span className="w-1 h-1 rounded-full bg-teal-700" />
-              Trendships — Discover what&apos;s trending today
+              influencershark — Discover what&apos;s trending today
               <span className="w-1 h-1 rounded-full bg-teal-700" />
             </div>
           </div>

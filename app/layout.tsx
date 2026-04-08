@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { Navbar } from "@/components/layout/navbar";
+import { InfluencerSharkHeader } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { PageTransitionLoader } from "@/components/PageTransitionLoader";
@@ -26,35 +26,32 @@ const inter = Inter({
 
 /* ══ Metadata ═════════════════════════════════════════════════════════════ */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://trendships.com"),
+  metadataBase: new URL("https://influencershark.com"),
 
   title: {
-    default: "Trendships — AI-Powered Trending Blogs, Deals & Products",
-    template: "%s | Trendships",
+    default: "Influencer Shark — Fashion, Travel, Tech & Honest Reviews",
+    template: "%s | Influencer Shark",
   },
 
   description:
-    "Discover AI-curated trending articles, deals, and products across fashion, travel, tech, lifestyle & more. Trendships brings you what's hot — updated daily.",
+    "Your ultimate guide for the latest in fashion, travel destinations, software reviews, and in-depth product comparisons. Dive into what's trending today.",
 
   keywords: [
-    "trending blogs",
-    "AI curated content",
-    "trending products",
-    "deals",
-    "travel guides",
-    "tech reviews",
-    "lifestyle articles",
     "fashion trends",
-    "best picks",
-    "trendships",
-    "what's trending",
-    "buying guides",
-    "product recommendations",
+    "travel guides",
+    "software reviews",
+    "product comparisons",
+    "lifestyle blogs",
+    "tech reviews",
+    "best destinations",
+    "influencer shark",
+    "trending products",
+    "honest reviews"
   ],
 
-  authors: [{ name: "Trendships Team" }],
-  creator: "Trendships",
-  publisher: "Adshouz Digital LLP",
+  authors: [{ name: "Influencer Shark Team" }],
+  creator: "Influencer Shark",
+  publisher: "Influencer Shark Media",
 
   robots: {
     index: true,
@@ -70,37 +67,37 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://trendships.com",
-    siteName: "Trendships",
-    title: "Trendships — AI-Powered Trending Blogs, Deals & Products",
+    url: "https://influencershark.com",
+    siteName: "Influencer Shark",
+    title: "Influencer Shark — Fashion, Travel & Software Reviews",
     description:
-      "AI-curated trending content across travel, tech, fashion, lifestyle & more. Discover what's hot today on Trendships.",
+      "Discover the best in lifestyle, tech, and travel. We bring you in-depth product comparisons and the latest trends.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "Trendships — Discover What's Trending",
+        alt: "Influencer Shark — Discover What's Trending",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Trendships — What's Trending Today",
+    title: "Influencer Shark — Honest Reviews & Trends",
     description:
-      "AI-curated trending blogs, deals & products — updated daily across every category.",
+      "Daily blogs on fashion, travel guides, software comparisons, and lifestyle trends.",
     images: ["/og-image.jpg"],
-    creator: "@trendships",
-    site: "@trendships",
+    creator: "@influencershark",
+    site: "@influencershark",
   },
 
   alternates: {
-    canonical: "https://trendships.com",
+    canonical: "https://influencershark.com",
   },
 
   verification: {
-    google: "your-google-verification-code",
+    google: "your-google-verification-code", 
     other: {
       "verify-admitad": "ff3fcff36d",
       "convertiser-verification": "4a2836a5da7012c891e09927e427664d7b22686d",
@@ -126,17 +123,17 @@ export const metadata: Metadata = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Trendships",
-  url: "https://trendships.com",
-  logo: "https://trendships.com/trendships-icon.jpg",
+  name: "Influencer Shark",
+  url: "https://influencershark.com",
+  logo: "https://influencershark.com/influencershark-icon.jpg",
   description:
-    "AI-powered content platform surfacing trending blogs, deals, and products across every category — updated daily.",
+    "A premium lifestyle and tech magazine featuring travel guides, fashion trends, and software comparisons.",
   foundingDate: "2024",
-  slogan: "Discover What's Trending",
+  slogan: "Dive Into The Best Reviews",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "hello@trendships.com",
+    email: "hello@influencershark.com",
     availableLanguage: ["en"],
   },
   address: {
@@ -144,10 +141,10 @@ const orgJsonLd = {
     addressCountry: "IN",
   },
   sameAs: [
-    "https://www.facebook.com/trendships",
-    "https://www.instagram.com/trendships",
-    "https://www.twitter.com/trendships",
-    "https://www.youtube.com/@trendships",
+    "https://www.facebook.com/influencershark",
+    "https://www.instagram.com/influencershark",
+    "https://www.twitter.com/influencershark",
+    "https://www.youtube.com/@influencershark",
   ],
 };
 
@@ -155,24 +152,24 @@ const orgJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Trendships",
-  url: "https://trendships.com",
+  name: "Influencer Shark",
+  url: "https://influencershark.com",
   description:
-    "AI-curated trending articles, deals and product recommendations updated daily.",
+    "Your daily dive into fashion, travel, software reviews, and product comparisons.",
   publisher: {
     "@type": "Organization",
-    name: "Adshouz Digital LLP",
-    url: "https://www.adshouz.com",
+    name: "Influencer Shark Media",
+    url: "https://influencershark.com",
     logo: {
       "@type": "ImageObject",
-      url: "https://trendships.com/trendships-icon.jpg",
+      url: "https://influencershark.com/influencershark-icon.jpg",
     },
   },
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://trendships.com/blogs?search={search_term_string}",
+      urlTemplate: "https://influencershark.com/blogs?search={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -187,15 +184,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <head>
-        {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cms.trendships.com" />
+        <link rel="preconnect" href="https://cms.influencershark.com" /> 
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
 
-      <body className={`${jakarta.className} antialiased bg-white text-gray-900`}>
-        {/* ── JSON-LD Structured Data ── */}
+      <body className={`${jakarta.className} antialiased bg-[#020813] text-slate-200 selection:bg-cyan-500/30`}>
+        
         <Script
           id="org-schema"
           type="application/ld+json"
@@ -209,12 +205,11 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        {/* ── App Shell ── */}
         <PageTransitionLoader />
 
         <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-1">{children}</main>
+          <InfluencerSharkHeader />
+          <main className="flex-1 pt-4">{children}</main>
           <Footer />
         </div>
 

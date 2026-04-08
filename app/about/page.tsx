@@ -69,7 +69,7 @@ function Hero() {
           </h1>
 
           <p className="text-zinc-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-10">
-            Trendships is an AI-powered content platform that surfaces trending articles,
+            influencershark is an AI-powered content platform that surfaces trending articles,
             deals &amp; products across fashion, travel, health, lifestyle &amp; more — helping
             you stay ahead, every single day.
           </p>
@@ -199,13 +199,13 @@ function OurStory() {
 
             <div className="space-y-5 text-gray-500 text-[14px] md:text-[15px] leading-[1.8]">
               <p>
-                <strong className="text-gray-900">Trendships</strong> was built with one
+                <strong className="text-gray-900">influencershark</strong> was built with one
                 goal — to cut through the noise and bring you only what&apos;s genuinely
                 trending. Our AI scans thousands of sources daily across fashion, travel,
                 health, beauty, food, business &amp; more.
               </p>
               <p>
-                We don&apos;t just aggregate — we curate. Every article on Trendships is
+                We don&apos;t just aggregate — we curate. Every article on influencershark is
                 scored for relevance, quality, and freshness before it reaches you. Our
                 mission is to help you{" "}
                 <em className="text-gray-700">spend smarter, live better, and explore more.</em>
@@ -355,7 +355,7 @@ function AffiliateDisclosure() {
           <div>
             <h4 className="font-black text-gray-900 text-[13px] mb-1">Affiliate Disclosure</h4>
             <p className="text-[12px] text-gray-500 leading-relaxed">
-              Some links on Trendships are affiliate links. If you make a purchase through
+              Some links on influencershark are affiliate links. If you make a purchase through
               these links, we may earn a small commission — at no extra cost to you. We only
               recommend products and services we genuinely believe in. This helps us keep
               content free and the platform running.
@@ -406,7 +406,7 @@ function BottomCTA() {
           </h2>
 
           <p className="text-zinc-500 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
-            Whether you&apos;re into fashion, food, business, or travel — Trendships has
+            Whether you&apos;re into fashion, food, business, or travel — influencershark has
             AI-curated content for every curious mind.
           </p>
 
@@ -430,10 +430,10 @@ function BottomCTA() {
           <p className="text-[11px] text-zinc-700">
             Partnership or collaboration?{" "}
             <a
-              href="mailto:hello@trendships.com"
+              href="mailto:hello@influencershark.com"
               className="text-teal-600 hover:text-teal-400 font-semibold transition-colors"
             >
-              hello@trendships.com
+              hello@influencershark.com
             </a>
           </p>
         </div>

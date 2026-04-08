@@ -5,9 +5,9 @@ import { Container } from "@/components/ui/container";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Disclaimer - Terms & Conditions | Trendships',
+  title: 'Disclaimer - Terms & Conditions | influencershark',
   description:
-    'Read the disclaimer and terms of use for Trendships. Understand our liability limitations, affiliate disclosure, and terms of service for our content platform.',
+    'Read the disclaimer and terms of use for influencershark. Understand our liability limitations, affiliate disclosure, and terms of service for our content platform.',
   keywords:
     'disclaimer, terms of use, affiliate disclosure, content blog disclaimer, liability terms',
   robots: 'index, follow',
@@ -60,7 +60,7 @@ export default function DisclaimerPage() {
                     Important Legal Notice
                   </h2>
                   <p className="text-gray-700 leading-relaxed">
-                    By accessing and using Trendships, you accept and agree to be
+                    By accessing and using influencershark, you accept and agree to be
                     bound by the terms and provisions of this disclaimer. If you do
                     not agree to these terms, please discontinue use of this website
                     immediately.
@@ -78,7 +78,7 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    The information provided on Trendships is for general
+                    The information provided on influencershark is for general
                     informational and educational purposes only. Our content spans
                     multiple topics including travel, technology, lifestyle, finance,
                     shopping, and more. While we strive to provide accurate and
@@ -103,7 +103,7 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    Trendships participates in various affiliate marketing programs.
+                    influencershark participates in various affiliate marketing programs.
                     This means we may earn a commission when you click on certain
                     links and make a purchase — at no additional cost to you. Our
                     affiliate partnerships may include, but are not limited to:
@@ -139,7 +139,7 @@ export default function DisclaimerPage() {
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
                     All reviews, guides, tips, and recommendations published on
-                    Trendships are based on personal research, experience, and
+                    influencershark are based on personal research, experience, and
                     publicly available information. They should not be considered
                     professional advice in any field. We strongly recommend that
                     you:
@@ -161,7 +161,7 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    Trendships contains links to external websites and third-party
+                    influencershark contains links to external websites and third-party
                     resources that are not provided or maintained by us. We have no
                     control over the nature, content, and availability of those
                     sites. The inclusion of any links does not imply a
@@ -184,9 +184,9 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    All content on Trendships — including text, images, graphics,
+                    All content on influencershark — including text, images, graphics,
                     logos, and multimedia elements — is protected by copyright and
-                    intellectual property laws. The content is owned by Trendships
+                    intellectual property laws. The content is owned by influencershark
                     or licensed to us. You may view, download, and print pages from
                     the website for personal, non-commercial use only. You may not:
                   </p>
@@ -194,7 +194,7 @@ export default function DisclaimerPage() {
                     <li>Republish material from this website without written permission</li>
                     <li>Sell, rent, or sub-license material from the website</li>
                     <li>Reproduce, duplicate, or copy material for commercial purposes</li>
-                    <li>Redistribute content from Trendships without proper attribution</li>
+                    <li>Redistribute content from influencershark without proper attribution</li>
                   </ul>
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    In no event shall Trendships, its owners, authors, or
+                    In no event shall influencershark, its owners, authors, or
                     contributors be liable for any direct, indirect, incidental,
                     consequential, or punitive damages arising out of your access to
                     or use of the website. This includes but is not limited to:
@@ -233,7 +233,7 @@ export default function DisclaimerPage() {
                 </h3>
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
-                    Trendships reserves the right to modify, suspend, or
+                    influencershark reserves the right to modify, suspend, or
                     discontinue any aspect of the website at any time without prior
                     notice. We may also update, change, or remove content without
                     notification. Product prices, availability, and specifications
@@ -257,7 +257,7 @@ export default function DisclaimerPage() {
                   <p>
                     Comments, reviews, and other content submitted by users
                     represent the opinions of those individuals and do not reflect
-                    the views of Trendships. We do not endorse or guarantee the
+                    the views of influencershark. We do not endorse or guarantee the
                     accuracy of user-generated content.
                   </p>
                   <p>
@@ -275,7 +275,7 @@ export default function DisclaimerPage() {
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   <p>
                     Any financial, investment, legal, medical, or other
-                    professional information published on Trendships is strictly
+                    professional information published on influencershark is strictly
                     for informational purposes only and does not constitute
                     professional advice. Always consult a qualified professional
                     before making decisions related to:
@@ -300,14 +300,14 @@ export default function DisclaimerPage() {
                     please reach out to us:
                   </p>
                   <div className="border-l-4 border-black pl-6 my-6">
-                    <p className="font-semibold text-gray-900">Trendships</p>
+                    <p className="font-semibold text-gray-900">influencershark</p>
                     <p>
                       Email:{' '}
                       <a
-                        href="mailto:support@Trendships.com"
+                        href="mailto:support@influencershark.com"
                         className="text-black underline hover:no-underline"
                       >
-                        support@Trendships.com
+                        support@influencershark.com
                       </a>
                     </p>
                   </div>
@@ -326,7 +326,7 @@ export default function DisclaimerPage() {
                   <p className="text-sm text-gray-600 leading-relaxed">
                     This disclaimer is subject to change without notice. We
                     recommend reviewing this page periodically to stay informed of
-                    any updates. Your continued use of Trendships after any changes
+                    any updates. Your continued use of influencershark after any changes
                     constitutes acceptance of those changes.
                   </p>
                   <p className="text-sm text-gray-600 mt-4">
