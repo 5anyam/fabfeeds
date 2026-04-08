@@ -11,7 +11,7 @@ import { Container } from "@/components/ui/container";
 
 
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
-const WP_API_URL = "https://paleturquoise-goshawk-537115.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
 
 
 /* ══ Types ════════════════════════════════════════════════════════════════ */
