@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Search, MapPin, Compass, Camera, Coffee, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WP_API_URL = 'https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2';
+const WP_API_URL = 'https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2';
 
 interface Category {
   id: number;

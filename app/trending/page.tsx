@@ -10,7 +10,7 @@ import {
 import { Container } from "@/components/ui/container";
 
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
-const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL = "https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2";
 
 /* ══ Types ════════════════════════════════════════════════════════════════ */
 interface WPPost {
@@ -608,7 +608,7 @@ export default function TrendingPage() {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: "The Radar — Influencer Shark",
-            url: "https://influencershark.com/trending",
+            url: "https://fabfeeds.com/trending",
             description:
               "Live signals and apex strategies curated by Influencer Shark AI. Dominate your sector.",
           }),

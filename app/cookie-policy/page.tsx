@@ -4,8 +4,8 @@ import { Section } from "@/components/ui/section";
 import { Cookie, Settings, Shield, Info } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy | influencershark',
-  description: 'Learn about how influencershark uses cookies to improve your experience and show relevant content.',
+  title: 'Cookie Policy | Fab Feeds',
+  description: 'Learn about how Fab Feeds uses cookies to improve your experience and show relevant content.',
 };
 
 export default function CookiePolicyPage() {
@@ -36,7 +36,7 @@ export default function CookiePolicyPage() {
             <div className="prose prose-lg prose-gray max-w-none">
               
               <p className="lead text-xl text-gray-700 leading-relaxed mb-10">
-                This Cookie Policy explains what cookies are, how <strong>influencershark</strong> uses them, and your choices regarding their use. By using our website, you consent to the use of cookies as described in this policy.
+                This Cookie Policy explains what cookies are, how <strong>Fab Feeds</strong> uses them, and your choices regarding their use. By using our website, you consent to the use of cookies as described in this policy.
               </p>
 
               <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 not-prose rounded-r-lg">
@@ -97,7 +97,7 @@ export default function CookiePolicyPage() {
                   If you have any questions about our use of cookies or other technologies, please email us.
                 </p>
                 <a 
-                  href="mailto:support@influencershark.com" 
+                  href="mailto:support@Fab Feeds.com" 
                   className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-sm font-bold rounded-md text-black bg-white hover:bg-gray-100 transition-colors"
                 >
                   Contact Support

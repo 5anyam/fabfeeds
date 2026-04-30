@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { InfluencerSharkHeader } from "@/components/layout/navbar";
+import { Header } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { PageTransitionLoader } from "@/components/PageTransitionLoader";
@@ -26,17 +26,18 @@ const inter = Inter({
 
 /* ══ Metadata ═════════════════════════════════════════════════════════════ */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://influencershark.com"),
+  metadataBase: new URL("https://fabfeeds.com"), // Update with your actual domain
 
   title: {
-    default: "Influencer Shark — Fashion, Travel, Tech & Honest Reviews",
-    template: "%s | Influencer Shark",
+    default: "Fab Feeds — Fashion, Travel, Tech & Honest Reviews",
+    template: "%s | Fab Feeds",
   },
 
   description:
-    "Your ultimate guide for the latest in fashion, travel destinations, software reviews, and in-depth product comparisons. Dive into what's trending today.",
+    "Your ultimate daily feed for the latest in fashion, travel destinations, software reviews, and in-depth product comparisons. Dive into what's trending today.",
 
   keywords: [
+    "fab feeds",
     "fashion trends",
     "travel guides",
     "software reviews",
@@ -44,14 +45,13 @@ export const metadata: Metadata = {
     "lifestyle blogs",
     "tech reviews",
     "best destinations",
-    "influencer shark",
     "trending products",
     "honest reviews"
   ],
 
-  authors: [{ name: "Influencer Shark Team" }],
-  creator: "Influencer Shark",
-  publisher: "Influencer Shark Media",
+  authors: [{ name: "Fab Feeds Team" }],
+  creator: "Fab Feeds",
+  publisher: "Fab Feeds Media",
 
   robots: {
     index: true,
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://influencershark.com",
-    siteName: "Influencer Shark",
-    title: "Influencer Shark — Fashion, Travel & Software Reviews",
+    url: "https://fabfeeds.com",
+    siteName: "Fab Feeds",
+    title: "Fab Feeds — Fashion, Travel & Software Reviews",
     description:
       "Discover the best in lifestyle, tech, and travel. We bring you in-depth product comparisons and the latest trends.",
     images: [
@@ -77,23 +77,23 @@ export const metadata: Metadata = {
         url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "Influencer Shark — Discover What's Trending",
+        alt: "Fab Feeds — Discover What's Trending",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Influencer Shark — Honest Reviews & Trends",
+    title: "Fab Feeds — Honest Reviews & Trends",
     description:
       "Daily blogs on fashion, travel guides, software comparisons, and lifestyle trends.",
     images: ["/og-image.jpg"],
-    creator: "@influencershark",
-    site: "@influencershark",
+    creator: "@fabfeeds",
+    site: "@fabfeeds",
   },
 
   alternates: {
-    canonical: "https://influencershark.com",
+    canonical: "https://fabfeeds.com",
   },
 
   verification: {
@@ -123,17 +123,17 @@ export const metadata: Metadata = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Influencer Shark",
-  url: "https://influencershark.com",
-  logo: "https://influencershark.com/influencershark-icon.jpg",
+  name: "Fab Feeds",
+  url: "https://fabfeeds.com",
+  logo: "https://fabfeeds.com/fabfeeds-icon.jpg",
   description:
     "A premium lifestyle and tech magazine featuring travel guides, fashion trends, and software comparisons.",
   foundingDate: "2024",
-  slogan: "Dive Into The Best Reviews",
+  slogan: "Your Daily Dose of Fabulous",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "hello@influencershark.com",
+    email: "hello@fabfeeds.com",
     availableLanguage: ["en"],
   },
   address: {
@@ -141,10 +141,10 @@ const orgJsonLd = {
     addressCountry: "IN",
   },
   sameAs: [
-    "https://www.facebook.com/influencershark",
-    "https://www.instagram.com/influencershark",
-    "https://www.twitter.com/influencershark",
-    "https://www.youtube.com/@influencershark",
+    "https://www.facebook.com/fabfeeds",
+    "https://www.instagram.com/fabfeeds",
+    "https://www.twitter.com/fabfeeds",
+    "https://www.youtube.com/@fabfeeds",
   ],
 };
 
@@ -152,24 +152,24 @@ const orgJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Influencer Shark",
-  url: "https://influencershark.com",
+  name: "Fab Feeds",
+  url: "https://fabfeeds.com",
   description:
-    "Your daily dive into fashion, travel, software reviews, and product comparisons.",
+    "Your daily feed for fashion, travel, software reviews, and product comparisons.",
   publisher: {
     "@type": "Organization",
-    name: "Influencer Shark Media",
-    url: "https://influencershark.com",
+    name: "Fab Feeds Media",
+    url: "https://fabfeeds.com",
     logo: {
       "@type": "ImageObject",
-      url: "https://influencershark.com/influencershark-icon.jpg",
+      url: "https://fabfeeds.com/fabfeeds-icon.jpg",
     },
   },
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://influencershark.com/blogs?search={search_term_string}",
+      urlTemplate: "https://fabfeeds.com/blogs?search={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -186,11 +186,13 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cms.influencershark.com" /> 
+        {/* Update this URL if your CMS domain changes */}
+        <link rel="preconnect" href="https://cms.fabfeeds.com" /> 
         <link rel="preconnect" href="https://images.unsplash.com" />
       </head>
 
-      <body className={`${jakarta.className} antialiased bg-[#020813] text-slate-200 selection:bg-cyan-500/30`}>
+      {/* Applied the Light Theme colors to match the rest of the site */}
+      <body className={`${jakarta.className} antialiased bg-slate-50 text-slate-800 selection:bg-indigo-200`}>
         
         <Script
           id="org-schema"
@@ -208,7 +210,7 @@ export default function RootLayout({
         <PageTransitionLoader />
 
         <div className="flex flex-col min-h-screen">
-          <InfluencerSharkHeader />
+          <Header />
           <main className="flex-1 pt-4">{children}</main>
           <Footer />
         </div>

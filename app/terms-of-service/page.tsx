@@ -4,8 +4,8 @@ import { Section } from "@/components/ui/section";
 import { Scale, FileCheck, AlertCircle, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | influencershark',
-  description: 'Terms and Conditions for using influencershark. Please read these terms carefully before using our website.',
+  title: 'Terms of Service | Fab Feeds',
+  description: 'Terms and Conditions for using Fab Feeds. Please read these terms carefully before using our website.',
 };
 
 export default function TermsPage() {
@@ -36,7 +36,7 @@ export default function TermsPage() {
             <div className="prose prose-lg prose-gray max-w-none">
               
               <p className="lead text-xl text-gray-700 leading-relaxed mb-10">
-                Welcome to <strong>influencershark</strong>! These terms and conditions outline the rules and regulations for the use of influencershark Website, located at https://influencershark.com.
+                Welcome to <strong>Fab Feeds</strong>! These terms and conditions outline the rules and regulations for the use of Fab Feeds Website, located at https://Fab Feeds.com.
               </p>
 
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 my-8 not-prose rounded-r-lg">
@@ -45,7 +45,7 @@ export default function TermsPage() {
                   <div>
                     <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Important Notice</h3>
                     <p className="text-sm text-gray-700">
-                      By accessing this website we assume you accept these terms and conditions. Do not continue to use influencershark if you do not agree to take all of the terms and conditions stated on this page.
+                      By accessing this website we assume you accept these terms and conditions. Do not continue to use Fab Feeds if you do not agree to take all of the terms and conditions stated on this page.
                     </p>
                   </div>
                 </div>
@@ -58,24 +58,24 @@ export default function TermsPage() {
 
               <h2>2. Cookies</h2>
               <p>
-                We employ the use of cookies. By accessing influencershark, you agreed to use cookies in agreement with the influencershark Privacy Policy. Most interactive websites use cookies to let us retrieve the user’s details for each visit.
+                We employ the use of cookies. By accessing Fab Feeds, you agreed to use cookies in agreement with the Fab Feeds Privacy Policy. Most interactive websites use cookies to let us retrieve the user’s details for each visit.
               </p>
 
               <h2>3. License</h2>
               <p>
-                Unless otherwise stated, influencershark and/or its licensors own the intellectual property rights for all material on influencershark. All intellectual property rights are reserved. You may access this from influencershark for your own personal use subjected to restrictions set in these terms and conditions.
+                Unless otherwise stated, Fab Feeds and/or its licensors own the intellectual property rights for all material on Fab Feeds. All intellectual property rights are reserved. You may access this from Fab Feeds for your own personal use subjected to restrictions set in these terms and conditions.
               </p>
               <p>You must not:</p>
               <ul>
-                <li>Republish material from influencershark</li>
-                <li>Sell, rent or sub-license material from influencershark</li>
-                <li>Reproduce, duplicate or copy material from influencershark</li>
-                <li>Redistribute content from influencershark</li>
+                <li>Republish material from Fab Feeds</li>
+                <li>Sell, rent or sub-license material from Fab Feeds</li>
+                <li>Reproduce, duplicate or copy material from Fab Feeds</li>
+                <li>Redistribute content from Fab Feeds</li>
               </ul>
 
               <h2>4. User Comments</h2>
               <p>
-                Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. influencershark does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of influencershark,its agents and/or affiliates.
+                Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Fab Feeds does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Fab Feeds,its agents and/or affiliates.
               </p>
 
               <h2>5. Hyperlinking to our Content</h2>
@@ -111,7 +111,7 @@ export default function TermsPage() {
                   If you have any questions about our Terms of Service, please contact us.
                 </p>
                 <a 
-                  href="mailto:support@influencershark.com" 
+                  href="mailto:support@Fab Feeds.com" 
                   className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                 >
                   Contact Legal Team

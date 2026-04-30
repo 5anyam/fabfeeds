@@ -4,9 +4,9 @@ import Link from "next/link";
 import {
   Instagram, Facebook, Twitter, Youtube,
   ArrowUpRight, Flame, Sparkles, MapPin,
-  BookOpen, Building2, Zap, Waves, Target
+  BookOpen, Building2, Zap, Target
 } from "lucide-react";
-import { Container } from "@/components/ui/container";
+import { Container } from "@/components/ui/container"; // Assumes you have this, otherwise replace with standard div
 
 /* ══ Data ═════════════════════════════════════════════════════════════════ */
 const footerLinks = [
@@ -71,25 +71,25 @@ const socialLinks = [
     href: "https://instagram.com",
     icon: Instagram,
     label: "Instagram",
-    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
+    hover: "hover:bg-pink-50 hover:text-pink-600 hover:border-pink-200",
   },
   {
     href: "https://facebook.com",
     icon: Facebook,
     label: "Facebook",
-    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
+    hover: "hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200",
   },
   {
     href: "https://twitter.com",
     icon: Twitter,
     label: "Twitter/X",
-    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
+    hover: "hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300",
   },
   {
     href: "https://youtube.com",
     icon: Youtube,
     label: "YouTube",
-    hover: "hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400",
+    hover: "hover:bg-red-50 hover:text-red-600 hover:border-red-200",
   },
 ];
 
@@ -97,21 +97,21 @@ const socialLinks = [
 function NewsletterForm() {
   return (
     <div>
-      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3 flex items-center gap-2">
-        <Zap className="w-3 h-3 text-cyan-500" /> Stay Updated
+      <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-3 flex items-center gap-2">
+        <Zap className="w-4 h-4 text-emerald-500" /> Stay Updated
       </h4>
       <div className="flex gap-2">
         <input
           type="email"
           placeholder="Your email address"
-          className="flex-1 min-w-0 px-3.5 py-2.5 bg-[#0a1220] border border-cyan-900/40 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/50 transition-all"
+          className="flex-1 min-w-0 px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all"
         />
-        <button className="shrink-0 px-4 py-2.5 bg-cyan-400 hover:bg-cyan-300 text-[#020813] font-black uppercase tracking-widest text-[10px] rounded-xl shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
+        <button className="shrink-0 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-wider text-xs rounded-lg shadow-md shadow-indigo-200 transition-all duration-300">
           Subscribe
         </button>
       </div>
-      <p className="text-[10px] text-slate-500 mt-2">
-        Join the radar · No spam, ever
+      <p className="text-xs text-slate-500 mt-2 font-medium">
+        Join the inner circle · No spam, ever
       </p>
     </div>
   );
@@ -122,33 +122,32 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#020813] border-t border-cyan-900/30 selection:bg-cyan-500/30" aria-label="Site footer">
+    <footer className="bg-white border-t border-slate-200 selection:bg-indigo-100" aria-label="Site footer">
 
       {/* ── Pre-footer Trending CTA strip ── */}
-      <div className="bg-[#050b14] border-b border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/10 to-transparent pointer-events-none" />
+      <div className="bg-indigo-50 border-b border-indigo-100 relative overflow-hidden">
         <Container>
-          <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
-            <div className="flex items-center gap-3">
-              <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 shrink-0">
-                <Target className="w-4 h-4 text-cyan-400" />
+          <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-5 relative z-10">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-indigo-100 shadow-sm shrink-0">
+                <Target className="w-5 h-5 text-indigo-600" />
               </span>
               <div>
-                <p className="text-[12px] font-black text-white tracking-wider uppercase">
+                <p className="text-sm font-black text-slate-900 tracking-wider uppercase">
                   See what&apos;s trending right now
                 </p>
-                <p className="text-[10px] text-cyan-100/60 font-medium">
-                  AI-curated picks updated daily
+                <p className="text-xs text-slate-600 font-medium mt-0.5">
+                  Hand-picked editorial and AI-curated top stories
                 </p>
               </div>
             </div>
             <Link
               href="/trending"
-              className="shrink-0 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#020813] bg-cyan-400 hover:bg-cyan-300 px-5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 group"
+              className="shrink-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md shadow-indigo-200 transition-all duration-300 group"
             >
-              <Flame className="w-3.5 h-3.5 text-[#020813]" />
+              <Flame className="w-4 h-4 text-emerald-400" />
               Explore Trending
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </Link>
           </div>
         </Container>
@@ -156,37 +155,28 @@ export function Footer() {
 
       {/* ── Main footer body ── */}
       <Container>
-        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 relative">
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 relative">
           
-          {/* Background Glow */}
-          <div className="absolute top-1/2 left-0 w-64 h-64 bg-cyan-900/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2" />
-
           {/* ── Brand column ── */}
-          <div className="lg:col-span-4 space-y-7 relative z-10">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group inline-flex">
-              <div className="w-10 h-10 bg-cyan-500/10 border border-cyan-400/30 rounded flex items-center justify-center group-hover:bg-cyan-500/20 group-hover:border-cyan-400 transition-all shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                <Waves className="w-5 h-5 text-cyan-400" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black uppercase tracking-widest text-white leading-none">
-                  Influencer
-                </span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 leading-none mt-1">
-                  Shark
-                </span>
-              </div>
+          <div className="lg:col-span-4 space-y-8 relative z-10">
+            {/* Logo - Fixed container to work well with images */}
+            <Link href="/" className="inline-block group">
+              <img 
+                src="/fabfeeds_logo.png" 
+                alt="Fab Feeds Logo" 
+                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
             </Link>
 
             {/* Tagline */}
-            <p className="text-slate-400 text-[12px] leading-relaxed max-w-xs font-medium">
-              Your AI-powered content hub for lifestyle, tech, health, and more. 
+            <p className="text-slate-600 text-sm leading-relaxed max-w-xs font-medium">
+              Your modern editorial hub for lifestyle, tech, health, and more. 
               Discover the apex of what&apos;s trending every day.
             </p>
 
             {/* AI badge */}
-            <div className="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-900 text-cyan-400 rounded-full px-3.5 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] shadow-[0_0_10px_rgba(34,211,238,0.1)]">
-              <Sparkles className="w-3 h-3" />
+            <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-full px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm">
+              <Sparkles className="w-3.5 h-3.5" />
               Powered by AI
             </div>
 
@@ -195,10 +185,10 @@ export function Footer() {
 
             {/* Socials */}
             <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-3">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-3">
                 Follow The Radar
               </h4>
-              <div className="flex gap-2">
+              <div className="flex gap-2.5">
                 {socialLinks.map((s) => {
                   const Icon = s.icon;
                   return (
@@ -208,7 +198,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className={`w-9 h-9 rounded-xl border border-white/10 bg-[#0a1220] flex items-center justify-center text-slate-400 transition-all duration-300 ${s.hover}`}
+                      className={`w-10 h-10 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-500 transition-all duration-300 ${s.hover}`}
                     >
                       <Icon className="w-4 h-4" />
                     </Link>
@@ -222,20 +212,20 @@ export function Footer() {
           {footerLinks.map((col) => {
             const Icon = col.icon;
             return (
-              <div key={col.heading} className="lg:col-span-2 space-y-5 relative z-10">
-                <h3 className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-300">
-                  <Icon className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+              <div key={col.heading} className="lg:col-span-2 space-y-6 relative z-10">
+                <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-900">
+                  <Icon className="w-4 h-4 text-indigo-500 shrink-0" />
                   {col.heading}
                 </h3>
-                <div className="w-10 h-px bg-cyan-500/50" />
-                <ul className="space-y-3">
+                <div className="w-8 h-0.5 bg-indigo-100" />
+                <ul className="space-y-3.5">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="group flex items-center gap-2.5 text-[12px] font-semibold text-slate-400 hover:text-cyan-300 transition-colors duration-200"
+                        className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-200"
                       >
-                        <span className="w-1 h-1 rounded-full bg-slate-700 group-hover:bg-cyan-400 group-hover:shadow-[0_0_5px_rgba(34,211,238,0.8)] transition-all shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-indigo-500 transition-all shrink-0" />
                         {link.label}
                       </Link>
                     </li>
@@ -247,13 +237,13 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* ── Affiliate disclosure ── */}
-      <div className="border-t border-white/5 bg-[#050b14]">
+      {/* ── Affiliate disclosure - UPDATED NAME ── */}
+      <div className="border-t border-slate-100 bg-slate-50">
         <Container>
-          <div className="py-5">
-            <p className="text-[10px] text-slate-500 text-center leading-relaxed max-w-4xl mx-auto font-medium">
-              <span className="text-cyan-400 font-bold uppercase tracking-wider">Affiliate Disclosure: </span>
-              Influencer Shark earns commissions from qualifying purchases made through affiliate
+          <div className="py-6">
+            <p className="text-xs text-slate-500 text-center leading-relaxed max-w-4xl mx-auto font-medium">
+              <span className="text-slate-900 font-bold uppercase tracking-wider">Affiliate Disclosure: </span>
+              Fab Feeds earns commissions from qualifying purchases made through affiliate
               links on this site, at no extra cost to you. We only recommend products, tools, and
               services we genuinely believe in.
             </p>
@@ -261,14 +251,14 @@ export function Footer() {
         </Container>
       </div>
 
-      {/* ── Bottom bar ── */}
-      <div className="border-t border-white/5 bg-[#020813]">
+      {/* ── Bottom bar - UPDATED COPYRIGHT NAME ── */}
+      <div className="border-t border-slate-200 bg-white">
         <Container>
-          <div className="py-5 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-slate-500 font-bold tracking-wide text-center md:text-left">
-              © {year} INFLUENCER SHARK. ALL RIGHTS RESERVED.
+          <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-slate-500 font-semibold tracking-wide text-center md:text-left">
+              © {year} FAB FEEDS. ALL RIGHTS RESERVED.
             </p>
-            <div className="flex flex-wrap justify-center md:justify-end gap-5">
+            <div className="flex flex-wrap justify-center md:justify-end gap-6">
               {[
                 { label: "Privacy Policy", href: "/privacy-policy" },
                 { label: "Terms of Service", href: "/terms-of-service" },
@@ -278,7 +268,7 @@ export function Footer() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-[11px] text-slate-500 hover:text-cyan-400 font-semibold uppercase tracking-wider transition-colors"
+                  className="text-xs text-slate-500 hover:text-indigo-600 font-bold uppercase tracking-wider transition-colors"
                 >
                   {l.label}
                 </Link>
