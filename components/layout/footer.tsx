@@ -256,7 +256,7 @@ export function Footer() {
         <Container>
           <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500 font-semibold tracking-wide text-center md:text-left">
-              © {year} FAB FEEDS. ALL RIGHTS RESERVED.
+              © {year} Advorise Digital. ALL RIGHTS RESERVED.
             </p>
             <div className="flex flex-wrap justify-center md:justify-end gap-6">
               {[
