@@ -4,17 +4,15 @@ import Link from "next/link";
 import {
   ArrowRight,
   TrendingUp,
-  MonitorSmartphone,
-  Lightbulb,
+  Flame,
+  Clock,
+  ChevronRight,
   Zap,
+  BookOpen,
   Star,
-  Flame
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-/* ══════════════════════════════════════════════════════════════
-   CONFIG & UTILS
-══════════════════════════════════════════════════════════════ */
 const WP_API_URL = "https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2";
 
 const stripHtml = (h: string) =>
@@ -23,28 +21,204 @@ const stripHtml = (h: string) =>
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString("en-IN", {
     day: "2-digit",
-    month: "long",
+    month: "short",
     year: "numeric",
   });
 
-/* ══════════════════════════════════════════════════════════════
-   UI WRAPPERS
-══════════════════════════════════════════════════════════════ */
-function Container({ children, className = "" }: { children: React.ReactNode, className?: string }) {
+function readingTime(content: string) {
+  const words = content.replace(/<[^>]*>/g, "").split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>;
 }
 
-function SectionHeading({ icon: Icon, title, subtitle }: { icon: any, title: string, subtitle?: string }) {
+/* ── SKELETON ── */
+function SkeletonCard({ className = "" }: { className?: string }) {
   return (
-    <div className="flex flex-col mb-10">
-      <div className="flex items-center gap-2 mb-2">
-        <Icon className="w-6 h-6 text-indigo-600" />
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight font-serif">
-          {title}
-        </h2>
+    <div className={`bg-white rounded-2xl overflow-hidden border border-slate-100 animate-pulse ${className}`}>
+      <div className="bg-slate-100 h-52" />
+      <div className="p-5 space-y-3">
+        <div className="h-3 bg-slate-100 rounded w-1/4" />
+        <div className="h-5 bg-slate-100 rounded w-full" />
+        <div className="h-5 bg-slate-100 rounded w-3/4" />
+        <div className="h-3 bg-slate-100 rounded w-1/3" />
       </div>
-      {subtitle && <p className="text-slate-500 font-medium text-lg ml-8">{subtitle}</p>}
     </div>
+  );
+}
+
+/* ── CATEGORY PILL ── */
+function CategoryPill({ name }: { name?: string }) {
+  if (!name) return null;
+  return (
+    <span className="inline-block bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
+      {name}
+    </span>
+  );
+}
+
+/* ── HERO CARD (big) ── */
+function HeroCard({ post }: { post: any }) {
+  const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+
+  return (
+    <Link href={`/${post.slug}`} className="group relative block rounded-2xl overflow-hidden bg-slate-900 h-full min-h-[420px] md:min-h-[520px]">
+      {img && (
+        <img
+          src={img}
+          alt={post.title.rendered}
+          className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 ease-out"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="absolute inset-0 flex flex-col justify-end p-7 md:p-10">
+        <CategoryPill name={cat} />
+        <h2 className="mt-3 text-2xl md:text-4xl font-black text-white leading-tight group-hover:text-indigo-200 transition-colors line-clamp-3">
+          {post.title.rendered}
+        </h2>
+        <p className="mt-3 text-slate-300 text-sm line-clamp-2 leading-relaxed hidden md:block">
+          {stripHtml(post.excerpt.rendered)}
+        </p>
+        <div className="mt-5 flex items-center gap-4 text-xs text-slate-400 font-semibold">
+          <span>{fmtDate(post.date)}</span>
+          <span className="w-1 h-1 rounded-full bg-slate-500" />
+          <span className="flex items-center gap-1">
+            <Clock className="w-3 h-3" /> {readingTime(post.content?.rendered || "")} min read
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ── SIDE STORY CARD ── */
+function SideCard({ post, index }: { post: any; index: number }) {
+  const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+
+  return (
+    <Link href={`/${post.slug}`} className="group flex gap-4 items-start py-4 border-b border-slate-100 last:border-0">
+      <span className="text-3xl font-black text-slate-200 group-hover:text-indigo-200 transition-colors leading-none mt-1 font-serif min-w-[2rem] text-center">
+        0{index + 1}
+      </span>
+      <div className="flex-1 min-w-0">
+        {cat && (
+          <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 block mb-1">{cat}</span>
+        )}
+        <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2">
+          {post.title.rendered}
+        </h4>
+        <span className="text-[11px] text-slate-400 font-medium mt-1 block">{fmtDate(post.date)}</span>
+      </div>
+      {img && (
+        <div className="w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-100 relative">
+          <img src={img} alt={post.title.rendered} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        </div>
+      )}
+    </Link>
+  );
+}
+
+/* ── STANDARD CARD ── */
+function PostCard({ post }: { post: any }) {
+  const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+
+  return (
+    <Link
+      href={`/${post.slug}`}
+      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-indigo-100 hover:shadow-[0_12px_40px_rgba(79,70,229,0.08)] transition-all duration-300"
+    >
+      <div className="relative h-52 overflow-hidden bg-slate-100">
+        {img ? (
+          <img
+            src={img}
+            alt={post.title.rendered}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <BookOpen className="w-8 h-8 text-slate-300" />
+          </div>
+        )}
+        {cat && (
+          <div className="absolute top-3 left-3">
+            <span className="bg-white/90 backdrop-blur-sm text-indigo-700 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm">
+              {cat}
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2 mb-2">
+          {post.title.rendered}
+        </h3>
+        <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed mb-4 flex-1">
+          {stripHtml(post.excerpt.rendered)}
+        </p>
+        <div className="flex items-center justify-between mt-auto pt-3 border-t border-slate-50">
+          <span className="text-[11px] text-slate-400 font-semibold">{fmtDate(post.date)}</span>
+          <span className="flex items-center gap-1 text-[11px] font-bold text-indigo-600">
+            Read <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ── HORIZONTAL FEATURE CARD ── */
+function FeatureCard({ post }: { post: any }) {
+  const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+
+  return (
+    <Link
+      href={`/${post.slug}`}
+      className="group flex gap-5 items-start bg-white rounded-2xl p-4 border border-slate-100 hover:border-indigo-100 hover:shadow-lg hover:shadow-slate-100 transition-all"
+    >
+      <div className="relative w-28 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-100">
+        {img ? (
+          <img src={img} alt={post.title.rendered} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <BookOpen className="w-5 h-5 text-slate-300" />
+          </div>
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        {cat && <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-1 block">{cat}</span>}
+        <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2 mb-2">
+          {post.title.rendered}
+        </h4>
+        <span className="text-[11px] text-slate-400 font-medium">{fmtDate(post.date)}</span>
+      </div>
+    </Link>
+  );
+}
+
+/* ── DARK OVERLAY CARD (for "Must Read" section) ── */
+function DarkCard({ post }: { post: any }) {
+  const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+
+  return (
+    <Link href={`/${post.slug}`} className="group relative rounded-2xl overflow-hidden h-60 bg-slate-800 flex flex-col justify-end">
+      {img && (
+        <img src={img} alt={post.title.rendered} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-110 transition-all duration-700" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+      <div className="relative z-10 p-5">
+        {cat && <span className="text-emerald-400 text-[9px] font-bold uppercase tracking-widest mb-1.5 block">{cat}</span>}
+        <h3 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors leading-snug line-clamp-3">
+          {post.title.rendered}
+        </h3>
+        <span className="text-[10px] text-slate-400 mt-2 block">{fmtDate(post.date)}</span>
+      </div>
+    </Link>
   );
 }
 
@@ -52,19 +226,14 @@ function SectionHeading({ icon: Icon, title, subtitle }: { icon: any, title: str
    MAIN PAGE
 ══════════════════════════════════════════════════════════════ */
 export default function FabFeedsHomePage() {
-  const [featuredPosts, setFeaturedPosts] = useState<any[]>([]);
-  const [allPosts, setAllPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [featRes, postsRes] = await Promise.all([
-          fetch(`${WP_API_URL}/posts?_embed&per_page=8&orderby=date`),
-          fetch(`${WP_API_URL}/posts?_embed&per_page=20&orderby=date`),
-        ]);
-        if (featRes.ok) setFeaturedPosts(await featRes.json());
-        if (postsRes.ok) setAllPosts(await postsRes.json());
+        const res = await fetch(`${WP_API_URL}/posts?_embed&per_page=24&orderby=date`);
+        if (res.ok) setPosts(await res.json());
       } catch (err) {
         console.error("Fetch error:", err);
       } finally {
@@ -74,38 +243,58 @@ export default function FabFeedsHomePage() {
     fetchData();
   }, []);
 
+  /* ── LOADING STATE ── */
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center gap-4">
-        <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-        <p className="text-slate-500 font-medium tracking-widest uppercase text-sm">Curating Fab Feeds...</p>
+      <div className="min-h-screen bg-slate-50">
+        {/* Top bar skeleton */}
+        <div className="bg-slate-900 h-10" />
+        <Container className="py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-8">
+              <div className="rounded-2xl overflow-hidden animate-pulse bg-slate-200 h-[520px]" />
+            </div>
+            <div className="lg:col-span-4 space-y-4">
+              {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}
+            </div>
+          </div>
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+        </Container>
       </div>
     );
   }
 
-  // Splitting posts for different sections
-  const heroPost = featuredPosts[0];
-  const rightColumnPosts = featuredPosts.slice(1, 4);
-  const editorPicks = featuredPosts.slice(4, 8);
-  
-  const techPosts = allPosts.slice(0, 3);
-  const strategyPosts = allPosts.slice(3, 7);
-  const latestPosts = allPosts.slice(7, 15);
+  /* ── DATA SLICING ── */
+  const hero = posts[0];
+  const trendingSide = posts.slice(1, 5);
+  const editorPicks = posts.slice(5, 9);
+  const mustRead = posts.slice(9, 13);
+  const latestMain = posts.slice(13, 17);
+  const sidebarFeed = posts.slice(17, 24);
 
   return (
-    <main className="bg-slate-50 text-slate-800 min-h-screen font-sans selection:bg-indigo-200 pb-20">
-      
-      {/* ── 1. THE NEWS TICKER (TOP BAR) ── */}
-      <div className="bg-slate-900 border-b border-slate-800 py-2.5">
+    <main className="bg-slate-50 text-slate-800 min-h-screen">
+
+      {/* ══ 1. NEWS TICKER ══ */}
+      <div className="bg-slate-900 border-b border-slate-800 py-2.5 overflow-hidden">
         <div className="flex items-center max-w-[1280px] mx-auto px-4">
-          <span className="shrink-0 bg-indigo-600 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm mr-4 flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 fill-current" /> Breaking
+          <span className="shrink-0 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-1.5 mr-4 whitespace-nowrap">
+            <Zap className="w-3 h-3 fill-current" /> Live Feed
           </span>
-          <div className="overflow-hidden flex-1">
-            <div className="flex gap-10 whitespace-nowrap animate-[ticker_40s_linear_infinite]">
-              {[...allPosts, ...allPosts].map((p, i) => (
-                <Link key={i} href={`/${p.slug}`} className="text-sm text-slate-300 hover:text-white font-medium transition-colors flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" /> 
+          <div className="overflow-hidden flex-1 relative">
+            <div
+              className="flex gap-12 whitespace-nowrap"
+              style={{ animation: "ticker 40s linear infinite" }}
+            >
+              {[...posts, ...posts].map((p, i) => (
+                <Link
+                  key={i}
+                  href={`/${p.slug}`}
+                  className="text-xs text-slate-400 hover:text-white font-medium transition-colors flex items-center gap-2 shrink-0"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
                   {p.title.rendered}
                 </Link>
               ))}
@@ -114,235 +303,134 @@ export default function FabFeedsHomePage() {
         </div>
       </div>
 
-      {/* ── 2. EDITORIAL HERO SECTION ── */}
-      <section className="py-12 md:py-16 bg-white border-b border-slate-200">
+      {/* ══ 2. HERO + TRENDING ══ */}
+      <section className="bg-white border-b border-slate-100 py-10 md:py-14">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            
-            {/* Main Hero Story (Left 8 cols) */}
-            {heroPost && (
-              <div className="lg:col-span-8 flex flex-col">
-                <Link href={`/${heroPost.slug}`} className="group relative block rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[16/9] mb-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-slate-100">
-                  {heroPost._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                    <img 
-                      src={heroPost._embedded["wp:featuredmedia"][0].source_url} 
-                      alt={heroPost.title.rendered} 
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                  )}
-                  {/* Subtle gradient for text readability if needed */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-                
-                <div>
-                  <span className="text-indigo-600 font-bold uppercase tracking-widest text-xs mb-3 block">
-                    {heroPost._embedded?.["wp:term"]?.[0]?.[0]?.name || "Cover Story"}
-                  </span>
-                  <Link href={`/${heroPost.slug}`} className="group">
-                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight mb-4 group-hover:text-indigo-600 transition-colors font-serif">
-                      {heroPost.title.rendered}
-                    </h2>
-                  </Link>
-                  <p className="text-slate-600 md:text-lg line-clamp-2 md:line-clamp-3 leading-relaxed mb-6">
-                    {stripHtml(heroPost.excerpt.rendered)}
-                  </p>
-                  <div className="flex items-center text-sm font-semibold text-slate-400">
-                    <span className="text-slate-800 mr-2">{fmtDate(heroPost.date)}</span> • 
-                    <span className="ml-2 flex items-center hover:text-indigo-600 cursor-pointer transition-colors">
-                      Read Full Story <ArrowRight className="w-4 h-4 ml-1" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-            {/* Right Column: Trending List */}
-            <div className="lg:col-span-4 flex flex-col">
-              <div className="flex items-center gap-2 mb-6 pb-4 border-b-2 border-slate-900">
-                <TrendingUp className="w-5 h-5 text-slate-900" />
-                <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest">Trending Now</h3>
-              </div>
-              
-              <div className="flex flex-col divide-y divide-slate-100">
-                {rightColumnPosts.map((post, i) => (
-                  <Link key={i} href={`/${post.slug}`} className="group py-5 first:pt-0 flex gap-5 items-start">
-                    <span className="text-4xl font-black text-slate-200 group-hover:text-indigo-100 transition-colors font-serif leading-none mt-1">
-                      0{i + 1}
-                    </span>
-                    <div>
-                      <h4 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-indigo-600 transition-colors mb-2">
-                        {post.title.rendered}
-                      </h4>
-                      <span className="text-slate-500 text-xs font-medium">
-                        {fmtDate(post.date)}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Newsletter / Promo Box */}
-              <div className="mt-8 bg-indigo-50 rounded-2xl p-6 border border-indigo-100 text-center">
-                <Star className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
-                <h4 className="font-bold text-slate-900 mb-2">Join the Inner Circle</h4>
-                <p className="text-sm text-slate-600 mb-4">Get the latest insights delivered straight to your inbox.</p>
-                <button className="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-200">
-                  Subscribe Now
-                </button>
-              </div>
+            {/* Hero story */}
+            <div className="lg:col-span-8">
+              {hero && <HeroCard post={hero} />}
             </div>
+
+            {/* Trending sidebar */}
+            <aside className="lg:col-span-4">
+              <div className="flex items-center gap-2 pb-4 mb-2 border-b-2 border-slate-900">
+                <TrendingUp className="w-4 h-4" />
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-900">Trending Now</h3>
+              </div>
+              {trendingSide.map((p, i) => <SideCard key={p.id} post={p} index={i} />)}
+              <Link
+                href="/blogs"
+                className="mt-6 flex items-center justify-center gap-2 bg-indigo-600 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-200"
+              >
+                Browse All Articles <ArrowRight className="w-4 h-4" />
+              </Link>
+            </aside>
           </div>
         </Container>
       </section>
 
-      {/* ── 3. SECTION: SOFTWARE & TECH DEEP DIVES (Clean Cards) ── */}
-      {techPosts.length > 0 && (
-        <section className="py-16 md:py-24">
-          <Container>
-            <SectionHeading icon={MonitorSmartphone} title="Tech & Tools" subtitle="In-depth reviews and software that drives results." />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {techPosts.map((post, idx) => (
-                <Link key={idx} href={`/${post.slug}`} className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-indigo-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] transition-all duration-300">
-                  <div className="relative h-56 overflow-hidden bg-slate-100">
-                    {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                      <img 
-                        src={post._embedded["wp:featuredmedia"][0].source_url} 
-                        alt={post.title.rendered}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    )}
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-indigo-700 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
-                      Review
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-indigo-600 leading-snug">
-                      {post.title.rendered}
-                    </h3>
-                    <p className="text-slate-600 text-sm line-clamp-2 mb-5 flex-1">
-                      {stripHtml(post.excerpt.rendered)}
-                    </p>
-                    <div className="flex items-center text-sm font-bold text-indigo-600">
-                      Read Breakdown <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
+      {/* ══ 3. SECTION DIVIDER — EDITOR'S PICKS ══ */}
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-8 bg-indigo-600 rounded-full" />
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-0.5">Curated for You</p>
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-serif">Editor&apos;s Picks</h2>
+              </div>
             </div>
-          </Container>
-        </section>
-      )}
+            <Link href="/blogs" className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors uppercase tracking-widest">
+              View All <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
 
-      {/* ── 4. SECTION: GROWTH STRATEGIES (Image Heavy Grid) ── */}
-      {strategyPosts.length > 0 && (
-        <section className="py-16 md:py-24 bg-slate-900 text-white">
-          <Container>
-            <div className="mb-10 flex flex-col items-center text-center">
-              <Lightbulb className="w-8 h-8 text-emerald-400 mb-3" />
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight font-serif mb-3">Growth Strategies</h2>
-              <p className="text-slate-400 max-w-2xl text-lg">Actionable tactics to scale your business and outsmart the competition.</p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {strategyPosts.map((post, idx) => (
-                <Link key={idx} href={`/${post.slug}`} className="group relative h-80 rounded-2xl overflow-hidden bg-slate-800 flex flex-col justify-end">
-                  {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                      <img 
-                        src={post._embedded["wp:featuredmedia"][0].source_url} 
-                        alt={post.title.rendered} 
-                        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-700 ease-out"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
-                    <div className="relative z-10 p-6">
-                      <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">
-                        Masterclass
-                      </span>
-                      <h3 className="text-lg font-bold text-white line-clamp-3 leading-snug group-hover:text-emerald-300 transition-colors">
-                        {post.title.rendered}
-                      </h3>
-                    </div>
-                </Link>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {editorPicks.map((p) => <PostCard key={p.id} post={p} />)}
+          </div>
+        </Container>
+      </section>
 
-      {/* ── 5. LATEST ARTICLES (Classic Feed Layout - FIXED IMAGES) ── */}
-      <section className="py-16 md:py-24 bg-slate-50">
+      {/* ══ 4. FULL-WIDTH DARK SECTION — MUST READ ══ */}
+      <section className="bg-slate-900 py-14 md:py-20">
+        <Container>
+          <div className="flex items-center gap-3 mb-10">
+            <Flame className="w-6 h-6 text-emerald-400" />
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-0.5">Can&apos;t Miss</p>
+              <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight font-serif">Must Read Stories</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {mustRead.map((p) => <DarkCard key={p.id} post={p} />)}
+          </div>
+        </Container>
+      </section>
+
+      {/* ══ 5. LATEST + SIDEBAR ══ */}
+      <section className="py-14 md:py-20">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            {/* LATEST POSTS FEED (Main Column) */}
+
+            {/* Main feed */}
             <div className="lg:col-span-8">
-              <SectionHeading icon={Flame} title="Latest Drops" />
-              <div className="space-y-8">
-                {latestPosts.map((post, idx) => (
-                  <Link key={idx} href={`/${post.slug}`} className="group flex flex-col md:flex-row gap-6 items-start bg-white p-4 rounded-2xl border border-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all">
-                    {/* Fixed Height constraint so absolute images don't collapse */}
-                    <div className="relative w-full md:w-64 h-56 md:h-48 shrink-0 overflow-hidden rounded-xl bg-slate-100">
-                      {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                        <img 
-                          src={post._embedded["wp:featuredmedia"][0].source_url} 
-                          alt={post.title.rendered}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      )}
-                    </div>
-                    <div className="flex-1 py-2 pr-4">
-                      <span className="text-slate-500 text-xs font-semibold mb-2 block">
-                        {fmtDate(post.date)}
-                      </span>
-                      <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-indigo-600 transition-colors font-serif">
-                        {post.title.rendered}
-                      </h3>
-                      <p className="text-slate-600 text-sm line-clamp-2 md:line-clamp-3 mb-4 leading-relaxed">
-                        {stripHtml(post.excerpt.rendered)}
-                      </p>
-                      <span className="inline-flex items-center text-sm font-bold text-indigo-600">
-                        Read Article <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-1 h-8 bg-emerald-500 rounded-full" />
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-emerald-600 mb-0.5">Fresh Off The Press</p>
+                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-serif">Latest Articles</h2>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {latestMain.map((p) => <PostCard key={p.id} post={p} />)}
+              </div>
+
+              <div className="mt-10 text-center">
+                <Link
+                  href="/blogs"
+                  className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 hover:border-indigo-400 hover:text-indigo-600 text-slate-700 font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-xl transition-all duration-300 shadow-sm"
+                >
+                  Load More Stories <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
 
-            {/* SIDEBAR: EDITOR'S PICKS */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-8">
-                <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-sm">
-                  <h3 className="text-xl font-black text-slate-900 mb-6 font-serif border-b border-slate-100 pb-4">
-                    Editor Picks
-                  </h3>
-                  <div className="space-y-6">
-                    {editorPicks.map((post, i) => (
-                      <Link key={i} href={`/${post.slug}`} className="group flex gap-4 items-center">
-                        <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-slate-100 relative">
-                          {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
-                            <img 
-                              src={post._embedded["wp:featuredmedia"][0].source_url} 
-                              alt={post.title.rendered} 
-                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 line-clamp-2 leading-snug mb-1">
-                            {post.title.rendered}
-                          </h4>
-                          <span className="text-xs text-slate-500">
-                            {fmtDate(post.date)}
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </aside>
+            {/* Sidebar */}
+            <aside className="lg:col-span-4 space-y-8">
 
+              {/* Newsletter */}
+              <div className="bg-indigo-600 rounded-2xl p-7 text-white text-center">
+                <Star className="w-8 h-8 text-indigo-200 mx-auto mb-4" />
+                <h3 className="text-lg font-black mb-2 font-serif">Join the Inner Circle</h3>
+                <p className="text-indigo-200 text-sm mb-5 leading-relaxed">Get the best stories and exclusive reads delivered weekly.</p>
+                <input type="email" placeholder="Your email address" className="w-full px-4 py-2.5 rounded-lg text-slate-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-white/50" />
+                <button className="w-full bg-white text-indigo-600 hover:bg-indigo-50 font-black uppercase tracking-widest text-xs py-3 rounded-lg transition-colors">
+                  Subscribe Free
+                </button>
+                <p className="text-indigo-300 text-[10px] mt-3 font-medium">No spam. Unsubscribe anytime.</p>
+              </div>
+
+              {/* Quick reads */}
+              <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-5 pb-4 border-b border-slate-100">
+                  <BookOpen className="w-4 h-4 text-indigo-500" />
+                  <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">More to Read</h3>
+                </div>
+                <div className="space-y-2">
+                  {sidebarFeed.slice(0, 5).map((p) => <FeatureCard key={p.id} post={p} />)}
+                </div>
+                <Link
+                  href="/blogs"
+                  className="mt-5 flex items-center justify-center gap-2 text-xs font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-widest pt-4 border-t border-slate-100 transition-colors"
+                >
+                  See All Articles <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+            </aside>
           </div>
         </Container>
       </section>
