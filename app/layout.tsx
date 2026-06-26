@@ -99,7 +99,7 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code", 
     other: {
-      "verify-admitad": "ff3fcff36d",
+      "verify-admitad": "d20433402e",
       "convertiser-verification": "ac8d7d735a045fdb004012e924b045eef6e40b7d",
     },
   },
