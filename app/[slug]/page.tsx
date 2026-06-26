@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-const WP_API_URL = 'https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2';
+const WP_API_URL = 'https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;

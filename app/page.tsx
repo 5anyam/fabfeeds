@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const WP_API_URL = "https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
 
 const stripHtml = (h: string) =>
   h.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();

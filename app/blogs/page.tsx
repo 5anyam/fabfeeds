@@ -12,7 +12,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
-const WP_API_URL = "https://lemonchiffon-porpoise-679406.hostingersite.com/wp-json/wp/v2";
+const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
 
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString("en-IN", {
