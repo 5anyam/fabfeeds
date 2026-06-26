@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code", 
     other: {
       "verify-admitad": "ff3fcff36d",
-      "convertiser-verification": "4a2836a5da7012c891e09927e427664d7b22686d",
+      "convertiser-verification": "ac8d7d735a045fdb004012e924b045eef6e40b7d",
     },
   },
 
