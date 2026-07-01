@@ -167,7 +167,7 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
           </h1>
 
           <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            The Influencer Shark AI continuously monitors the digital depths, intercepting the highest-performing 
+            The Fab Feeds AI continuously monitors the digital depths, intercepting the highest-performing
             strategies, tools, and content in real-time. Don&apos;t chase trends—anticipate them.
           </p>
 
@@ -261,7 +261,7 @@ function AIProductsBanner() {
                 </div>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed max-w-lg font-medium">
-                The Shark Radar intercepts the highest-converting software, SaaS deals, and affiliate 
+                The Fab Feeds Radar intercepts the highest-converting software, SaaS deals, and affiliate
                 networks before they hit the mainstream. Dominate your niche with superior tools.
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
@@ -523,7 +523,7 @@ function BottomCTA() {
             <span className="text-cyan-400">Digital Space.</span>
           </h2>
           <p className="text-slate-400 text-sm md:text-base font-medium leading-relaxed mb-10">
-            The Influencer Shark Radar processes massive datasets daily to hand you the exact 
+            The Fab Feeds Radar processes massive datasets daily to hand you the exact
             strategies and tools you need to dominate.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -607,10 +607,10 @@ export default function TrendingPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "The Radar — Influencer Shark",
+            name: "The Radar — Fab Feeds",
             url: "https://fabfeeds.com/trending",
             description:
-              "Live signals and apex strategies curated by Influencer Shark AI. Dominate your sector.",
+              "Live signals and apex strategies curated by Fab Feeds AI. Dominate your sector.",
           }),
         }}
       />
