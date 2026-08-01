@@ -45,6 +45,10 @@ const fmtDate = (d: string) =>
     day: "2-digit", month: "short", year: "numeric",
   });
 
+/* WP category/term names come HTML-entity-encoded (e.g. "Health &amp; Lifestyle") */
+const decodeEntities = (s: string) =>
+  s.replace(/&amp;/g, "&").replace(/&#0?39;/g, "'").replace(/&quot;/g, '"');
+
 /* ══ Scroll Reveal Hook ═══════════════════════════════════════════════════ */
 function useReveal(threshold = 0.08) {
   const ref = useRef<HTMLDivElement>(null);
@@ -300,7 +304,8 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
   const main = posts[0];
   const side = posts.slice(1, 4);
   const mainImg = main._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-  const mainCat = main._embedded?.["wp:term"]?.[0]?.[0]?.name;
+  const mainCatRaw = main._embedded?.["wp:term"]?.[0]?.[0]?.name;
+  const mainCat = mainCatRaw && decodeEntities(mainCatRaw);
 
   return (
     <div
@@ -331,7 +336,7 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
               </span>
             </div>
             <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-serif">
-              {category.name}
+              {decodeEntities(category.name)}
             </h2>
           </div>
         </div>
@@ -409,7 +414,8 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
         <div className="md:col-span-7 flex flex-col gap-4">
           {side.map((post, idx) => {
             const img = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-            const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+            const catRaw = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
+            const cat = catRaw && decodeEntities(catRaw);
             return (
               <Link
                 key={post.id}

@@ -6,7 +6,7 @@ import {
   ArrowUpRight, Sparkles, Flame, ShieldCheck,
   Heart, Zap, Globe, BarChart2,
   Shirt, Plane, Activity, Home, Star,
-  Salad, ShoppingCart, Briefcase, Car, UtensilsCrossed,
+  ShoppingCart, Briefcase, Car, Laptop, Gamepad2, Users, Server,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
@@ -252,19 +252,20 @@ function OurStory() {
 function WhatWeCover() {
   const { ref, visible } = useReveal();
 
+  // Titles + slugs map 1:1 to live WordPress categories — keep in sync with the CMS.
   const categories = [
-    { emoji: "👗", icon: Shirt,          bg: "bg-blue-50",    color: "text-blue-600",   title: "Fashion",       desc: "Latest trends, outfit inspiration, brand spotlights, and fashion deals curated daily." },
-    { emoji: "✈️", icon: Plane,          bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Travel",        desc: "Destination guides, visa tips, packing lists, and budget travel hacks for every explorer." },
-    { emoji: "🏥", icon: Activity,       bg: "bg-blue-50",    color: "text-blue-600",   title: "Health",        desc: "Wellness tips, fitness guides, mental health articles, and healthy living inspiration." },
-    { emoji: "🏠", icon: Home,           bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Home Decor",    desc: "Interior ideas, decor trends, DIY projects, and the best home products on the market." },
-    { emoji: "✨", icon: Sparkles,       bg: "bg-blue-50",    color: "text-blue-600",   title: "Lifestyle",     desc: "Daily habits, productivity, self-improvement, and content that elevates everyday life." },
-    { emoji: "💄", icon: Star,           bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Beauty",        desc: "Skincare routines, makeup reviews, best beauty products, and expert tips from the pros." },
-    { emoji: "💑", icon: Heart,          bg: "bg-blue-50",    color: "text-blue-600",   title: "Relationship",  desc: "Relationship advice, dating tips, communication guides, and emotional well-being reads." },
-    { emoji: "🥗", icon: Salad,          bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Diet",          desc: "Nutrition guides, diet plans, healthy recipes, and expert takes on trending food habits." },
-    { emoji: "🛒", icon: ShoppingCart,   bg: "bg-blue-50",    color: "text-blue-600",   title: "Ecommerce",     desc: "Best deals, platform comparisons, shopping guides, and the hottest products right now." },
-    { emoji: "📊", icon: Briefcase,      bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Business",      desc: "Startup stories, business strategies, marketing tips, and entrepreneurship insights." },
-    { emoji: "🚗", icon: Car,            bg: "bg-blue-50",    color: "text-blue-600",   title: "Automotive",    desc: "Car reviews, EV news, buying guides, and the latest in auto trends and technology." },
-    { emoji: "🍕", icon: UtensilsCrossed,bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Food",          desc: "Restaurant picks, food reviews, easy recipes, and the tastiest trends from around the world." },
+    { emoji: "👗", icon: Shirt,        bg: "bg-blue-50",    color: "text-blue-600",    title: "Fashion",            slug: "fashion",          desc: "Latest trends, outfit inspiration, brand spotlights, and fashion deals curated daily." },
+    { emoji: "✈️", icon: Plane,        bg: "bg-emerald-50", color: "text-emerald-600", title: "Travel",             slug: "travel",           desc: "Destination guides, visa tips, packing lists, and budget travel hacks for every explorer." },
+    { emoji: "💻", icon: Laptop,       bg: "bg-blue-50",    color: "text-blue-600",    title: "Technology",         slug: "technology",       desc: "Gadget reviews, software comparisons, AI trends, and the latest in consumer tech." },
+    { emoji: "📊", icon: Briefcase,    bg: "bg-emerald-50", color: "text-emerald-600", title: "Business",           slug: "business",         desc: "Startup stories, business strategies, marketing tips, and entrepreneurship insights." },
+    { emoji: "🛒", icon: ShoppingCart, bg: "bg-blue-50",    color: "text-blue-600",    title: "Ecommerce",          slug: "ecommerce",        desc: "Best deals, platform comparisons, shopping guides, and the hottest products right now." },
+    { emoji: "🏥", icon: Activity,     bg: "bg-emerald-50", color: "text-emerald-600", title: "Health & Lifestyle", slug: "health-lifestyle", desc: "Wellness tips, fitness guides, mental health articles, and healthy living inspiration." },
+    { emoji: "🏠", icon: Home,         bg: "bg-blue-50",    color: "text-blue-600",    title: "Home Decor",         slug: "home-decor",       desc: "Interior ideas, decor trends, DIY projects, and the best home products on the market." },
+    { emoji: "✨", icon: Sparkles,     bg: "bg-emerald-50", color: "text-emerald-600", title: "Lifestyle",          slug: "lifestyle",        desc: "Daily habits, productivity, self-improvement, and content that elevates everyday life." },
+    { emoji: "🎮", icon: Gamepad2,     bg: "bg-blue-50",    color: "text-blue-600",    title: "Gaming",             slug: "gaming",           desc: "Game reviews, platform news, esports coverage, and the best gear for every gamer." },
+    { emoji: "🧑‍💻", icon: Users,       bg: "bg-emerald-50", color: "text-emerald-600", title: "Freelance",          slug: "freelance",        desc: "Remote work tips, freelance platforms, client management, and building a solo career." },
+    { emoji: "🖥️", icon: Server,       bg: "bg-blue-50",    color: "text-blue-600",    title: "Hosting",            slug: "hosting",          desc: "Web hosting reviews, domain tips, and comparisons to help you launch online." },
+    { emoji: "🚗", icon: Car,          bg: "bg-emerald-50", color: "text-emerald-600", title: "Automobile",         slug: "automobile",       desc: "Car reviews, EV news, buying guides, and the latest in auto trends and technology." },
   ];
 
   return (
@@ -297,7 +298,7 @@ function WhatWeCover() {
             return (
               <Link
                 key={cat.title}
-                href={`/blogs?category=${cat.title.toLowerCase().replace(" ", "-")}`}
+                href={`/blogs?category=${cat.slug}`}
                 className="group bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-xl hover:shadow-slate-200/50 hover:border-blue-200 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-4">

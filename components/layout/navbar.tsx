@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import {
-  Menu, X, ChevronDown, Waves, Zap, Flame,
-  ArrowUpRight, Sparkles, Heart, Utensils, 
+  Menu, X, ChevronDown, Zap, Flame,
+  ArrowUpRight, Sparkles, Heart, Gamepad2,
   Compass, Laptop, TrendingUp, LucideIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -32,6 +32,7 @@ type NavItem = {
 };
 
 // ── BLOG NAVIGATION ──
+// Dropdown items map 1:1 to live WordPress category slugs — keep in sync with the CMS.
 const navigation: NavItem[] = [
   { name: "Home", href: "/" },
   {
@@ -42,31 +43,21 @@ const navigation: NavItem[] = [
       {
         category: "Style & Beauty",
         icon: Sparkles,
-        desc: "Fashion & lifestyle trends",
+        desc: "Fashion, beauty & accessories",
         items: [
-          { name: "Fashion",   href: "/blogs?category=fashion" },
-          { name: "Beauty",    href: "/blogs?category=beauty" },
-          { name: "Lifestyle", href: "/blogs?category=lifestyle" },
+          { name: "Fashion",     href: "/blogs?category=fashion" },
+          { name: "Beauty",      href: "/blogs?category=beauty" },
+          { name: "Accessories", href: "/blogs?category=accessories" },
         ],
       },
       {
-        category: "Health & Life",
+        category: "Health & Living",
         icon: Heart,
         desc: "Wellness & modern living",
         items: [
-          { name: "Health",        href: "/blogs?category=health" },
-          { name: "Relationship",  href: "/blogs?category=relationship" },
-          { name: "Home Decor",    href: "/blogs?category=home-decor" },
-        ],
-      },
-      {
-        category: "Food & Dining",
-        icon: Utensils,
-        desc: "Recipes & top restaurants",
-        items: [
-          { name: "Recipes",      href: "/blogs?category=recipes" },
-          { name: "Restaurants",  href: "/blogs?category=restaurants" },
-          { name: "Diet Plans",   href: "/blogs?category=diet" },
+          { name: "Health & Lifestyle", href: "/blogs?category=health-lifestyle" },
+          { name: "Lifestyle",          href: "/blogs?category=lifestyle" },
+          { name: "Home Decor",         href: "/blogs?category=home-decor" },
         ],
       },
       {
@@ -74,9 +65,8 @@ const navigation: NavItem[] = [
         icon: Compass,
         desc: "Destinations & rides",
         items: [
-          { name: "Destinations",  href: "/blogs?category=destinations" },
-          { name: "Automotive",    href: "/blogs?category=automotive" },
-          { name: "Travel Guides", href: "/blogs?category=travel-guides" },
+          { name: "Travel",     href: "/blogs?category=travel" },
+          { name: "Automobile", href: "/blogs?category=automobile" },
         ],
       },
       {
@@ -84,25 +74,37 @@ const navigation: NavItem[] = [
         icon: Laptop,
         desc: "Gadgets & digital life",
         items: [
-          { name: "Gadgets",      href: "/blogs?category=gadgets" },
-          { name: "Software",     href: "/blogs?category=software" },
-          { name: "AI Trends",    href: "/blogs?category=ai-trends" },
+          { name: "Technology", href: "/blogs?category=technology" },
+          { name: "Gadgets",    href: "/blogs?category=gadget" },
+          { name: "Electronics", href: "/blogs?category=electronics" },
+          { name: "EdTech",     href: "/blogs?category=edtech" },
         ],
       },
       {
-        category: "Business & More",
+        category: "Business & Work",
         icon: TrendingUp,
         desc: "Markets & entrepreneurship",
         items: [
-          { name: "Business",     href: "/blogs?category=business" },
-          { name: "Ecommerce",    href: "/blogs?category=ecommerce" },
-          { name: "Finance",      href: "/blogs?category=finance" },
+          { name: "Business",  href: "/blogs?category=business" },
+          { name: "Ecommerce", href: "/blogs?category=ecommerce" },
+          { name: "Freelance", href: "/blogs?category=freelance" },
+          { name: "Hosting",   href: "/blogs?category=hosting" },
+        ],
+      },
+      {
+        category: "Entertainment",
+        icon: Gamepad2,
+        desc: "Games, sports & screen time",
+        items: [
+          { name: "Gaming",        href: "/blogs?category=gaming" },
+          { name: "Sports",        href: "/blogs?category=sports" },
+          { name: "Entertainment", href: "/blogs?category=entertainment" },
         ],
       },
     ],
   },
-  { name: "Trending",       href: "/trending", icon: Flame },
-  { name: "Buying Guides",  href: "/blogs?filter=buying-guides" },
+  { name: "Trending", href: "/trending", icon: Flame },
+  { name: "All Articles", href: "/blogs" },
 ];
 
 export function Header() {

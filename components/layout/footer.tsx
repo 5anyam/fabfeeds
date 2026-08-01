@@ -3,53 +3,38 @@
 import Link from "next/link";
 import {
   Instagram, Facebook, Twitter, Youtube,
-  ArrowUpRight, Flame, Sparkles, MapPin,
+  ArrowUpRight, Flame, Sparkles, ShieldCheck,
   BookOpen, Building2, Zap, Target
 } from "lucide-react";
 import { Container } from "@/components/ui/container"; // Assumes you have this, otherwise replace with standard div
 
-/* ══ Data ═════════════════════════════════════════════════════════════════ */
+/* ══ Data ═════════════════════════════════════════════════════════════════
+   Category links map 1:1 to live WordPress category slugs — keep in sync
+   with the CMS, or a click here silently falls back to "All Articles".
+══════════════════════════════════════════════════════════════════════════ */
 const footerLinks = [
   {
     heading: "Categories",
     icon: BookOpen,
     links: [
-      { label: "Fashion",       href: "/blogs?category=fashion" },
-      { label: "Travel",        href: "/blogs?category=travel" },
-      { label: "Health",        href: "/blogs?category=health" },
-      { label: "Home Decor",    href: "/blogs?category=home-decor" },
-      { label: "Lifestyle",     href: "/blogs?category=lifestyle" },
-      { label: "Beauty",        href: "/blogs?category=beauty" },
-      { label: "Relationship",  href: "/blogs?category=relationship" },
-      { label: "Diet",          href: "/blogs?category=diet" },
-      { label: "Ecommerce",     href: "/blogs?category=ecommerce" },
-      { label: "Business",      href: "/blogs?category=business" },
-      { label: "Automotive",    href: "/blogs?category=automotive" },
-      { label: "Food",          href: "/blogs?category=food" },
+      { label: "Fashion",             href: "/blogs?category=fashion" },
+      { label: "Travel",              href: "/blogs?category=travel" },
+      { label: "Technology",          href: "/blogs?category=technology" },
+      { label: "Business",            href: "/blogs?category=business" },
+      { label: "Ecommerce",           href: "/blogs?category=ecommerce" },
+      { label: "Health & Lifestyle",  href: "/blogs?category=health-lifestyle" },
     ],
   },
   {
-    heading: "Quick Reads",
+    heading: "More Categories",
     icon: Flame,
     links: [
-      { label: "Buying Guides",   href: "/blogs?filter=buying-guides" },
-      { label: "How-To Guides",   href: "/blogs?category=how-to" },
-      { label: "Product Reviews", href: "/blogs?category=reviews" },
-      { label: "Tips & Tricks",   href: "/blogs?category=tips" },
-      { label: "Best Picks",      href: "/blogs?category=best-picks" },
-      { label: "Comparisons",     href: "/blogs?category=comparisons" },
-    ],
-  },
-  {
-    heading: "Resources",
-    icon: MapPin,
-    links: [
-      { label: "Travel Guides",   href: "/blogs?category=travel-guides" },
-      { label: "Packing Lists",   href: "/blogs?category=packing" },
-      { label: "Visa Info",       href: "/blogs?category=visa" },
-      { label: "Latest Deals",    href: "/blogs?category=deals" },
-      { label: "Itineraries",     href: "/blogs?category=itineraries" },
-      { label: "Safety Tips",     href: "/blogs?category=safety" },
+      { label: "Home Decor",  href: "/blogs?category=home-decor" },
+      { label: "Lifestyle",   href: "/blogs?category=lifestyle" },
+      { label: "Gaming",      href: "/blogs?category=gaming" },
+      { label: "Automobile",  href: "/blogs?category=automobile" },
+      { label: "Freelance",   href: "/blogs?category=freelance" },
+      { label: "Hosting",     href: "/blogs?category=hosting" },
     ],
   },
   {
@@ -61,7 +46,16 @@ const footerLinks = [
       { label: "All Articles",  href: "/blogs" },
       { label: "Trending",      href: "/trending" },
       { label: "Contact Us",    href: "/contact" },
-      { label: "Disclaimer",    href: "/disclaimer" },
+    ],
+  },
+  {
+    heading: "Legal",
+    icon: ShieldCheck,
+    links: [
+      { label: "Privacy Policy",   href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
+      { label: "Disclaimer",       href: "/disclaimer" },
+      { label: "Cookie Policy",    href: "/cookie-policy" },
     ],
   },
 ];

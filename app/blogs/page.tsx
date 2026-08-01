@@ -22,6 +22,10 @@ const fmtDate = (d: string) =>
 const stripHtml = (h: string) =>
   h.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
 
+/* WP category/term names come HTML-entity-encoded (e.g. "Health &amp; Lifestyle") */
+const decodeEntities = (s: string) =>
+  s.replace(/&amp;/g, "&").replace(/&#0?39;/g, "'").replace(/&quot;/g, '"');
+
 /* ══ Types ════════════════════════════════════════════════════════════════ */
 interface WordPressPost {
   id: number;
@@ -44,7 +48,7 @@ interface Category {
 /* ══ HORIZONTAL BLOG CARD (Best for Affiliate/Reviews) ════════════════════ */
 function HorizontalBlogCard({ post }: { post: WordPressPost }) {
   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-  const categoryName = post._embedded?.["wp:term"]?.[0]?.[0]?.name || "Article";
+  const categoryName = decodeEntities(post._embedded?.["wp:term"]?.[0]?.[0]?.name || "Article");
 
   return (
     <Link 
@@ -228,8 +232,8 @@ function BlogContent() {
     }
   };
 
-  const categoryName = selectedCategory === "all" ? "All Categories" 
-    : categories.find((c) => c.slug === selectedCategory)?.name || "";
+  const categoryName = selectedCategory === "all" ? "All Categories"
+    : decodeEntities(categories.find((c) => c.slug === selectedCategory)?.name || "");
 
   return (
     <div className="bg-slate-50 min-h-screen pt-16">
@@ -306,7 +310,7 @@ function BlogContent() {
                     selectedCategory === cat.slug ? "bg-blue-600 text-white shadow-md shadow-blue-200" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
                   )}
                 >
-                  {cat.name}
+                  {decodeEntities(cat.name)}
                 </button>
               ))}
             </div>
@@ -358,10 +362,10 @@ function BlogContent() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  { label: "Best Software Reviews 2024", href: "/blogs?category=software" },
-                  { label: "Ultimate Buying Guides", href: "/blogs?filter=buying-guides" },
-                  { label: "Travel Packing Essentials", href: "/blogs?category=travel-guides" },
-                  { label: "Top Rated Gadgets", href: "/blogs?category=gadgets" }
+                  { label: "Best Tech Reviews", href: "/blogs?category=technology" },
+                  { label: "Fashion Trends", href: "/blogs?category=fashion" },
+                  { label: "Travel Guides", href: "/blogs?category=travel" },
+                  { label: "Top Rated Gadgets", href: "/blogs?category=gadget" }
                 ].map((link, i) => (
                   <li key={i}>
                     <Link href={link.href} className="group flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
@@ -385,7 +389,7 @@ function BlogContent() {
                     onClick={() => handleCategoryChange(cat.slug)}
                     className="flex items-center justify-between py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
                   >
-                    <span>{cat.name}</span>
+                    <span>{decodeEntities(cat.name)}</span>
                     <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded font-semibold">{cat.count}</span>
                   </button>
                 ))}

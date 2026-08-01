@@ -16,6 +16,10 @@ interface Category {
   description?: string;
 }
 
+/* WP category names come HTML-entity-encoded (e.g. "Health &amp; Lifestyle") */
+const decodeEntities = (s: string) =>
+  s.replace(/&amp;/g, "&").replace(/&#0?39;/g, "'").replace(/&quot;/g, '"');
+
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -129,10 +133,10 @@ export default function CategoriesPage() {
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                      {category.name}
+                      {decodeEntities(category.name)}
                     </h3>
                     <p className="text-sm text-gray-500 line-clamp-2">
-                      {category.description || `Discover the best guides and tips about ${category.name}. Curated for travelers.`}
+                      {category.description || `Discover the best guides and tips about ${decodeEntities(category.name)}. Curated for travelers.`}
                     </p>
                   </div>
                   
