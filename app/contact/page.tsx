@@ -24,8 +24,8 @@ const contactInfo = [
     detail: "hello@fabfeeds.com",
     sub: "We reply within 24 hours",
     href: "mailto:hello@fabfeeds.com",
-    bg: "bg-indigo-50",
-    color: "text-indigo-600",
+    bg: "bg-blue-50",
+    color: "text-blue-600",
   },
   {
     icon: MapPin,
@@ -41,8 +41,8 @@ const contactInfo = [
 const reasons = [
   {
     icon: Sparkles,
-    bg: "bg-indigo-50",
-    color: "text-indigo-600",
+    bg: "bg-blue-50",
+    color: "text-blue-600",
     title: "AI-Powered Content",
     desc: "Trending articles curated daily by our AI engine.",
   },
@@ -62,8 +62,8 @@ const reasons = [
   },
   {
     icon: Zap,
-    bg: "bg-indigo-50",
-    color: "text-indigo-600",
+    bg: "bg-blue-50",
+    color: "text-blue-600",
     title: "Quick Support",
     desc: "Fast responses to every query.",
   },
@@ -119,14 +119,14 @@ export default function ContactPage() {
       {/* ══ 1. LIGHT EDITORIAL HERO ════════════════════════════════════════ */}
       <section className="bg-white border-b border-slate-200 relative overflow-hidden py-16 md:py-24">
         {/* Subtle Accents */}
-        <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-indigo-50 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-blue-50 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-emerald-50/50 rounded-full blur-[100px] pointer-events-none" />
 
         <Container>
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             {/* Pill */}
             <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
-              <MessageSquare className="w-3.5 h-3.5 text-indigo-600" />
+              <MessageSquare className="w-3.5 h-3.5 text-blue-600" />
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600">
                 Get In Touch
               </span>
@@ -134,7 +134,7 @@ export default function ContactPage() {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-5 font-serif">
               Let&apos;s{" "}
-              <span className="text-indigo-600 italic">
+              <span className="text-blue-600 italic">
                 Connect.
               </span>
             </h1>
@@ -146,16 +146,16 @@ export default function ContactPage() {
 
             {/* Quick stat pills */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-indigo-700 border border-indigo-100 bg-indigo-50 rounded-full px-3.5 py-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-blue-700 border border-blue-100 bg-blue-50 rounded-full px-3.5 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
                 24h Response
               </span>
               <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-700 border border-emerald-100 bg-emerald-50 rounded-full px-3.5 py-1.5">
                 <Flame className="w-3 h-3 text-emerald-500" />
                 Open to Collabs
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-indigo-700 border border-indigo-100 bg-indigo-50 rounded-full px-3.5 py-1.5">
-                <Globe className="w-3 h-3 text-indigo-500" />
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-blue-700 border border-blue-100 bg-blue-50 rounded-full px-3.5 py-1.5">
+                <Globe className="w-3 h-3 text-blue-500" />
                 Worldwide
               </span>
             </div>
@@ -172,7 +172,7 @@ export default function ContactPage() {
               return (
                 <div
                   key={info.title}
-                  className="flex items-center gap-4 bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100 transition-all duration-300 group"
+                  className="flex items-center gap-4 bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100 transition-all duration-300 group"
                 >
                   <span className={`w-12 h-12 rounded-xl border border-white/50 shadow-sm ${info.bg} flex items-center justify-center shrink-0`}>
                     <Icon className={`w-5 h-5 ${info.color}`} />
@@ -184,7 +184,7 @@ export default function ContactPage() {
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="text-[13px] font-bold text-slate-900 hover:text-indigo-600 transition-colors"
+                        className="text-[13px] font-bold text-slate-900 hover:text-blue-600 transition-colors"
                       >
                         {info.detail}
                       </a>
@@ -209,8 +209,8 @@ export default function ContactPage() {
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-slate-50 rounded-2xl border border-slate-200 shadow-sm p-8 md:p-10">
                 <div className="mb-8 border-b border-slate-200 pb-6">
-                  <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-                    <Send className="w-3 h-3 text-indigo-500" />
+                  <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                    <Send className="w-3 h-3 text-blue-500" />
                     Send a Message
                   </div>
                   <h2 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight font-serif">
@@ -232,7 +232,7 @@ export default function ContactPage() {
                         type="text"
                         required
                         placeholder="John Doe"
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
                       />
                     </div>
                     <div>
@@ -243,7 +243,7 @@ export default function ContactPage() {
                         type="email"
                         required
                         placeholder="john@example.com"
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
                       />
                     </div>
                   </div>
@@ -257,7 +257,7 @@ export default function ContactPage() {
                       <input
                         type="tel"
                         placeholder="+91 98765 43210"
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
                       />
                     </div>
                     <div>
@@ -266,7 +266,7 @@ export default function ContactPage() {
                       </label>
                       <select
                         required
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all appearance-none shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all appearance-none shadow-sm"
                       >
                         <option value="">Select type…</option>
                         <option>Content Collaboration</option>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                       type="text"
                       required
                       placeholder="How can we help you?"
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all shadow-sm"
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
                     />
                   </div>
 
@@ -302,14 +302,14 @@ export default function ContactPage() {
                       required
                       rows={5}
                       placeholder="Tell us about your idea, question, or collaboration proposal…"
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all resize-none shadow-sm"
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all resize-none shadow-sm"
                     />
                   </div>
 
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-md shadow-indigo-200 hover:-translate-y-0.5 transition-all duration-300 group mt-4"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-md shadow-blue-200 hover:-translate-y-0.5 transition-all duration-300 group mt-4"
                   >
                     <Send className="w-4 h-4" />
                     Send Message
@@ -327,17 +327,17 @@ export default function ContactPage() {
             <div className="space-y-6">
 
               {/* Support Email Card */}
-              <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 shadow-sm">
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
-                  <Sparkles className="w-4 h-4 text-indigo-500" />
-                  <h3 className="text-sm font-black text-indigo-900 uppercase tracking-widest">Quick Support</h3>
+                  <Sparkles className="w-4 h-4 text-blue-500" />
+                  <h3 className="text-sm font-black text-blue-900 uppercase tracking-widest">Quick Support</h3>
                 </div>
-                <p className="text-xs text-indigo-700/80 leading-relaxed mb-5 font-medium">
+                <p className="text-xs text-blue-700/80 leading-relaxed mb-5 font-medium">
                   Prefer a direct line? Reach out via email for the fastest response from our editorial team.
                 </p>
                 <a
                   href="mailto:hello@fabfeeds.com"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-600 hover:text-white font-bold uppercase tracking-widest text-xs py-3.5 rounded-lg shadow-sm transition-all duration-300"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white border border-blue-200 text-blue-700 hover:bg-blue-600 hover:text-white font-bold uppercase tracking-widest text-xs py-3.5 rounded-lg shadow-sm transition-all duration-300"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   Email Support
@@ -386,7 +386,7 @@ export default function ContactPage() {
                 <div className="mt-6 pt-5 border-t border-slate-100">
                   <Link
                     href="/blogs"
-                    className="w-full inline-flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-indigo-700 border border-indigo-200 bg-indigo-50 hover:bg-indigo-600 hover:text-white py-3 rounded-lg transition-colors"
+                    className="w-full inline-flex items-center justify-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-700 border border-blue-200 bg-blue-50 hover:bg-blue-600 hover:text-white py-3 rounded-lg transition-colors"
                   >
                     Browse All Articles
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -408,7 +408,7 @@ export default function ContactPage() {
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3 font-serif">
               Frequently Asked{" "}
-              <span className="text-indigo-600 italic">Questions.</span>
+              <span className="text-blue-600 italic">Questions.</span>
             </h2>
             <p className="text-sm text-slate-500 font-medium">Quick answers to common questions about Fab Feeds.</p>
           </div>
@@ -417,7 +417,7 @@ export default function ContactPage() {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 <h3 className="text-sm font-bold text-slate-900 mb-3 leading-snug">
                   {faq.q}
@@ -430,9 +430,9 @@ export default function ContactPage() {
           {/* Still have questions CTA */}
           <div className="mt-16 text-center">
             <div className="inline-block bg-white border border-slate-200 rounded-2xl p-8 shadow-sm max-w-md w-full relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full pointer-events-none" />
-              <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center mx-auto mb-5 relative z-10">
-                <MessageSquare className="w-6 h-6 text-indigo-600" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-5 relative z-10">
+                <MessageSquare className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="text-lg font-black text-slate-900 mb-2 relative z-10 font-serif">
                 Still have questions?
@@ -442,7 +442,7 @@ export default function ContactPage() {
               </p>
               <a
                 href="mailto:hello@fabfeeds.com"
-                className="inline-flex items-center gap-2 bg-indigo-600 text-white font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-md shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all duration-300 group relative z-10"
+                className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-md shadow-blue-200 hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300 group relative z-10"
               >
                 <Mail className="w-3.5 h-3.5" />
                 Email Us Now

@@ -49,7 +49,7 @@ function HorizontalBlogCard({ post }: { post: WordPressPost }) {
   return (
     <Link 
       href={`/${post.slug}`} 
-      className="group flex flex-col sm:flex-row bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:shadow-slate-200/50 hover:border-indigo-200 transition-all duration-300"
+      className="group flex flex-col sm:flex-row bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:shadow-slate-200/50 hover:border-blue-200 transition-all duration-300"
     >
       {/* Fixed aspect ratio container for images so they never break */}
       <div className="relative w-full sm:w-64 h-52 sm:h-auto shrink-0 bg-slate-100 overflow-hidden">
@@ -65,7 +65,7 @@ function HorizontalBlogCard({ post }: { post: WordPressPost }) {
           </div>
         )}
         <div className="absolute top-3 left-3">
-          <span className="bg-white/90 backdrop-blur-sm text-indigo-700 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded shadow-sm">
+          <span className="bg-white/90 backdrop-blur-sm text-blue-700 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded shadow-sm">
             {categoryName}
           </span>
         </div>
@@ -75,13 +75,13 @@ function HorizontalBlogCard({ post }: { post: WordPressPost }) {
         <span className="text-slate-500 text-xs font-semibold mb-2 block">
           {fmtDate(post.date)}
         </span>
-        <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-indigo-600 transition-colors font-serif line-clamp-2">
+        <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-blue-600 transition-colors font-serif line-clamp-2">
           {post.title.rendered}
         </h3>
         <p className="text-slate-600 text-sm line-clamp-2 mb-4 leading-relaxed">
           {stripHtml(post.excerpt.rendered)}
         </p>
-        <div className="mt-auto flex items-center text-sm font-bold text-indigo-600">
+        <div className="mt-auto flex items-center text-sm font-bold text-blue-600">
           Read Full Guide <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
@@ -241,13 +241,13 @@ function BlogContent() {
             <div>
               {/* SEO Breadcrumbs */}
               <div className="flex items-center gap-2 mb-3 text-xs font-semibold">
-                <Link href="/" className="text-slate-500 hover:text-indigo-600 transition-colors">Home</Link>
+                <Link href="/" className="text-slate-500 hover:text-blue-600 transition-colors">Home</Link>
                 <ChevronRight className="w-3 h-3 text-slate-400" />
                 <span className="text-slate-500">Articles</span>
                 {selectedCategory !== "all" && (
                   <>
                     <ChevronRight className="w-3 h-3 text-slate-400" />
-                    <span className="text-indigo-600 font-bold">{categoryName}</span>
+                    <span className="text-blue-600 font-bold">{categoryName}</span>
                   </>
                 )}
               </div>
@@ -263,7 +263,7 @@ function BlogContent() {
                 placeholder="Search articles & reviews..."
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
               />
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               {searchQuery && (
@@ -292,7 +292,7 @@ function BlogContent() {
                 onClick={() => handleCategoryChange("all")}
                 className={cn(
                   "px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all",
-                  selectedCategory === "all" ? "bg-indigo-600 text-white shadow-md shadow-indigo-200" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600"
+                  selectedCategory === "all" ? "bg-blue-600 text-white shadow-md shadow-blue-200" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
                 )}
               >
                 All
@@ -303,7 +303,7 @@ function BlogContent() {
                   onClick={() => handleCategoryChange(cat.slug)}
                   className={cn(
                     "px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all",
-                    selectedCategory === cat.slug ? "bg-indigo-600 text-white shadow-md shadow-indigo-200" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-indigo-600"
+                    selectedCategory === cat.slug ? "bg-blue-600 text-white shadow-md shadow-blue-200" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
                   )}
                 >
                   {cat.name}
@@ -338,7 +338,7 @@ function BlogContent() {
                   <div className="pt-8 text-center">
                     <button
                       onClick={handleLoadMore}
-                      className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 text-slate-700 font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-sm transition-all duration-300"
+                      className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-blue-400 hover:text-blue-600 text-slate-700 font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-sm transition-all duration-300"
                     >
                       Load More Articles <ChevronDown className="w-4 h-4" />
                     </button>
@@ -352,8 +352,8 @@ function BlogContent() {
           <aside className="lg:col-span-4 space-y-8">
             
             {/* Quick Links / Deals Widget */}
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-6">
-              <h3 className="text-sm font-black uppercase tracking-widest text-indigo-900 mb-4 flex items-center gap-2">
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
+              <h3 className="text-sm font-black uppercase tracking-widest text-blue-900 mb-4 flex items-center gap-2">
                 <Flame className="w-4 h-4 text-emerald-500" /> Top Picks & Deals
               </h3>
               <ul className="space-y-3">
@@ -364,8 +364,8 @@ function BlogContent() {
                   { label: "Top Rated Gadgets", href: "/blogs?category=gadgets" }
                 ].map((link, i) => (
                   <li key={i}>
-                    <Link href={link.href} className="group flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors">
-                      <ChevronRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform" />
+                    <Link href={link.href} className="group flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
+                      <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-transform" />
                       {link.label}
                     </Link>
                   </li>
@@ -376,14 +376,14 @@ function BlogContent() {
             {/* All Categories Widget */}
             <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
-                <Tag className="w-4 h-4 text-indigo-500" /> Categories
+                <Tag className="w-4 h-4 text-blue-500" /> Categories
               </h3>
               <div className="flex flex-col gap-1.5">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => handleCategoryChange(cat.slug)}
-                    className="flex items-center justify-between py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
+                    className="flex items-center justify-between py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
                   >
                     <span>{cat.name}</span>
                     <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded font-semibold">{cat.count}</span>
@@ -397,8 +397,8 @@ function BlogContent() {
               <Sparkles className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
               <h3 className="text-lg font-black text-white font-serif mb-2">Join the Inner Circle</h3>
               <p className="text-slate-400 text-xs mb-5 font-medium">Get the best reviews and exclusive deals delivered weekly.</p>
-              <input type="email" placeholder="Your email..." className="w-full px-4 py-2.5 rounded border border-slate-700 bg-slate-800 text-white text-sm mb-3 focus:outline-none focus:border-indigo-500" />
-              <button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold uppercase tracking-widest text-xs py-3 rounded transition-colors">
+              <input type="email" placeholder="Your email..." className="w-full px-4 py-2.5 rounded border border-slate-700 bg-slate-800 text-white text-sm mb-3 focus:outline-none focus:border-blue-500" />
+              <button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-widest text-xs py-3 rounded transition-colors">
                 Subscribe Now
               </button>
             </div>
@@ -418,7 +418,7 @@ export default function BlogsPage() {
         <div className="bg-slate-50 min-h-screen flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center shadow-sm">
-              <Loader2 className="w-6 h-6 text-indigo-600 animate-spin" />
+              <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
             </div>
             <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest animate-pulse">Loading Feed...</p>
           </div>

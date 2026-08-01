@@ -104,9 +104,9 @@ function NewsletterForm() {
         <input
           type="email"
           placeholder="Your email address"
-          className="flex-1 min-w-0 px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all"
+          className="flex-1 min-w-0 px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
         />
-        <button className="shrink-0 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-wider text-xs rounded-lg shadow-md shadow-indigo-200 transition-all duration-300">
+        <button className="shrink-0 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-wider text-xs rounded-lg shadow-md shadow-blue-200 transition-all duration-300">
           Subscribe
         </button>
       </div>
@@ -122,15 +122,15 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-slate-200 selection:bg-indigo-100" aria-label="Site footer">
+    <footer className="bg-white border-t border-slate-200 selection:bg-blue-100" aria-label="Site footer">
 
       {/* ── Pre-footer Trending CTA strip ── */}
-      <div className="bg-indigo-50 border-b border-indigo-100 relative overflow-hidden">
+      <div className="bg-blue-50 border-b border-blue-100 relative overflow-hidden">
         <Container>
           <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-5 relative z-10">
             <div className="flex items-center gap-4">
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-indigo-100 shadow-sm shrink-0">
-                <Target className="w-5 h-5 text-indigo-600" />
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-blue-100 shadow-sm shrink-0">
+                <Target className="w-5 h-5 text-blue-600" />
               </span>
               <div>
                 <p className="text-sm font-black text-slate-900 tracking-wider uppercase">
@@ -143,7 +143,7 @@ export function Footer() {
             </div>
             <Link
               href="/trending"
-              className="shrink-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg shadow-md shadow-indigo-200 transition-all duration-300 group"
+              className="shrink-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg shadow-md shadow-blue-200 transition-all duration-300 group"
             >
               <Flame className="w-4 h-4 text-emerald-400" />
               Explore Trending
@@ -214,18 +214,18 @@ export function Footer() {
             return (
               <div key={col.heading} className="lg:col-span-2 space-y-6 relative z-10">
                 <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-900">
-                  <Icon className="w-4 h-4 text-indigo-500 shrink-0" />
+                  <Icon className="w-4 h-4 text-blue-500 shrink-0" />
                   {col.heading}
                 </h3>
-                <div className="w-8 h-0.5 bg-indigo-100" />
+                <div className="w-8 h-0.5 bg-blue-100" />
                 <ul className="space-y-3.5">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-200"
+                        className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-200"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-indigo-500 transition-all shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-blue-500 transition-all shrink-0" />
                         {link.label}
                       </Link>
                     </li>
@@ -268,7 +268,7 @@ export function Footer() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-xs text-slate-500 hover:text-indigo-600 font-bold uppercase tracking-wider transition-colors"
+                  className="text-xs text-slate-500 hover:text-blue-600 font-bold uppercase tracking-wider transition-colors"
                 >
                   {l.label}
                 </Link>

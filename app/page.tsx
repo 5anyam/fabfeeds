@@ -53,7 +53,7 @@ function SkeletonCard({ className = "" }: { className?: string }) {
 function CategoryPill({ name }: { name?: string }) {
   if (!name) return null;
   return (
-    <span className="inline-block bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
+    <span className="inline-block bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
       {name}
     </span>
   );
@@ -76,7 +76,7 @@ function HeroCard({ post }: { post: any }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-end p-7 md:p-10">
         <CategoryPill name={cat} />
-        <h2 className="mt-3 text-2xl md:text-4xl font-black text-white leading-tight group-hover:text-indigo-200 transition-colors line-clamp-3">
+        <h2 className="mt-3 text-2xl md:text-4xl font-black text-white leading-tight group-hover:text-blue-200 transition-colors line-clamp-3">
           {post.title.rendered}
         </h2>
         <p className="mt-3 text-slate-300 text-sm line-clamp-2 leading-relaxed hidden md:block">
@@ -101,14 +101,14 @@ function SideCard({ post, index }: { post: any; index: number }) {
 
   return (
     <Link href={`/${post.slug}`} className="group flex gap-4 items-start py-4 border-b border-slate-100 last:border-0">
-      <span className="text-3xl font-black text-slate-200 group-hover:text-indigo-200 transition-colors leading-none mt-1 font-serif min-w-[2rem] text-center">
+      <span className="text-3xl font-black text-slate-200 group-hover:text-blue-200 transition-colors leading-none mt-1 font-serif min-w-[2rem] text-center">
         0{index + 1}
       </span>
       <div className="flex-1 min-w-0">
         {cat && (
-          <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 block mb-1">{cat}</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 block mb-1">{cat}</span>
         )}
-        <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2">
+        <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
           {post.title.rendered}
         </h4>
         <span className="text-[11px] text-slate-400 font-medium mt-1 block">{fmtDate(post.date)}</span>
@@ -130,7 +130,7 @@ function PostCard({ post }: { post: any }) {
   return (
     <Link
       href={`/${post.slug}`}
-      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-indigo-100 hover:shadow-[0_12px_40px_rgba(79,70,229,0.08)] transition-all duration-300"
+      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-[0_12px_40px_rgba(37,99,235,0.08)] transition-all duration-300"
     >
       <div className="relative h-52 overflow-hidden bg-slate-100">
         {img ? (
@@ -146,14 +146,14 @@ function PostCard({ post }: { post: any }) {
         )}
         {cat && (
           <div className="absolute top-3 left-3">
-            <span className="bg-white/90 backdrop-blur-sm text-indigo-700 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm">
+            <span className="bg-white/90 backdrop-blur-sm text-blue-700 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm">
               {cat}
             </span>
           </div>
         )}
       </div>
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2 mb-2">
+        <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2 mb-2">
           {post.title.rendered}
         </h3>
         <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed mb-4 flex-1">
@@ -161,7 +161,7 @@ function PostCard({ post }: { post: any }) {
         </p>
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-slate-50">
           <span className="text-[11px] text-slate-400 font-semibold">{fmtDate(post.date)}</span>
-          <span className="flex items-center gap-1 text-[11px] font-bold text-indigo-600">
+          <span className="flex items-center gap-1 text-[11px] font-bold text-blue-600">
             Read <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </span>
         </div>
@@ -178,7 +178,7 @@ function FeatureCard({ post }: { post: any }) {
   return (
     <Link
       href={`/${post.slug}`}
-      className="group flex gap-5 items-start bg-white rounded-2xl p-4 border border-slate-100 hover:border-indigo-100 hover:shadow-lg hover:shadow-slate-100 transition-all"
+      className="group flex gap-5 items-start bg-white rounded-2xl p-4 border border-slate-100 hover:border-blue-100 hover:shadow-lg hover:shadow-slate-100 transition-all"
     >
       <div className="relative w-28 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-100">
         {img ? (
@@ -190,8 +190,8 @@ function FeatureCard({ post }: { post: any }) {
         )}
       </div>
       <div className="flex-1 min-w-0">
-        {cat && <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-1 block">{cat}</span>}
-        <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-2 mb-2">
+        {cat && <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 mb-1 block">{cat}</span>}
+        <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2 mb-2">
           {post.title.rendered}
         </h4>
         <span className="text-[11px] text-slate-400 font-medium">{fmtDate(post.date)}</span>
@@ -280,7 +280,7 @@ export default function FabFeedsHomePage() {
       {/* ══ 1. NEWS TICKER ══ */}
       <div className="bg-slate-900 border-b border-slate-800 py-2.5 overflow-hidden">
         <div className="flex items-center max-w-[1280px] mx-auto px-4">
-          <span className="shrink-0 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-1.5 mr-4 whitespace-nowrap">
+          <span className="shrink-0 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-1.5 mr-4 whitespace-nowrap">
             <Zap className="w-3 h-3 fill-current" /> Live Feed
           </span>
           <div className="overflow-hidden flex-1 relative">
@@ -322,7 +322,7 @@ export default function FabFeedsHomePage() {
               {trendingSide.map((p, i) => <SideCard key={p.id} post={p} index={i} />)}
               <Link
                 href="/blogs"
-                className="mt-6 flex items-center justify-center gap-2 bg-indigo-600 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-200"
+                className="mt-6 flex items-center justify-center gap-2 bg-blue-600 text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl hover:bg-blue-700 transition-colors shadow-md shadow-blue-200"
               >
                 Browse All Articles <ArrowRight className="w-4 h-4" />
               </Link>
@@ -336,13 +336,13 @@ export default function FabFeedsHomePage() {
         <Container>
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-3">
-              <div className="w-1 h-8 bg-indigo-600 rounded-full" />
+              <div className="w-1 h-8 bg-blue-600 rounded-full" />
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-0.5">Curated for You</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-0.5">Curated for You</p>
                 <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-serif">Editor&apos;s Picks</h2>
               </div>
             </div>
-            <Link href="/blogs" className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors uppercase tracking-widest">
+            <Link href="/blogs" className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors uppercase tracking-widest">
               View All <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -391,7 +391,7 @@ export default function FabFeedsHomePage() {
               <div className="mt-10 text-center">
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 hover:border-indigo-400 hover:text-indigo-600 text-slate-700 font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-xl transition-all duration-300 shadow-sm"
+                  className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 text-slate-700 font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-xl transition-all duration-300 shadow-sm"
                 >
                   Load More Stories <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -402,21 +402,21 @@ export default function FabFeedsHomePage() {
             <aside className="lg:col-span-4 space-y-8">
 
               {/* Newsletter */}
-              <div className="bg-indigo-600 rounded-2xl p-7 text-white text-center">
-                <Star className="w-8 h-8 text-indigo-200 mx-auto mb-4" />
+              <div className="bg-blue-600 rounded-2xl p-7 text-white text-center">
+                <Star className="w-8 h-8 text-blue-200 mx-auto mb-4" />
                 <h3 className="text-lg font-black mb-2 font-serif">Join the Inner Circle</h3>
-                <p className="text-indigo-200 text-sm mb-5 leading-relaxed">Get the best stories and exclusive reads delivered weekly.</p>
+                <p className="text-blue-200 text-sm mb-5 leading-relaxed">Get the best stories and exclusive reads delivered weekly.</p>
                 <input type="email" placeholder="Your email address" className="w-full px-4 py-2.5 rounded-lg text-slate-900 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-white/50" />
-                <button className="w-full bg-white text-indigo-600 hover:bg-indigo-50 font-black uppercase tracking-widest text-xs py-3 rounded-lg transition-colors">
+                <button className="w-full bg-white text-blue-600 hover:bg-blue-50 font-black uppercase tracking-widest text-xs py-3 rounded-lg transition-colors">
                   Subscribe Free
                 </button>
-                <p className="text-indigo-300 text-[10px] mt-3 font-medium">No spam. Unsubscribe anytime.</p>
+                <p className="text-blue-300 text-[10px] mt-3 font-medium">No spam. Unsubscribe anytime.</p>
               </div>
 
               {/* Quick reads */}
               <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
                 <div className="flex items-center gap-2 mb-5 pb-4 border-b border-slate-100">
-                  <BookOpen className="w-4 h-4 text-indigo-500" />
+                  <BookOpen className="w-4 h-4 text-blue-500" />
                   <h3 className="text-xs font-black uppercase tracking-widest text-slate-900">More to Read</h3>
                 </div>
                 <div className="space-y-2">
@@ -424,7 +424,7 @@ export default function FabFeedsHomePage() {
                 </div>
                 <Link
                   href="/blogs"
-                  className="mt-5 flex items-center justify-center gap-2 text-xs font-bold text-indigo-600 hover:text-indigo-800 uppercase tracking-widest pt-4 border-t border-slate-100 transition-colors"
+                  className="mt-5 flex items-center justify-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 uppercase tracking-widest pt-4 border-t border-slate-100 transition-colors"
                 >
                   See All Articles <ArrowRight className="w-4 h-4" />
                 </Link>

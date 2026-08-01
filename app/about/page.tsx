@@ -33,7 +33,7 @@ function Hero() {
   return (
     <section className="bg-slate-50 relative overflow-hidden py-20 md:py-28 border-b border-slate-200" aria-label="About hero">
       {/* Subtle Background Accents */}
-      <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-indigo-50 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-blue-50 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-emerald-50/50 rounded-full blur-[100px] pointer-events-none" />
 
       <Container>
@@ -44,7 +44,7 @@ function Hero() {
         >
           {/* Pill */}
           <div className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
-            <Globe className="w-3.5 h-3.5 text-indigo-600" />
+            <Globe className="w-3.5 h-3.5 text-blue-600" />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600">
               Your Daily Feed
             </span>
@@ -54,7 +54,7 @@ function Hero() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight font-serif mb-6">
             We don&apos;t just write.
             <br />
-            <span className="text-indigo-600 italic">
+            <span className="text-blue-600 italic">
               We curate what matters.
             </span>
           </h1>
@@ -69,7 +69,7 @@ function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-md shadow-indigo-200 hover:-translate-y-0.5 transition-all duration-300 group"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-widest text-xs px-8 py-3.5 rounded-lg shadow-md shadow-blue-200 hover:-translate-y-0.5 transition-all duration-300 group"
             >
               Browse Articles
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -91,9 +91,9 @@ function Hero() {
 /* ══ SECTION 2 — STATS BAR ════════════════════════════════════════════════ */
 function StatsBar() {
   const stats = [
-    { value: "50K+",  label: "Monthly Readers",    color: "text-indigo-600" },
+    { value: "50K+",  label: "Monthly Readers",    color: "text-blue-600" },
     { value: "12+",   label: "Categories Covered", color: "text-emerald-600" },
-    { value: "500+",  label: "Articles Published", color: "text-indigo-600" },
+    { value: "500+",  label: "Articles Published", color: "text-blue-600" },
     { value: "Daily", label: "Fresh Updates",      color: "text-emerald-600" },
   ];
   return (
@@ -171,14 +171,14 @@ function OurStory() {
           {/* Text */}
           <div className="space-y-8">
             <div>
-              <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-full px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 rounded-full px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
                 Our Story
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight font-serif">
                 One Platform.
                 <br />
-                <span className="text-indigo-600">Endless Discoveries.</span>
+                <span className="text-blue-600">Endless Discoveries.</span>
               </h2>
             </div>
 
@@ -200,8 +200,8 @@ function OurStory() {
               {[
                 {
                   icon: ShieldCheck,
-                  bg: "bg-indigo-50 border-indigo-100",
-                  color: "text-indigo-600",
+                  bg: "bg-blue-50 border-blue-100",
+                  color: "text-blue-600",
                   title: "Honest Content",
                   sub: "Unbiased & research-backed.",
                 },
@@ -214,8 +214,8 @@ function OurStory() {
                 },
                 {
                   icon: Zap,
-                  bg: "bg-indigo-50 border-indigo-100",
-                  color: "text-indigo-600",
+                  bg: "bg-blue-50 border-blue-100",
+                  color: "text-blue-600",
                   title: "AI-Enhanced",
                   sub: "Updated daily, automatically.",
                 },
@@ -253,17 +253,17 @@ function WhatWeCover() {
   const { ref, visible } = useReveal();
 
   const categories = [
-    { emoji: "👗", icon: Shirt,          bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Fashion",       desc: "Latest trends, outfit inspiration, brand spotlights, and fashion deals curated daily." },
+    { emoji: "👗", icon: Shirt,          bg: "bg-blue-50",    color: "text-blue-600",   title: "Fashion",       desc: "Latest trends, outfit inspiration, brand spotlights, and fashion deals curated daily." },
     { emoji: "✈️", icon: Plane,          bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Travel",        desc: "Destination guides, visa tips, packing lists, and budget travel hacks for every explorer." },
-    { emoji: "🏥", icon: Activity,       bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Health",        desc: "Wellness tips, fitness guides, mental health articles, and healthy living inspiration." },
+    { emoji: "🏥", icon: Activity,       bg: "bg-blue-50",    color: "text-blue-600",   title: "Health",        desc: "Wellness tips, fitness guides, mental health articles, and healthy living inspiration." },
     { emoji: "🏠", icon: Home,           bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Home Decor",    desc: "Interior ideas, decor trends, DIY projects, and the best home products on the market." },
-    { emoji: "✨", icon: Sparkles,       bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Lifestyle",     desc: "Daily habits, productivity, self-improvement, and content that elevates everyday life." },
+    { emoji: "✨", icon: Sparkles,       bg: "bg-blue-50",    color: "text-blue-600",   title: "Lifestyle",     desc: "Daily habits, productivity, self-improvement, and content that elevates everyday life." },
     { emoji: "💄", icon: Star,           bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Beauty",        desc: "Skincare routines, makeup reviews, best beauty products, and expert tips from the pros." },
-    { emoji: "💑", icon: Heart,          bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Relationship",  desc: "Relationship advice, dating tips, communication guides, and emotional well-being reads." },
+    { emoji: "💑", icon: Heart,          bg: "bg-blue-50",    color: "text-blue-600",   title: "Relationship",  desc: "Relationship advice, dating tips, communication guides, and emotional well-being reads." },
     { emoji: "🥗", icon: Salad,          bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Diet",          desc: "Nutrition guides, diet plans, healthy recipes, and expert takes on trending food habits." },
-    { emoji: "🛒", icon: ShoppingCart,   bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Ecommerce",     desc: "Best deals, platform comparisons, shopping guides, and the hottest products right now." },
+    { emoji: "🛒", icon: ShoppingCart,   bg: "bg-blue-50",    color: "text-blue-600",   title: "Ecommerce",     desc: "Best deals, platform comparisons, shopping guides, and the hottest products right now." },
     { emoji: "📊", icon: Briefcase,      bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Business",      desc: "Startup stories, business strategies, marketing tips, and entrepreneurship insights." },
-    { emoji: "🚗", icon: Car,            bg: "bg-indigo-50",    color: "text-indigo-600",   title: "Automotive",    desc: "Car reviews, EV news, buying guides, and the latest in auto trends and technology." },
+    { emoji: "🚗", icon: Car,            bg: "bg-blue-50",    color: "text-blue-600",   title: "Automotive",    desc: "Car reviews, EV news, buying guides, and the latest in auto trends and technology." },
     { emoji: "🍕", icon: UtensilsCrossed,bg: "bg-emerald-50",   color: "text-emerald-600",  title: "Food",          desc: "Restaurant picks, food reviews, easy recipes, and the tastiest trends from around the world." },
   ];
 
@@ -282,7 +282,7 @@ function WhatWeCover() {
             12 Categories
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight mb-4 font-serif">
-            What We <span className="text-indigo-600">Explore.</span>
+            What We <span className="text-blue-600">Explore.</span>
           </h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
             From fashion trends to automotive news — we cover every niche that
@@ -298,13 +298,13 @@ function WhatWeCover() {
               <Link
                 key={cat.title}
                 href={`/blogs?category=${cat.title.toLowerCase().replace(" ", "-")}`}
-                className="group bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-xl hover:shadow-slate-200/50 hover:border-indigo-200 hover:-translate-y-1 transition-all duration-300"
+                className="group bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-xl hover:shadow-slate-200/50 hover:border-blue-200 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <span className={`w-12 h-12 rounded-xl border border-white/50 shadow-sm ${cat.bg} flex items-center justify-center shrink-0`}>
                     <Icon className={`w-5 h-5 ${cat.color}`} />
                   </span>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 group-hover:text-indigo-600 transition-colors flex items-center gap-2">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 group-hover:text-blue-600 transition-colors flex items-center gap-2">
                     <span className="text-lg">{cat.emoji}</span>
                     {cat.title}
                   </h3>
@@ -312,7 +312,7 @@ function WhatWeCover() {
                 <p className="text-xs text-slate-500 leading-relaxed line-clamp-3 font-medium">
                   {cat.desc}
                 </p>
-                <div className="mt-4 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="mt-4 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
                   View Feed <ArrowUpRight className="w-3 h-3" />
                 </div>
               </Link>
@@ -330,8 +330,8 @@ function AffiliateDisclosure() {
     <section className="py-12 bg-white border-t border-slate-200">
       <Container>
         <div className="flex flex-col sm:flex-row items-start gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto shadow-sm">
-          <span className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-6 h-6 text-indigo-600" />
+          <span className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+            <ShieldCheck className="w-6 h-6 text-blue-600" />
           </span>
           <div>
             <h4 className="font-black text-slate-900 text-sm mb-2 uppercase tracking-widest">Affiliate Disclosure</h4>
@@ -359,7 +359,7 @@ function BottomCTA() {
       }`}
     >
       {/* Editorial Dark Section for contrast */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-900/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-900/30 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-emerald-900/20 rounded-full blur-[80px] pointer-events-none" />
       
       <Container>
@@ -372,7 +372,7 @@ function BottomCTA() {
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-6 font-serif">
             Ready to discover
             <br />
-            <span className="text-indigo-400 font-sans uppercase tracking-tighter">what&apos;s trending?</span>
+            <span className="text-blue-400 font-sans uppercase tracking-tighter">what&apos;s trending?</span>
           </h2>
 
           <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-10 max-w-lg mx-auto font-medium">
@@ -383,7 +383,7 @@ function BottomCTA() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Link
               href="/blogs"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-lg shadow-lg shadow-indigo-900/50 transition-all duration-300 group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase tracking-widest text-xs px-8 py-4 rounded-lg shadow-lg shadow-blue-900/50 transition-all duration-300 group"
             >
               Explore Articles
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

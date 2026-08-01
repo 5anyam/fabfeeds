@@ -137,15 +137,15 @@ function stripHtml(html: string): string {
 ═══════════════════════════════════════════════ */
 const Breadcrumb = ({ post }: { post: WordPressPost }) => (
   <nav className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold mb-6 flex-wrap">
-    <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+    <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
     <ChevronRight className="w-3 h-3" />
-    <Link href="/blogs" className="hover:text-indigo-600 transition-colors">Articles</Link>
+    <Link href="/blogs" className="hover:text-blue-600 transition-colors">Articles</Link>
     {post._embedded?.['wp:term']?.[0]?.[0] && (
       <>
         <ChevronRight className="w-3 h-3" />
         <Link
           href={`/blogs?category=${post._embedded['wp:term'][0][0].slug}`}
-          className="hover:text-indigo-600 transition-colors"
+          className="hover:text-blue-600 transition-colors"
         >
           {post._embedded['wp:term'][0][0].name}
         </Link>
@@ -166,7 +166,7 @@ const ArticleHeader = ({ post }: { post: WordPressPost }) => (
         {post._embedded?.['wp:term']?.[0]?.[0] && (
           <Link
             href={`/blogs?category=${post._embedded['wp:term'][0][0].slug}`}
-            className="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 border border-indigo-100 text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full mb-5 hover:bg-indigo-100 transition-colors"
+            className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 border border-blue-100 text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full mb-5 hover:bg-blue-100 transition-colors"
           >
             <Tag className="w-3 h-3" />
             {post._embedded['wp:term'][0][0].name}
@@ -178,7 +178,7 @@ const ArticleHeader = ({ post }: { post: WordPressPost }) => (
         </h1>
 
         {/* Excerpt */}
-        <p className="text-lg text-slate-500 leading-relaxed mb-8 font-medium border-l-4 border-indigo-200 pl-4 italic">
+        <p className="text-lg text-slate-500 leading-relaxed mb-8 font-medium border-l-4 border-blue-200 pl-4 italic">
           {stripHtml(post.excerpt.rendered).substring(0, 200)}
         </p>
 
@@ -186,7 +186,7 @@ const ArticleHeader = ({ post }: { post: WordPressPost }) => (
         <div className="flex flex-wrap items-center gap-4">
           {post._embedded?.author?.[0]?.name && (
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-100 border-2 border-indigo-200 flex items-center justify-center font-black text-indigo-700 text-sm rounded-full">
+              <div className="w-10 h-10 bg-blue-100 border-2 border-blue-200 flex items-center justify-center font-black text-blue-700 text-sm rounded-full">
                 {post._embedded.author[0].name.charAt(0).toUpperCase()}
               </div>
               <div>
@@ -292,10 +292,10 @@ const RelatedPosts = ({ posts }: { posts: WordPressPost[] }) => {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-3">
-              <div className="w-1 h-7 bg-indigo-600 rounded-full" />
+              <div className="w-1 h-7 bg-blue-600 rounded-full" />
               <h2 className="text-xl md:text-2xl font-black text-slate-900 font-serif">Read Next</h2>
             </div>
-            <Link href="/blogs" className="text-xs font-bold text-slate-500 hover:text-indigo-600 uppercase tracking-widest flex items-center gap-1 transition-colors">
+            <Link href="/blogs" className="text-xs font-bold text-slate-500 hover:text-blue-600 uppercase tracking-widest flex items-center gap-1 transition-colors">
               All Articles <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -303,7 +303,7 @@ const RelatedPosts = ({ posts }: { posts: WordPressPost[] }) => {
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-indigo-100 hover:shadow-[0_12px_40px_rgba(79,70,229,0.08)] transition-all flex flex-col"
+                className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-[0_12px_40px_rgba(37,99,235,0.08)] transition-all flex flex-col"
               >
                 <Link href={`/${post.slug}`} className="block relative aspect-[4/3] overflow-hidden bg-slate-100">
                   {post._embedded?.['wp:featuredmedia']?.[0]?.source_url ? (
@@ -322,11 +322,11 @@ const RelatedPosts = ({ posts }: { posts: WordPressPost[] }) => {
                 </Link>
                 <div className="p-5 flex-1 flex flex-col">
                   {post._embedded?.['wp:term']?.[0]?.[0] && (
-                    <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2 block">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-2 block">
                       {post._embedded['wp:term'][0][0].name}
                     </span>
                   )}
-                  <h3 className="text-sm font-bold text-slate-900 mb-3 leading-snug line-clamp-2 group-hover:text-indigo-600 transition-colors flex-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-3 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors flex-1">
                     <Link href={`/${post.slug}`}>{post.title.rendered}</Link>
                   </h3>
                   <div className="flex items-center gap-2 text-[11px] text-slate-400 font-semibold mt-auto pt-3 border-t border-slate-50">
@@ -350,7 +350,7 @@ const RelatedPosts = ({ posts }: { posts: WordPressPost[] }) => {
    NEWSLETTER CTA
 ═══════════════════════════════════════════════ */
 const NewsletterCTA = () => (
-  <div className="bg-indigo-600 text-white py-16 md:py-20">
+  <div className="bg-blue-600 text-white py-16 md:py-20">
     <Container>
       <div className="max-w-xl mx-auto text-center space-y-6">
         <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mx-auto">
@@ -358,7 +358,7 @@ const NewsletterCTA = () => (
         </div>
         <div>
           <h2 className="text-2xl md:text-3xl font-black mb-2 font-serif">Stay in the Loop</h2>
-          <p className="text-indigo-200 leading-relaxed">
+          <p className="text-blue-200 leading-relaxed">
             Join thousands of readers getting the best stories, weekly guides & exclusive deals.
           </p>
         </div>
@@ -376,7 +376,7 @@ const NewsletterCTA = () => (
             Subscribe Free
           </Button>
         </form>
-        <p className="text-xs text-indigo-300 font-medium">No spam. Unsubscribe at any time.</p>
+        <p className="text-xs text-blue-300 font-medium">No spam. Unsubscribe at any time.</p>
       </div>
     </Container>
   </div>
@@ -447,22 +447,22 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     [&>h2]:text-2xl [&>h2]:md:text-3xl [&>h2]:font-black [&>h2]:text-slate-900 [&>h2]:mt-14 [&>h2]:mb-5 [&>h2]:font-serif [&>h2]:tracking-tight
     [&>h3]:text-xl [&>h3]:md:text-2xl [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mt-10 [&>h3]:mb-4
     [&>p]:leading-[1.9] [&>p]:mb-6 [&>p]:text-slate-600
-    [&>p>a]:text-indigo-600 [&>p>a]:underline [&>p>a]:decoration-indigo-200 hover:[&>p>a]:decoration-indigo-500 [&>p>a]:underline-offset-2
+    [&>p>a]:text-blue-600 [&>p>a]:underline [&>p>a]:decoration-blue-200 hover:[&>p>a]:decoration-blue-500 [&>p>a]:underline-offset-2
     [&_figure]:mx-auto [&_figure]:block [&_figure]:max-w-full [&_figure]:my-10
     [&_img]:mx-auto [&_img]:block [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-2xl [&_img]:shadow-md
     [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:text-slate-400 [&_figcaption]:mt-3 [&_figcaption]:italic
     [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul]:space-y-2 [&>ul]:text-slate-600
     [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-6 [&>ol]:space-y-2 [&>ol]:text-slate-600
-    [&>blockquote]:border-l-4 [&>blockquote]:border-indigo-500 [&>blockquote]:bg-indigo-50 [&>blockquote]:py-5 [&>blockquote]:px-7 [&>blockquote]:my-10 [&>blockquote]:rounded-r-xl [&>blockquote]:italic [&>blockquote]:text-indigo-900 [&>blockquote]:font-medium [&>blockquote]:text-lg
+    [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:bg-blue-50 [&>blockquote]:py-5 [&>blockquote]:px-7 [&>blockquote]:my-10 [&>blockquote]:rounded-r-xl [&>blockquote]:italic [&>blockquote]:text-blue-900 [&>blockquote]:font-medium [&>blockquote]:text-lg
     [&_.wp-block-button]:my-6 [&_.wp-block-button]:flex [&_.wp-block-button]:justify-center
     [&_.wp-block-button__link]:inline-flex [&_.wp-block-button__link]:items-center [&_.wp-block-button__link]:justify-center
-    [&_.wp-block-button__link]:bg-indigo-600 [&_.wp-block-button__link]:text-white
+    [&_.wp-block-button__link]:bg-blue-600 [&_.wp-block-button__link]:text-white
     [&_.wp-block-button__link]:no-underline [&_.wp-block-button__link]:font-bold
     [&_.wp-block-button__link]:px-8 [&_.wp-block-button__link]:py-3
     [&_.wp-block-button__link]:rounded-xl [&_.wp-block-button__link]:text-sm
     [&_.wp-block-button__link]:tracking-wide
     [&_.wp-block-button__link]:transition-all [&_.wp-block-button__link]:duration-200
-    hover:[&_.wp-block-button__link]:bg-indigo-700 hover:[&_.wp-block-button__link]:scale-[1.02]
+    hover:[&_.wp-block-button__link]:bg-blue-700 hover:[&_.wp-block-button__link]:scale-[1.02]
   `;
 
   return (
@@ -505,7 +505,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
               <div className="lg:col-span-8">
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 mb-8 font-bold uppercase tracking-wider transition-colors group"
+                  className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-blue-600 mb-8 font-bold uppercase tracking-wider transition-colors group"
                 >
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   Back to Articles
@@ -532,7 +532,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <div className="max-w-3xl mx-auto pb-16">
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-600 mb-8 font-bold uppercase tracking-wider transition-colors group"
+                className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-blue-600 mb-8 font-bold uppercase tracking-wider transition-colors group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Back to Articles

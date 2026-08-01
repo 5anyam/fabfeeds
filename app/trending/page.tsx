@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   Flame, ArrowRight, Sparkles, Zap, Package,
   Clock, ArrowUpRight, TrendingUp, ChevronRight,
-  BarChart2, Eye, Target, Crosshair, Activity
+  BarChart2, Eye, BookOpen, Star
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
@@ -45,14 +45,6 @@ const fmtDate = (d: string) =>
     day: "2-digit", month: "short", year: "numeric",
   });
 
-/* Neon rank colors */
-const rankColor = (i: number) => {
-  if (i === 0) return "text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]";
-  if (i === 1) return "text-cyan-500 drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]";
-  if (i === 2) return "text-slate-400";
-  return "text-slate-600";
-};
-
 /* ══ Scroll Reveal Hook ═══════════════════════════════════════════════════ */
 function useReveal(threshold = 0.08) {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,34 +69,34 @@ const Sk = ({ className = "" }: { className?: string }) => (
 
 function TrendingSkeleton() {
   return (
-    <div className="bg-[#020813] min-h-screen">
-      <div className="bg-[#020813] border-b border-cyan-900/40 py-24">
+    <div className="bg-slate-50 min-h-screen">
+      <div className="bg-white border-b border-slate-100 py-24">
         <Container>
           <div className="text-center space-y-5">
-            <Sk className="h-6 w-36 bg-cyan-900/30 mx-auto rounded-full" />
-            <Sk className="h-20 w-80 bg-cyan-900/20 mx-auto" />
-            <Sk className="h-5 w-96 bg-white/5 mx-auto" />
+            <Sk className="h-6 w-36 bg-slate-100 mx-auto rounded-full" />
+            <Sk className="h-16 w-80 bg-slate-100 mx-auto" />
+            <Sk className="h-5 w-96 bg-slate-100 mx-auto" />
           </div>
         </Container>
       </div>
-      <div className="bg-[#050b14] border-b border-white/5 py-8">
+      <div className="bg-white border-b border-slate-100 py-8">
         <Container>
-          <div className="grid grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => <Sk key={i} className="h-16 bg-[#0a1220]" />)}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, i) => <Sk key={i} className="h-16 bg-slate-100" />)}
           </div>
         </Container>
       </div>
-      <div className="bg-[#020813] py-12">
+      <div className="bg-slate-50 py-12">
         <Container>
           <div className="space-y-16">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="space-y-6">
-                <Sk className="h-8 w-64 bg-cyan-900/20" />
+                <Sk className="h-8 w-64 bg-slate-100" />
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                  <Sk className="md:col-span-5 h-[350px] bg-[#050b14] border border-white/5" />
+                  <Sk className="md:col-span-5 h-[350px] bg-white border border-slate-100" />
                   <div className="md:col-span-7 space-y-4">
                     {[...Array(3)].map((_, j) => (
-                      <Sk key={j} className="h-[100px] bg-[#050b14] border border-white/5" />
+                      <Sk key={j} className="h-[100px] bg-white border border-slate-100" />
                     ))}
                   </div>
                 </div>
@@ -125,20 +117,9 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
   useEffect(() => { const t = setTimeout(() => setMounted(true), 60); return () => clearTimeout(t); }, []);
 
   return (
-    <section className="bg-[#020813] relative overflow-hidden py-20 md:py-32 border-b border-cyan-900/40" aria-label="Trending hero">
-      {/* Blobs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[300px] h-[200px] bg-cyan-900/20 rounded-full blur-[80px] pointer-events-none" />
-      
-      {/* Grid texture */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg,#06b6d4 0,#06b6d4 1px,transparent 1px,transparent 60px)," +
-            "repeating-linear-gradient(90deg,#06b6d4 0,#06b6d4 1px,transparent 1px,transparent 60px)",
-        }}
-      />
+    <section className="bg-white relative overflow-hidden py-20 md:py-28 border-b border-slate-100" aria-label="Trending hero">
+      {/* Soft blue glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-blue-100/60 rounded-full blur-[120px] pointer-events-none" />
 
       <Container>
         <div
@@ -146,44 +127,39 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* AI pill */}
-          <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded px-4 py-1.5 mb-6 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-            <Activity className="w-4 h-4 text-cyan-400 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-300">
-              Active Radar Scan
+          {/* Pill */}
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-6">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-700">
+              Updated Daily
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tighter uppercase mb-6">
-            <span className="text-white">Live </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-200">
-              Signals
-            </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-slate-900 mb-6 font-serif">
+            What&apos;s Trending
             <br />
-            <span className="text-slate-500 text-3xl sm:text-4xl md:text-5xl font-black">
-              Across The Grid
-            </span>
+            <span className="text-blue-600">Right Now</span>
           </h1>
 
-          <p className="text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            The Fab Feeds AI continuously monitors the digital depths, intercepting the highest-performing
-            strategies, tools, and content in real-time. Don&apos;t chase trends—anticipate them.
+          <p className="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium leading-relaxed mb-10">
+            Our editorial team and AI curation surface the highest-performing stories,
+            guides, and deals across every category — so you never have to go looking.
           </p>
 
-          {/* Live stats pills */}
+          {/* Stat pills */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-cyan-400 border border-cyan-500/30 bg-[#050b14] rounded px-4 py-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse" />
+            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-700 border border-blue-100 bg-blue-50 rounded-full px-4 py-2">
+              <Flame className="w-3.5 h-3.5 text-blue-600" />
               Live Feed
             </span>
-            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-300 border border-white/10 bg-[#050b14] rounded px-4 py-2">
-              <Zap className="w-3.5 h-3.5 text-cyan-500" />
-              Real-Time Sync
+            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-600 border border-slate-200 bg-slate-50 rounded-full px-4 py-2">
+              <Zap className="w-3.5 h-3.5 text-blue-600" />
+              Updated Continuously
             </span>
-            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-300 border border-white/10 bg-[#050b14] rounded px-4 py-2">
-              <Target className="w-3.5 h-3.5 text-cyan-500" />
-              {totalCategories} Sectors Monitored
+            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-600 border border-slate-200 bg-slate-50 rounded-full px-4 py-2">
+              <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+              {totalCategories} Categories Covered
             </span>
           </div>
         </div>
@@ -197,25 +173,25 @@ function TrendingHero({ totalCategories }: { totalCategories: number }) {
 ══════════════════════════════════════════════════════════════════════════ */
 function StatsBar({ totalPosts }: { totalPosts: number }) {
   const stats = [
-    { icon: Activity, label: "Signals Intercepted", value: `${totalPosts}+` },
-    { icon: Zap, label: "Algorithm Status", value: "Optimal" },
-    { icon: Target, label: "Active Sectors", value: "6+" },
-    { icon: Crosshair, label: "Data Accuracy", value: "99.8%" },
+    { icon: BarChart2, label: "Stories Curated", value: `${totalPosts}+` },
+    { icon: Eye, label: "Editorial Quality", value: "Verified" },
+    { icon: TrendingUp, label: "Categories Live", value: "6+" },
+    { icon: Star, label: "Reader Rated", value: "4.8/5" },
   ];
 
   return (
-    <div className="bg-[#050b14] border-b border-white/5">
+    <div className="bg-white border-b border-slate-100">
       <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-100">
           {stats.map((s) => {
             const Icon = s.icon;
             return (
               <div key={s.label} className="px-5 py-6 flex items-center gap-4 group">
-                <span className="w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/20 group-hover:border-cyan-400 transition-all shadow-[0_0_10px_rgba(34,211,238,0.1)] group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-                  <Icon className="w-5 h-5 text-cyan-400" />
+                <span className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-all">
+                  <Icon className="w-5 h-5 text-blue-600" />
                 </span>
                 <div>
-                  <div className="text-xl md:text-2xl font-black text-white leading-none mb-1">{s.value}</div>
+                  <div className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-1">{s.value}</div>
                   <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{s.label}</div>
                 </div>
               </div>
@@ -237,38 +213,38 @@ function AIProductsBanner() {
       ref={ref}
       className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
     >
-      <div className="bg-[#050b14] rounded-xl overflow-hidden relative border border-cyan-900/40 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+      <div className="bg-blue-600 rounded-2xl overflow-hidden relative shadow-lg shadow-blue-200">
         {/* Glows */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-cyan-900/20 rounded-full blur-[60px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-[60px] pointer-events-none" />
 
         <div className="relative z-10 p-6 md:p-10">
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             {/* Left text */}
             <div className="flex-1 space-y-4">
               <div className="flex items-center gap-4">
-                <span className="w-12 h-12 rounded bg-cyan-400 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.4)]">
-                  <Package className="w-6 h-6 text-[#020813]" />
+                <span className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-md shrink-0">
+                  <Package className="w-6 h-6 text-blue-600" />
                 </span>
                 <div>
-                  <h2 className="text-white font-black text-2xl uppercase tracking-tight">
-                    Apex Software Deals
+                  <h2 className="text-white font-black text-2xl tracking-tight font-serif">
+                    Top Software Deals
                   </h2>
-                  <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-400 mt-1">
+                  <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mt-1">
                     <Sparkles className="w-3 h-3" />
-                    Radar Intel
+                    Editor Curated
                   </div>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-lg font-medium">
-                The Fab Feeds Radar intercepts the highest-converting software, SaaS deals, and affiliate
-                networks before they hit the mainstream. Dominate your niche with superior tools.
+              <p className="text-blue-100 text-sm leading-relaxed max-w-lg font-medium">
+                We track the best-converting software, SaaS deals, and affiliate offers
+                before they hit the mainstream — hand-picked to save you time and money.
               </p>
               <div className="flex flex-wrap gap-2 pt-2">
-                {["SaaS", "AI Tools", "Funnels", "Networks", "Tracking"].map((tag) => (
+                {["SaaS", "AI Tools", "Productivity", "Deals", "Tracking"].map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 border border-cyan-900 bg-cyan-950/30 px-3 py-1.5 rounded"
+                    className="text-[10px] font-bold uppercase tracking-widest text-white border border-white/30 bg-white/10 px-3 py-1.5 rounded-full"
                   >
                     {tag}
                   </span>
@@ -281,17 +257,14 @@ function AIProductsBanner() {
               {[...Array(4)].map((_, i) => (
                 <div
                   key={i}
-                  className="bg-[#020813] border border-white/5 rounded-lg p-3 flex flex-col items-center gap-3 hover:border-cyan-500/50 transition-colors cursor-pointer group"
+                  className="bg-white/10 border border-white/20 rounded-lg p-3 flex flex-col items-center gap-3 hover:bg-white/20 transition-colors cursor-pointer group"
                 >
-                  <div
-                    className="w-full aspect-square rounded bg-cyan-950/30 flex items-center justify-center border border-white/5"
-                    style={{ animation: `pulse 2s ease-in-out ${i * 0.3}s infinite` }}
-                  >
-                    <Package className="w-5 h-5 text-cyan-900 group-hover:text-cyan-400 transition-colors" />
+                  <div className="w-full aspect-square rounded bg-white/10 flex items-center justify-center border border-white/10">
+                    <Package className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                   </div>
                   <div className="w-full space-y-1.5">
-                    <div className="h-1 bg-slate-700 rounded animate-pulse" />
-                    <div className="h-1 bg-slate-800 rounded animate-pulse w-3/4 mx-auto" />
+                    <div className="h-1 bg-white/30 rounded" />
+                    <div className="h-1 bg-white/20 rounded w-3/4 mx-auto" />
                   </div>
                 </div>
               ))}
@@ -299,14 +272,14 @@ function AIProductsBanner() {
           </div>
 
           {/* Coming soon strip */}
-          <div className="mt-8 pt-5 border-t border-white/5 flex items-center justify-between">
+          <div className="mt-8 pt-5 border-t border-white/20 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse" />
-              <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
-                Live API integration initiating...
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[10px] uppercase tracking-widest text-blue-100 font-bold">
+                Live deals integration coming soon
               </span>
             </div>
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#020813] bg-cyan-400 px-3 py-1 rounded">
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-700 bg-white px-3 py-1 rounded-full">
               Phase 2
             </span>
           </div>
@@ -337,27 +310,27 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
       }`}
     >
       {/* Section header */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+      <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-slate-900">
         <div className="flex items-center gap-4">
-          <span className="flex items-center justify-center w-12 h-12 rounded bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.15)] shrink-0">
-            <Target className="w-5 h-5 text-cyan-400" />
+          <span className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 border border-blue-100 shrink-0">
+            <TrendingUp className="w-5 h-5 text-blue-600" />
           </span>
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                Sector Activity
+                Trending Category
               </span>
               <span
-                className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded ${
+                className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
                   rank <= 3
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
-                    : "bg-[#050b14] border border-white/10 text-slate-400"
+                    ? "bg-blue-600 text-white"
+                    : "bg-slate-100 border border-slate-200 text-slate-500"
                 }`}
               >
-                LEVEL {rank}
+                #{rank}
               </span>
             </div>
-            <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-serif">
               {category.name}
             </h2>
           </div>
@@ -365,9 +338,9 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
 
         <Link
           href={`/blogs?category=${category.slug}`}
-          className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:text-[#020813] hover:bg-cyan-400 border border-cyan-500/50 px-4 py-2 rounded transition-all duration-300 group"
+          className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-blue-700 hover:text-white hover:bg-blue-600 border border-blue-200 px-4 py-2 rounded-full transition-all duration-300 group"
         >
-          View Sector
+          View Category
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </div>
@@ -377,55 +350,57 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
         {/* Main large post */}
         <Link
           href={`/${main.slug}`}
-          className="md:col-span-5 group block relative rounded-xl overflow-hidden border border-white/5 hover:border-cyan-500/50 hover:shadow-[0_10px_30px_rgba(34,211,238,0.15)] transition-all duration-500 bg-[#050b14]"
+          className="md:col-span-5 group block relative rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-[0_10px_30px_rgba(37,99,235,0.12)] transition-all duration-500 bg-white"
         >
-          <div className="relative h-64 md:h-[320px] overflow-hidden bg-[#020813]">
+          <div className="relative h-64 md:h-[320px] overflow-hidden bg-slate-100">
             {mainImg ? (
               <img
                 src={mainImg}
                 alt={main.title.rendered}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
             ) : (
-              <div className="w-full h-full bg-cyan-950/20" />
+              <div className="w-full h-full flex items-center justify-center">
+                <BookOpen className="w-8 h-8 text-slate-300" />
+              </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050b14] via-[#050b14]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
             {/* #1 badge */}
             <div className="absolute top-4 left-4">
-              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] bg-cyan-400 text-[#020813] px-3 py-1.5 rounded shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] bg-blue-600 text-white px-3 py-1.5 rounded-full shadow-md">
                 <Flame className="w-3 h-3" />
-                Apex Signal
+                Top Story
               </span>
             </div>
 
             {/* Category */}
             {mainCat && (
               <div className="absolute top-4 right-4">
-                <span className="text-[9px] font-black uppercase tracking-widest bg-[#020813]/80 backdrop-blur-md border border-cyan-900 text-cyan-400 px-3 py-1.5 rounded">
+                <span className="text-[9px] font-black uppercase tracking-widest bg-white/90 backdrop-blur-md text-blue-700 px-3 py-1.5 rounded-full shadow-sm">
                   {mainCat}
                 </span>
               </div>
             )}
 
             <div className="absolute bottom-5 left-5 right-5 text-white z-10">
-              <h3 className="text-lg md:text-xl font-black uppercase line-clamp-2 leading-tight group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-lg md:text-xl font-black line-clamp-2 leading-tight group-hover:text-blue-200 transition-colors">
                 {main.title.rendered}
               </h3>
-              <p className="text-xs text-slate-400 font-medium line-clamp-2 mt-2 hidden sm:block">
+              <p className="text-xs text-slate-300 font-medium line-clamp-2 mt-2 hidden sm:block">
                 {stripHtml(main.excerpt.rendered)}
               </p>
             </div>
           </div>
 
-          <div className="px-5 py-4 bg-[#050b14] border-t border-white/5 flex items-center justify-between">
+          <div className="px-5 py-4 bg-white border-t border-slate-100 flex items-center justify-between">
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 flex items-center gap-2">
-              <Clock className="w-3 h-3 text-cyan-900" />
+              <Clock className="w-3 h-3 text-slate-400" />
               {fmtDate(main.date)}
             </span>
-            <span className="text-[10px] font-black uppercase tracking-widest text-cyan-500 flex items-center gap-1 group-hover:gap-2 transition-all">
-              Initiate <ArrowUpRight className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 flex items-center gap-1 group-hover:gap-2 transition-all">
+              Read Now <ArrowUpRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </Link>
@@ -439,46 +414,46 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
               <Link
                 key={post.id}
                 href={`/${post.slug}`}
-                className="group flex gap-4 items-center bg-[#050b14] rounded-xl border border-white/5 p-4 hover:border-cyan-500/40 hover:shadow-[0_5px_20px_rgba(34,211,238,0.1)] transition-all duration-300"
+                className="group flex gap-4 items-center bg-white rounded-2xl border border-slate-100 p-4 hover:border-blue-200 hover:shadow-[0_5px_20px_rgba(37,99,235,0.08)] transition-all duration-300"
               >
                 {/* Rank number */}
-                <span
-                  className={`shrink-0 text-3xl md:text-4xl font-black leading-none w-10 text-center tabular-nums select-none ${rankColor(idx + 1)}`}
-                >
+                <span className="shrink-0 text-3xl md:text-4xl font-black leading-none w-10 text-center tabular-nums select-none text-slate-200 group-hover:text-blue-200 transition-colors font-serif">
                   {idx + 2}
                 </span>
 
                 {/* Thumbnail */}
-                <div className="relative shrink-0 w-[90px] h-[90px] rounded overflow-hidden bg-[#020813] border border-white/5">
+                <div className="relative shrink-0 w-[90px] h-[90px] rounded-xl overflow-hidden bg-slate-100">
                   {img ? (
                     <img
                       src={img}
                       alt={post.title.rendered}
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-cyan-950/20" />
+                    <div className="w-full h-full flex items-center justify-center">
+                      <BookOpen className="w-5 h-5 text-slate-300" />
+                    </div>
                   )}
                 </div>
 
                 {/* Text */}
                 <div className="flex-1 min-w-0 py-1">
                   {cat && (
-                    <span className="text-[9px] font-black uppercase tracking-widest text-cyan-500 block mb-1.5">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 block mb-1.5">
                       {cat}
                     </span>
                   )}
-                  <h3 className="text-sm md:text-base font-bold text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-sm md:text-base font-bold text-slate-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
                     {post.title.rendered}
                   </h3>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mt-2 flex items-center gap-1.5">
-                    <span className="w-1 h-1 rounded-full bg-slate-700 group-hover:bg-cyan-500 transition-colors" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2 flex items-center gap-1.5">
+                    <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-blue-500 transition-colors" />
                     {fmtDate(post.date)}
                   </span>
                 </div>
 
-                <ArrowUpRight className="w-5 h-5 text-slate-600 group-hover:text-cyan-400 shrink-0 transition-colors hidden sm:block mr-2" />
+                <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-blue-600 shrink-0 transition-colors hidden sm:block mr-2" />
               </Link>
             );
           })}
@@ -486,9 +461,9 @@ function CategorySection({ data, rank }: { data: CategoryWithPosts; rank: number
           {/* See all link — mobile */}
           <Link
             href={`/blogs?category=${category.slug}`}
-            className="sm:hidden flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-cyan-400 border border-cyan-900/50 bg-[#050b14] rounded py-3.5 hover:bg-cyan-500/10 transition-colors mt-2"
+            className="sm:hidden flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-700 border border-blue-100 bg-blue-50 rounded-full py-3.5 hover:bg-blue-100 transition-colors mt-2"
           >
-            Access Full Sector
+            View Full Category
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
@@ -505,40 +480,40 @@ function BottomCTA() {
   return (
     <div
       ref={ref}
-      className={`bg-[#050b14] border-t border-cyan-900/30 relative overflow-hidden py-20 md:py-28 transition-all duration-1000 ${
+      className={`bg-white border-t border-slate-100 relative overflow-hidden py-20 md:py-28 transition-all duration-1000 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-      
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-50 rounded-full blur-[100px] pointer-events-none" />
+
       <Container>
         <div className="relative z-10 text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-[#020813] border border-cyan-500/30 text-cyan-400 rounded px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-            <Target className="w-3.5 h-3.5" />
-            Scanner Active
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
+            Never Miss a Story
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-5">
-            Command the
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-5 font-serif">
+            Explore Every
             <br />
-            <span className="text-cyan-400">Digital Space.</span>
+            <span className="text-blue-600">Category.</span>
           </h2>
-          <p className="text-slate-400 text-sm md:text-base font-medium leading-relaxed mb-10">
-            The Fab Feeds Radar processes massive datasets daily to hand you the exact
-            strategies and tools you need to dominate.
+          <p className="text-slate-500 text-sm md:text-base font-medium leading-relaxed mb-10">
+            From fashion to tech, travel to finance — browse our full archive of
+            editorial picks and in-depth guides.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/blogs"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-cyan-400 text-[#020813] font-black uppercase tracking-widest text-[11px] px-8 py-4 rounded shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] px-8 py-4 rounded-full shadow-md shadow-blue-200 hover:bg-blue-700 transition-all duration-300 group"
             >
-              Access Radar Intel
+              Browse All Articles
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <Link
               href="/categories"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-cyan-400 border border-cyan-900/50 hover:border-cyan-500/50 bg-[#020813] font-bold uppercase tracking-widest text-[11px] px-8 py-4 rounded transition-all duration-300 hover:bg-cyan-500/10"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-slate-700 border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 bg-white font-bold uppercase tracking-widest text-[11px] px-8 py-4 rounded-full transition-all duration-300"
             >
-              Scan Sectors
+              View Categories
             </Link>
           </div>
         </div>
@@ -599,7 +574,7 @@ export default function TrendingPage() {
   if (isLoading) return <TrendingSkeleton />;
 
   return (
-    <main className="bg-[#020813]">
+    <main className="bg-slate-50">
       {/* SEO JSON-LD */}
       <script
         type="application/ld+json"
@@ -607,15 +582,15 @@ export default function TrendingPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            name: "The Radar — Fab Feeds",
+            name: "Trending — Fab Feeds",
             url: "https://fabfeeds.com/trending",
             description:
-              "Live signals and apex strategies curated by Fab Feeds AI. Dominate your sector.",
+              "The most popular stories and editorial picks, curated by Fab Feeds across every category.",
           }),
         }}
       />
 
-      {/* ① Dark hero */}
+      {/* ① Hero */}
       <TrendingHero totalCategories={data.length} />
 
       {/* ② Stats bar */}
@@ -625,17 +600,17 @@ export default function TrendingPage() {
       <div className="py-12 md:py-20">
         <Container>
           <div className="space-y-16 md:space-y-24">
-            {/* AI products banner */}
+            {/* Deals banner */}
             <AIProductsBanner />
 
             {/* Divider with label */}
             <div className="flex items-center gap-4">
-              <div className="flex-1 h-px bg-white/5" />
-              <span className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-cyan-500 bg-[#020813] px-4 border border-cyan-900/40 py-1.5 rounded">
-                <Activity className="w-3.5 h-3.5" />
-                Live Sector Feed
+              <div className="flex-1 h-px bg-slate-200" />
+              <span className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-blue-700 bg-white px-4 border border-blue-100 py-1.5 rounded-full">
+                <TrendingUp className="w-3.5 h-3.5" />
+                Trending by Category
               </span>
-              <div className="flex-1 h-px bg-white/5" />
+              <div className="flex-1 h-px bg-slate-200" />
             </div>
 
             {/* Category sections */}
@@ -647,21 +622,21 @@ export default function TrendingPage() {
 
             {/* No data fallback */}
             {data.length === 0 && (
-              <div className="text-center py-24 bg-[#050b14] border border-white/5 rounded-xl">
-                <div className="w-16 h-16 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-5 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-                  <Activity className="w-6 h-6 text-cyan-400 animate-pulse" />
+              <div className="text-center py-24 bg-white border border-slate-100 rounded-2xl">
+                <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto mb-5">
+                  <TrendingUp className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-black uppercase tracking-widest text-white mb-2">
-                  No Signals Detected
+                <h3 className="text-xl font-black text-slate-900 mb-2 font-serif">
+                  No Trending Stories Yet
                 </h3>
-                <p className="text-sm font-medium text-slate-400 mb-8">
-                  The radar is recalibrating. Check back shortly.
+                <p className="text-sm font-medium text-slate-500 mb-8">
+                  Check back shortly — we&apos;re curating fresh picks.
                 </p>
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center gap-2 bg-cyan-400 text-[#020813] font-black uppercase tracking-widest text-[11px] px-8 py-3.5 rounded shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] px-8 py-3.5 rounded-full shadow-md shadow-blue-200 hover:bg-blue-700 transition-all"
                 >
-                  Access Archives
+                  Browse Articles
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>

@@ -52,7 +52,7 @@ export default function CategoriesPage() {
   const getGradient = (index: number) => {
     const gradients = [
       "from-emerald-500 to-teal-500",
-      "from-blue-500 to-indigo-500",
+      "from-blue-500 to-blue-500",
       "from-orange-500 to-red-500",
       "from-purple-500 to-pink-500",
       "from-cyan-500 to-blue-500",
