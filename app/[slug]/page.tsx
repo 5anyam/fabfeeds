@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, Facebook, Twitter, Linkedin, Tag, BookOpen, ChevronRight, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { BannerRow } from "@/components/BannerRow";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -443,17 +444,17 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const isFiverrPost = params.slug.toLowerCase().includes('fiverr');
 
   const articleClasses = `
-    wp-content prose prose-lg max-w-none text-slate-700 leading-[1.85]
+    wp-content prose prose-lg max-w-none text-lg text-slate-700 leading-[1.85]
     [&>h2]:text-2xl [&>h2]:md:text-3xl [&>h2]:font-black [&>h2]:text-slate-900 [&>h2]:mt-14 [&>h2]:mb-5 [&>h2]:font-serif [&>h2]:tracking-tight
     [&>h3]:text-xl [&>h3]:md:text-2xl [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mt-10 [&>h3]:mb-4
-    [&>p]:leading-[1.9] [&>p]:mb-6 [&>p]:text-slate-600
+    [&>p]:text-lg [&>p]:leading-[1.9] [&>p]:mb-6 [&>p]:text-slate-600
     [&>p>a]:text-blue-600 [&>p>a]:underline [&>p>a]:decoration-blue-200 hover:[&>p>a]:decoration-blue-500 [&>p>a]:underline-offset-2
     [&_figure]:mx-auto [&_figure]:block [&_figure]:max-w-full [&_figure]:my-10
     [&_img]:mx-auto [&_img]:block [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-2xl [&_img]:shadow-md
     [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:text-slate-400 [&_figcaption]:mt-3 [&_figcaption]:italic
-    [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul]:space-y-2 [&>ul]:text-slate-600
-    [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-6 [&>ol]:space-y-2 [&>ol]:text-slate-600
-    [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:bg-blue-50 [&>blockquote]:py-5 [&>blockquote]:px-7 [&>blockquote]:my-10 [&>blockquote]:rounded-r-xl [&>blockquote]:italic [&>blockquote]:text-blue-900 [&>blockquote]:font-medium [&>blockquote]:text-lg
+    [&>ul]:text-lg [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul]:space-y-2 [&>ul]:text-slate-600
+    [&>ol]:text-lg [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-6 [&>ol]:space-y-2 [&>ol]:text-slate-600
+    [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:bg-blue-50 [&>blockquote]:py-5 [&>blockquote]:px-7 [&>blockquote]:my-10 [&>blockquote]:rounded-r-xl [&>blockquote]:italic [&>blockquote]:text-blue-900 [&>blockquote]:font-medium [&>blockquote]:text-xl
     [&_.wp-block-button]:my-6 [&_.wp-block-button]:flex [&_.wp-block-button]:justify-center
     [&_.wp-block-button__link]:inline-flex [&_.wp-block-button__link]:items-center [&_.wp-block-button__link]:justify-center
     [&_.wp-block-button__link]:bg-blue-600 [&_.wp-block-button__link]:text-white
@@ -545,6 +546,14 @@ export default async function BlogPost({ params }: { params: { slug: string } })
               </div>
             </div>
           )}
+        </Container>
+      </div>
+
+      <div className="bg-white pb-16">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <BannerRow group="blog" />
+          </div>
         </Container>
       </div>
 

@@ -12,6 +12,8 @@ import {
   Star,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { BannerRow } from "@/components/BannerRow";
+import { getLanguageId, DEFAULT_LANGUAGE_SLUG } from "@/lib/language";
 
 const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
 
@@ -306,7 +308,12 @@ export default function FabFeedsHomePage() {
 
     async function fetchData() {
       try {
-        const res = await fetch(`${WP_API_URL}/posts?_embed&per_page=30&orderby=date`, { signal: controller.signal });
+        /* Default the entire home page to English — if the language plugin
+           isn't installed yet, langParam is just empty and nothing changes. */
+        const englishId = await getLanguageId(DEFAULT_LANGUAGE_SLUG);
+        const langParam = englishId ? `&blog_language=${englishId}` : "";
+
+        const res = await fetch(`${WP_API_URL}/posts?_embed&per_page=30&orderby=date${langParam}`, { signal: controller.signal });
         if (res.ok) setPosts(await res.json());
 
         /* Top 3 live categories, by post count, drive the category rails */
@@ -316,7 +323,7 @@ export default function FabFeedsHomePage() {
 
         const railResults = await Promise.all(
           topCats.map((cat) =>
-            fetch(`${WP_API_URL}/posts?_embed&per_page=4&categories=${cat.id}&orderby=date&order=desc`, { signal: controller.signal })
+            fetch(`${WP_API_URL}/posts?_embed&per_page=4&categories=${cat.id}&orderby=date&order=desc${langParam}`, { signal: controller.signal })
               .then((r) => (r.ok ? r.json() : []))
               .then((p) => ({ category: cat, posts: p }))
           )
@@ -423,7 +430,14 @@ export default function FabFeedsHomePage() {
         </Container>
       </section>
 
-      {/* ══ 3. CATEGORY RAILS — real live categories, real posts ══ */}
+      {/* ══ 3. HOME BANNERS — configured live from WordPress ══ */}
+      <section className="bg-white border-b border-slate-100 py-8">
+        <Container>
+          <BannerRow group="home" />
+        </Container>
+      </section>
+
+      {/* ══ 4. CATEGORY RAILS — real live categories, real posts ══ */}
       {rails.map((rail) => <CategoryRail key={rail.category.id} data={rail} />)}
 
       {/* ══ 4. FULL-WIDTH DARK SECTION — EDITOR'S CHOICE ══ */}

@@ -10,6 +10,8 @@ import Link from "next/link";
 import { useState, useEffect, Suspense, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Language, DEFAULT_LANGUAGE_SLUG } from "@/lib/language";
+import { Globe } from "lucide-react";
 
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
 const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
@@ -111,6 +113,7 @@ function HorizontalSkeleton() {
 function BlogContent() {
   const [posts, setPosts] = useState<WordPressPost[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [languages, setLanguages] = useState<Language[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -122,10 +125,12 @@ function BlogContent() {
 
   const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "all");
+  const [selectedLanguage, setSelectedLanguage] = useState(searchParams.get("lang") || DEFAULT_LANGUAGE_SLUG);
 
   useEffect(() => {
     setSearchQuery(searchParams.get("search") || "");
     setSelectedCategory(searchParams.get("category") || "all");
+    setSelectedLanguage(searchParams.get("lang") || DEFAULT_LANGUAGE_SLUG);
   }, [searchParams]);
 
   const handleSearchChange = useCallback(
@@ -143,6 +148,16 @@ function BlogContent() {
       setSelectedCategory(slug);
       const params = new URLSearchParams(searchParams.toString());
       slug !== "all" ? params.set("category", slug) : params.delete("category");
+      router.replace(`/blogs?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router]
+  );
+
+  const handleLanguageChange = useCallback(
+    (slug: string) => {
+      setSelectedLanguage(slug);
+      const params = new URLSearchParams(searchParams.toString());
+      slug !== DEFAULT_LANGUAGE_SLUG ? params.set("lang", slug) : params.delete("lang");
       router.replace(`/blogs?${params.toString()}`, { scroll: false });
     },
     [searchParams, router]
@@ -170,11 +185,24 @@ function BlogContent() {
           }
         }
 
+        let langs = languages;
+        if (!langs.length) {
+          const langRes = await fetch(`${WP_API_URL}/languages?per_page=50`, { signal: controller.signal });
+          if (langRes.ok) {
+            langs = await langRes.json();
+            setLanguages(langs);
+          }
+        }
+
         let url = `${WP_API_URL}/posts?_embed&per_page=10&page=1`;
         if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
         if (selectedCategory !== "all") {
           const catId = cats.find((c) => c.slug === selectedCategory)?.id;
           if (catId) url += `&categories=${catId}`;
+        }
+        if (selectedLanguage !== "all") {
+          const langId = langs.find((l) => l.slug === selectedLanguage)?.id;
+          if (langId) url += `&blog_language=${langId}`;
         }
 
         const res = await fetch(url, { signal: controller.signal });
@@ -200,7 +228,7 @@ function BlogContent() {
     const timer = setTimeout(fetchData, 300);
     return () => { clearTimeout(timer); controller.abort(); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedLanguage]);
 
   const handleLoadMore = async () => {
     if (isLoadMoreLoading || !hasMore) return;
@@ -212,6 +240,10 @@ function BlogContent() {
     if (selectedCategory !== "all") {
       const catId = categories.find((c) => c.slug === selectedCategory)?.id;
       if (catId) url += `&categories=${catId}`;
+    }
+    if (selectedLanguage !== "all") {
+      const langId = languages.find((l) => l.slug === selectedLanguage)?.id;
+      if (langId) url += `&blog_language=${langId}`;
     }
 
     try {
@@ -260,21 +292,41 @@ function BlogContent() {
               </h1>
             </div>
 
-            {/* Compact Search Bar */}
-            <div className="relative w-full md:w-72">
-              <input
-                type="search"
-                placeholder="Search articles & reviews..."
-                value={searchQuery}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
-              />
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              {searchQuery && (
-                <button onClick={() => handleSearchChange("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-900">
-                  <X className="w-4 h-4" />
-                </button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+              {/* Language Selector — only shown once the language plugin is installed */}
+              {languages.length > 0 && (
+                <div className="relative shrink-0">
+                  <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => handleLanguageChange(e.target.value)}
+                    className="appearance-none pl-9 pr-8 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm cursor-pointer"
+                  >
+                    <option value="all">All Languages</option>
+                    {languages.map((l) => (
+                      <option key={l.id} value={l.slug}>{l.name}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+                </div>
               )}
+
+              {/* Compact Search Bar */}
+              <div className="relative w-full md:w-72">
+                <input
+                  type="search"
+                  placeholder="Search articles & reviews..."
+                  value={searchQuery}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm"
+                />
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                {searchQuery && (
+                  <button onClick={() => handleSearchChange("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-900">
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </Container>

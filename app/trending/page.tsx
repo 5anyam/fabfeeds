@@ -8,6 +8,7 @@ import {
   BarChart2, Eye, BookOpen, Star
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { getLanguageId, DEFAULT_LANGUAGE_SLUG } from "@/lib/language";
 
 /* ══ Config ═══════════════════════════════════════════════════════════════ */
 const WP_API_URL = "https://chocolate-zebra-912190.hostingersite.com/wp-json/wp/v2";
@@ -541,6 +542,11 @@ export default function TrendingPage() {
 
     async function fetchData() {
       try {
+        /* Default trending to English — if the language plugin isn't
+           installed yet, langParam is just empty and nothing changes. */
+        const englishId = await getLanguageId(DEFAULT_LANGUAGE_SLUG);
+        const langParam = englishId ? `&blog_language=${englishId}` : "";
+
         /* Step 1: Fetch top categories */
         const catsRes = await fetch(
           `${WP_API_URL}/categories?per_page=8&orderby=count&order=desc`,
@@ -555,7 +561,7 @@ export default function TrendingPage() {
         const results = await Promise.all(
           cats.map((cat) =>
             fetch(
-              `${WP_API_URL}/posts?_embed&per_page=4&categories=${cat.id}&orderby=date&order=desc`,
+              `${WP_API_URL}/posts?_embed&per_page=4&categories=${cat.id}&orderby=date&order=desc${langParam}`,
               { signal: controller.signal }
             )
               .then((r) => (r.ok ? r.json() : []))
