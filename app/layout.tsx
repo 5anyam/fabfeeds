@@ -101,6 +101,7 @@ export const metadata: Metadata = {
     other: {
       "verify-admitad": "d20433402e",
       "convertiser-verification": "ac8d7d735a045fdb004012e924b045eef6e40b7d",
+      "mitgo-verification" :"8dfd0fde-7823-41f6-abc0-5e107ad189a0",
     },
   },
 
